@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 public class FourFragment extends Fragment {
@@ -17,13 +17,13 @@ public class FourFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_four, container, false);
-        ImageView CSsem = (ImageView)rootView.findViewById(R.id.cssem);
-        ImageView ECsem = (ImageView)rootView.findViewById(R.id.ecsem);
-        ImageView EEsem = (ImageView)rootView.findViewById(R.id.eesem);
-        ImageView ITsem = (ImageView)rootView.findViewById(R.id.itsem);
-        ImageView MEsem = (ImageView)rootView.findViewById(R.id.mesem);
-        ImageView AEsem = (ImageView)rootView.findViewById(R.id.aesem);
-        ImageView CIVILsem = (ImageView)rootView.findViewById(R.id.civilsem);
+        LinearLayout CSsem = (LinearLayout)rootView.findViewById(R.id.cssem);
+        LinearLayout ECsem = (LinearLayout)rootView.findViewById(R.id.ecsem);
+        LinearLayout EEsem = (LinearLayout)rootView.findViewById(R.id.eesem);
+        LinearLayout ITsem = (LinearLayout)rootView.findViewById(R.id.itsem);
+        LinearLayout MEsem = (LinearLayout)rootView.findViewById(R.id.mesem);
+        LinearLayout AEsem = (LinearLayout)rootView.findViewById(R.id.aesem);
+        LinearLayout CIVILsem = (LinearLayout)rootView.findViewById(R.id.civilsem);
 
         CSsem.setOnClickListener(new View.OnClickListener() {
             @Override
