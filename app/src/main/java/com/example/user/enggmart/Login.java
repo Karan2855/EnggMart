@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
                 Intent i=new Intent(Login.this,LoginPage.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                finish();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +39,7 @@ public class Login extends AppCompatActivity {
                 Intent i=new Intent(Login.this,Signup.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                finish();
             }
         });
         viewPager = (ViewPager) findViewById(R.id.viewPager);

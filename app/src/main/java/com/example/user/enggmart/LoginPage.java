@@ -39,16 +39,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View view) {
                 onBackPressed();
-                finish();
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                startActivity(new Intent(LoginPage.this, Login.class));
+                finish();
             }
         });
         firebaseAuth = FirebaseAuth.getInstance();
-      /*  if(firebaseAuth.getCurrentUser() != null){
-            //profileactivity
-            finish();
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        } */
         btnlog = (Button) findViewById(R.id.buttonlogin);
         usernamelog = (EditText) findViewById(R.id.editusernamelg);
         usrpasswordlog = (EditText) findViewById(R.id.editpasswordlg);

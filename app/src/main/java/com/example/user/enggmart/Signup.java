@@ -76,8 +76,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
                 Intent i = new Intent(Signup.this, Login.class);
                 startActivity(i);
-                finish();
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
             }
         });
 
