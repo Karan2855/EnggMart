@@ -238,7 +238,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            return;
         }
 
 

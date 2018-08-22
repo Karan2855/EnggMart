@@ -29,8 +29,9 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(Login.this,LoginPage.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                 finish();
+                overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
