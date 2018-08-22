@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "308628606891",
+    "firebase_url": "https://enggmart.firebaseio.com",
+    "project_id": "enggmart",
+    "storage_bucket": "enggmart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308628606891:android:6ebbf000763826af",
+        "android_client_info": {
+          "package_name": "com.example.user.enggmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308628606891-okmt83dad07s2c6n177p3oh5c5mqm4iq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.enggmart",
+            "certificate_hash": "cb8dbcaf3ab3baec5152ae1e8b8c5bb544e8149f"
+          }
+        },
+        {
+          "client_id": "308628606891-9o9irjuomhoko2lags8pratcfvioggq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.enggmart",
+            "certificate_hash": "ab1e6fb42d173cda8b9c2ddf2ceb474686cda3a1"
+          }
+        },
+        {
+          "client_id": "308628606891-u8fv93fdljgdefauh1ldmgepjjg54lrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2NuVyGzpVJcP6uq_8FFdHXUSYdRPUVGg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308628606891-u8fv93fdljgdefauh1ldmgepjjg54lrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

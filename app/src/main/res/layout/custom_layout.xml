@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:orientation="vertical">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        app:srcCompat="@mipmap/ic_launcher"
+
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/imageView" />
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/textview11"
+            android:textColor="#222"
+            android:text="Best Shopping Center of"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="serif"
+            android:layout_marginLeft="20dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/textview12"
+            android:textColor="#222"
+            android:text="Engineering Material"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:fontFamily="serif"
+
+            android:gravity="center"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/textview13"
+            android:textColor="#150481"
+            android:text="Easy to Purchase"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_height="30dp" />
+    </LinearLayout>
+    
+
+</LinearLayout>
