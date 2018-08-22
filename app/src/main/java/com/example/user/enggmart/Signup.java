@@ -91,6 +91,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         if (view == login) {
 
             startActivity(new Intent(Signup.this, LoginPage.class));
+            overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
             finish();
             //log in activty
         }
@@ -116,6 +117,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                                 addDirectory();
                                 Toast.makeText(Signup.this, "Register sucessfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(Signup.this, LoginPage.class));
+                                overridePendingTransition(R.anim.fade_out, R.anim.slide_out_left);
                                 finish();
                             } else {
                                 progressDialog.dismiss();
@@ -213,4 +215,11 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Signup.this, Login.class));
+        overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
+        finish();
+    }
 }

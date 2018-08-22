@@ -83,6 +83,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         if (task.isSuccessful()) {
                             //start profile activity
                             startActivity(new Intent(LoginPage.this, HomeActivity.class));
+                            overridePendingTransition(R.anim.fade_in, R.anim.slide_out_down);
                             finish();
                         } else {
                             mthd();
@@ -107,7 +108,16 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         if (view == signup) {
             //log in activty
             startActivity(new Intent(LoginPage.this, Signup.class));
+            overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LoginPage.this, Login.class));
+        overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
+        finish();
     }
 }

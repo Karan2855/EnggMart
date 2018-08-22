@@ -40,10 +40,12 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 if (userAuth.getCurrentUser() != null) {
                     startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+                    overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                     finish();
                 } else {
                     Intent i = new Intent(SplashScreen.this, Login.class);
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                     finish();
                 }
             }
