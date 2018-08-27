@@ -23,7 +23,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         if(firebaseAuth.getCurrentUser() == null){
             //profileactivity
             finish();
-            startActivity(new Intent(getApplicationContext(),Login.class));
+            startActivity(new Intent(getApplicationContext(),SignInSignUp.class));
         }
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -38,7 +38,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         if(view == Logout){
             firebaseAuth.signOut();
             finish();
-            startActivity(new Intent(this,Login.class));
+            startActivity(new Intent(this,SignInSignUp.class));
         }
     }
 }

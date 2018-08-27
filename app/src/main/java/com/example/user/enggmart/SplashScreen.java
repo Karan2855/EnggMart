@@ -1,10 +1,10 @@
 package com.example.user.enggmart;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ProgressBar;
 
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +27,9 @@ public class SplashScreen extends AppCompatActivity {
         userAuth = FirebaseAuth.getInstance();
         gifImageView = (GifImageView) findViewById(R.id.gifImageView);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//Do what you need for this SDK
+        }
         try {
             InputStream inputStream = getAssets().open("loading.gif");
             byte[] bytes = IOUtils.toByteArray(inputStream);
@@ -43,7 +46,7 @@ public class SplashScreen extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                     finish();
                 } else {
-                    Intent i = new Intent(SplashScreen.this, Login.class);
+                    Intent i = new Intent(SplashScreen.this, SignInSignUp.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                     finish();

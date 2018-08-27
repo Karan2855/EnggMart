@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginPage extends AppCompatActivity implements View.OnClickListener {
+public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private ImageView imgback;
 
     private EditText usernamelog;
@@ -33,14 +31,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_signin);
         imgback = (ImageView) findViewById(R.id.imv12);
         imgback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                startActivity(new Intent(LoginPage.this, Login.class));
+                startActivity(new Intent(SignIn.this, SignInSignUp.class));
                 finish();
             }
         });
@@ -48,7 +46,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         btnlog = (Button) findViewById(R.id.buttonlogin);
         usernamelog = (EditText) findViewById(R.id.editusernamelg);
         usrpasswordlog = (EditText) findViewById(R.id.editpasswordlg);
-        signup = (TextView) findViewById(R.id.goSignup);
+        signup = (TextView) findViewById(R.id.gosignup);
         btnlog.setOnClickListener(this);
         signup.setOnClickListener(this);
         progressDialog = new ProgressDialog(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
@@ -73,31 +71,32 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             return;
 
         }
-        progressDialog.setMessage("Login user...");
-        progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            //start profile activity
-                            startActivity(new Intent(LoginPage.this, HomeActivity.class));
-                            overridePendingTransition(R.anim.fade_in, R.anim.slide_out_down);
-                            finish();
+                            if (task.getResult().getUser().isEmailVerified()) {
+                                startActivity(new Intent(SignIn.this, HomeActivity.class));
+                                //overridePendingTransition(R.anim.fade_in, R.anim.slide_out_down);
+                                finish();
+                            } else {
+                                Toast.makeText(SignIn.this,
+                                        "Verification email is sent to "
+                                                + task.getResult().getUser().getEmail() +
+                                                " at the time of Registration..!  Please Click On that",
+                                        Toast.LENGTH_LONG).show();
+                                firebaseAuth.signOut();
+                            }
                         } else {
-                            mthd();
+                            Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
 
 
-    }
-
-    private void mthd() {
-
-        Toast.makeText(this, "incorrect user id or password", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -107,7 +106,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         }
         if (view == signup) {
             //log in activty
-            startActivity(new Intent(LoginPage.this, Signup.class));
+            startActivity(new Intent(SignIn.this, Signup.class));
             overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
             finish();
         }
@@ -116,7 +115,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoginPage.this, Login.class));
+        startActivity(new Intent(SignIn.this, SignInSignUp.class));
         overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
         finish();
     }
