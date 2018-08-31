@@ -186,16 +186,26 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
                         mDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                                Log.e("DATASnapshot", dataSnapshot + "");
                                 ModelRegister modelRegister = new ModelRegister();
                                 modelRegister.setEmail("" + fUser.getEmail());
                                 modelRegister.setName("" + fUser.getDisplayName());
-                                modelRegister.setPhone("");
                                 modelRegister.setPassword("");
-                                if (dataSnapshot.child("image").getValue().equals(null)) {
-                                    modelRegister.setImage(imageUri.toString());
-                                } else
+                                if (dataSnapshot.getValue() == null) {
+                                    modelRegister.setPhone("");
+                                    if (fUser.getPhotoUrl() != null) {
+                                        imageUri=fUser.getPhotoUrl();
+                                        Log.e("ImageUri",imageUri+"");
+                                        updatepic(imageUri);
+                                        modelRegister.setImage(imageUri.toString());
+                                    } else {
+                                        updatepic(imageUri);
+                                        modelRegister.setImage(imageUri.toString());
+                                    }
+                                } else {
                                     modelRegister.setImage(dataSnapshot.child("image").getValue().toString());
+                                    modelRegister.setPhone(dataSnapshot.child("phone").getValue().toString());
+                                }
                                 mDatabase.setValue(modelRegister);
                                 startActivity(new Intent(Signup.this, HomeActivity.class));
                                 finish();
@@ -203,19 +213,42 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
                                 return;
                             }
 
+                            private void updatepic(Uri photoUrl) {
+                                final StorageReference sRef = mStorageRef.child("profile.jpg");
+                                sRef.putFile(photoUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        imageUri=taskSnapshot.getUploadSessionUri();
+
+                                        return;
+                                    }
+                                })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                                return;
+                                            }
+                                        });
+                            }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(Signup.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                return;
                             }
                         });
 
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                }).
+
+                addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                });
     }
 
 

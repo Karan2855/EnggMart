@@ -155,6 +155,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Glide.with(getApplicationContext()).load(imageurl).into(imageProfile);
                     uname.setText(name + "");
                     uemail.setText(email + "");
+                    return;
                 }
             }
 
