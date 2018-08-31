@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:scrollIndicators="top"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="#4eaaff"
+            app:cardBackgroundColor="#61835e"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
