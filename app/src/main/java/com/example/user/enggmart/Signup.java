@@ -192,16 +192,9 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
                                 modelRegister.setName("" + fUser.getDisplayName());
                                 modelRegister.setPassword("");
                                 if (dataSnapshot.getValue() == null) {
-                                    modelRegister.setPhone("");
-                                    if (fUser.getPhotoUrl() != null) {
-                                        imageUri=fUser.getPhotoUrl();
-                                        Log.e("ImageUri",imageUri+"");
-                                        updatepic(imageUri);
-                                        modelRegister.setImage(imageUri.toString());
-                                    } else {
-                                        updatepic(imageUri);
-                                        modelRegister.setImage(imageUri.toString());
-                                    }
+                                    modelRegister.setPhone("+91 ");
+                                    updatepic(imageUri);
+                                    modelRegister.setImage(imageUri.toString());
                                 } else {
                                     modelRegister.setImage(dataSnapshot.child("image").getValue().toString());
                                     modelRegister.setPhone(dataSnapshot.child("phone").getValue().toString());
@@ -218,7 +211,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
                                 sRef.putFile(photoUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        imageUri=taskSnapshot.getUploadSessionUri();
+                                        imageUri = taskSnapshot.getUploadSessionUri();
 
                                         return;
                                     }
