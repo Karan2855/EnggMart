@@ -9,6 +9,7 @@
     <EditText
         android:id="@+id/messageArea"
         android:layout_width="match_parent"
+        android:background="#fff"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="Write a message..."
@@ -21,8 +22,8 @@
         android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background=""
         android:layout_weight="4"
         android:padding="4dp"
+
         android:src="@android:drawable/ic_menu_send" />
 </LinearLayout>
