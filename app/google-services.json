@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "308628606891-l0uhihulm0balu3lle39i4u9ocq5krhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.enggmart",
+            "certificate_hash": "7dc4f983ab83a157c8b665d42d3068350cde3143"
+          }
+        },
+        {
           "client_id": "308628606891-u8fv93fdljgdefauh1ldmgepjjg54lrc.apps.googleusercontent.com",
           "client_type": 3
         }
