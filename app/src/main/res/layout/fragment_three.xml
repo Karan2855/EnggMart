@@ -7,14 +7,25 @@
     android:orientation="vertical"
     tools:context=".ThreeFragment">
 
+<<<<<<< HEAD
+=======
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+>>>>>>> ujjawal corrected
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+<<<<<<< HEAD
         </LinearLayout>
 
 
 
 
+=======
+    </LinearLayout>
+>>>>>>> ujjawal corrected
 
 

@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -17,7 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SignInSignUp extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
-    private TextView signin, signup;
+    private Button signin, signup;
     private ViewPager viewPager;
     private LinearLayout sliderDotspanel;
     private int dotscount;
@@ -33,7 +34,7 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_signup);
         checkConnection();
-        signin = (TextView) findViewById(R.id.signin);
+        signin = (Button) findViewById(R.id.signin);
         signup = findViewById(R.id.signup);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);

@@ -3,28 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:orientation="vertical">
-
+        android:layout_height="300dp"
+        android:gravity="center"
+        >
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             app:srcCompat="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/textview11"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:paddingRight="70dp"
             android:layout_marginTop="10dp"
             android:fontFamily="serif"
             android:text="Best Shopping Center of"
@@ -35,11 +44,10 @@
             android:id="@+id/textview12"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginLeft="80dp"
             android:fontFamily="serif"
             android:gravity="center"
+            android:paddingLeft="70dp"
             android:text="Engineering Material"
-
             android:textColor="#222"
             android:textSize="20dp" />
 
@@ -51,7 +59,10 @@
             android:text="Easy to Purchase"
             android:textColor="#150481"
             android:textSize="18dp" />
+
     </LinearLayout>
+
+
 
 
 </LinearLayout>
