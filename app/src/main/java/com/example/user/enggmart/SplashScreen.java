@@ -25,19 +25,19 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         userAuth = FirebaseAuth.getInstance();
-        gifImageView = (GifImageView) findViewById(R.id.gifImageView);
+      //  gifImageView = (GifImageView) findViewById(R.id.gifImageView);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //Do what you need for this SDK
         }
-        try {
-            InputStream inputStream = getAssets().open("loading.gif");
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            gifImageView.setBytes(bytes);
-            gifImageView.startAnimation();
-        } catch (IOException e) {
+    //    try {
+         //   InputStream inputStream = getAssets().open("loading.gif");
+          //  byte[] bytes = IOUtils.toByteArray(inputStream);
+         //   gifImageView.setBytes(bytes);
+         //   gifImageView.startAnimation();
+       // } catch (IOException e) {
 
-        }
+        //}
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

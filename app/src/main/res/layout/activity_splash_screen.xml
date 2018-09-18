@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#1278be"
+    android:gravity="center"
     tools:context=".SplashScreen">
 
-    <com.felipecsl.gifimageview.library.GifImageView
+
+   <!-- <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/gifImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp" />
+        android:background="@drawable/whitebordercircle"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
+        android:layout_height="200dp"
 
-        <TextView
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="cursive"
-            android:text="Engg"
-            android:textColor="#05d205"
-            android:textSize="30dp" />
+        android:layout_marginTop="240dp" />-->
+<LinearLayout
+    android:layout_width="180dp"
+    android:layout_height="180dp"
+    android:background="@drawable/whitebordercircle"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="Engg"
+        android:textColor="#18940f"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="22dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Mart"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:textSize="24dp"/>
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:fontFamily="serif"
-            android:text="Mart"
-            android:textColor="#000"
-            android:textSize="30dp" />
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
+</LinearLayout>
