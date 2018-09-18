@@ -5,6 +5,10 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +21,7 @@ import java.io.InputStream;
 public class SplashScreen extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2500;
     private GifImageView gifImageView;
+    private LinearLayout animat;
     private FirebaseAuth userAuth;
 
 
@@ -24,6 +29,17 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+
+
+            Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in_logo);
+            a.reset();
+            animat=(LinearLayout)findViewById(R.id.anim);
+            animat.clearAnimation();
+            animat.startAnimation(a);
+
+
+
         userAuth = FirebaseAuth.getInstance();
       //  gifImageView = (GifImageView) findViewById(R.id.gifImageView);
 
