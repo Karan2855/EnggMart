@@ -20,7 +20,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class ThreeFragment extends Fragment {
 
     ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7","Person 8", "Person 9", "Person 10", "Person 11", "Person 12", "Person 13", "Person 14"));
-    ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.bookb, R.drawable.bookc, R.drawable.bookd, R.drawable.booke, R.drawable.bookf, R.drawable.bookg, R.drawable.bookb,R.drawable.bookc, R.drawable.bookd, R.drawable.booke, R.drawable.bookf, R.drawable.bookd, R.drawable.bookg, R.drawable.bookc));
+    ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.bookb, R.drawable.bookc, R.drawable.bookd, R.drawable.booke, R.drawable.bookf, R.drawable.bookg, R.drawable.bookc,R.drawable.bookf, R.drawable.bookd, R.drawable.booke, R.drawable.bookf, R.drawable.bookd, R.drawable.bookg, R.drawable.bookc));
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
