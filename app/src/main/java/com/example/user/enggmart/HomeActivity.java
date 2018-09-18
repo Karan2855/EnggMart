@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         findIds();
         userAuth = FirebaseAuth.getInstance();
         uid = userAuth.getCurrentUser().getUid().toString();
@@ -172,7 +173,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(new OneFragment(), "Newfeed");
         adapter.addFragment(new TwoFragment(), "Work/Job ");
         adapter.addFragment(new ThreeFragment(), "Store");
-        adapter.addFragment(new FourFragment(), "STUDY");
+        adapter.addFragment(new FourFragment(), "Engg Lib");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -355,6 +356,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawers();
         } else if (v == share) {
             Toast.makeText(this, "clicked On Share", Toast.LENGTH_SHORT).show();
+
+                    Intent myIntent = new Intent(Intent.ACTION_SEND);
+                    myIntent.setType("text/plain");
+                    String shareBody = "";
+                    String shareSub = "Your Subject here";
+                    myIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
+                    myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                    startActivity(Intent.createChooser(myIntent,"Share using"));
+
+
             drawer.closeDrawers();
         } else if (v == imageProfile) {
             Toast.makeText(this, "clicked On Image Profile", Toast.LENGTH_SHORT).show();

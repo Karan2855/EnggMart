@@ -39,6 +39,17 @@
           }
         },
         {
+<<<<<<< HEAD
+=======
+          "client_id": "308628606891-dek9pdnm8ll18pvn7aks1n2j7b6qdehm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.enggmart",
+            "certificate_hash": "4eea25d4b420680c01231c9adf109fb5c222d207"
+          }
+        },
+        {
+>>>>>>> By Arjit
           "client_id": "308628606891-u8fv93fdljgdefauh1ldmgepjjg54lrc.apps.googleusercontent.com",
           "client_type": 3
         }

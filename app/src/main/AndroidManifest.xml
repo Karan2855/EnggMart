@@ -82,7 +82,13 @@
             </intent-filter>
         </receiver>
 
+<<<<<<< HEAD
         <activity android:name=".AdminPannel"></activity>
+=======
+        <activity android:name=".Book1" />
+        <activity android:name=".CurrentAffairs" />
+        <activity android:name=".Pdf1" />
+>>>>>>> By Arjit
     </application>
 
 </manifest>

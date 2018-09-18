@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ android:orientation="vertical"
+    tools:context=".Semester">
+
+    <include layout="@layout/custom_app_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#fff"
+        tools:context=".FourFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="5dp">
+            <LinearLayout layout="@layout/content_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical"
+                android:background="#f5f5f5">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/first"
+                        android:layout_height="100dp"
+                        android:background="#fff"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/scanpickup1"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/one"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="TOI"
+                            android:id="@+id/scanpickup2"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="19dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/second"
+                        android:background="#fff"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/pickupList2"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/two"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="HT"
+                            android:id="@+id/pickupList3"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/third"
+                        android:background="#fff"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/pickupHist4"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/three"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="The Hindu"
+                            android:id="@+id/pickupHist5"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/fourth"
+                        android:background="#fff"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/scanDRS1"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/four"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="BBC"
+                            android:id="@+id/ScanDRS2"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/fifth"
+                        android:background="#fff"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/DRSList1"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/five"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="Hindustan"
+                            android:id="@+id/DRSList2"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/sixth"
+                        android:background="#fff"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/DRSHistory4"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/six"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="Dainik Jagran"
+
+                            android:id="@+id/DRSHistory5"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:id="@+id/seventh"
+                        android:background="#fff"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/scanDRS3"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/seven"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="Dainik Bhaskar"
+                            android:id="@+id/ScanDRS12"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="17dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:id="@+id/eight"
+                        android:background="#fff"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/DRSList11"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/eight"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="Rajasthan Patrika"
+                            android:id="@+id/DRSList32"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_marginLeft="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:id="@+id/ninth"
+                            android:background="#fff"
+                            android:layout_marginLeft="2dp"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/DRSList12"
+                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center"
+                                android:background="@mipmap/eight"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:text="Indian Express"
+                                android:id="@+id/DRSList33"
+                                android:textColor="#000"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                android:textSize="16dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
