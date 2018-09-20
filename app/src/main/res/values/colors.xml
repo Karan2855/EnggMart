@@ -6,5 +6,7 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="stay_color">#999999</color>
+    <color name="view_color">#766b6b</color>
 
 </resources>
