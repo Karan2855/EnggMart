@@ -33,7 +33,7 @@
         android:layout_marginBottom="2dp"
         android:paddingBottom="10dp"
         android:background="@drawable/rectanglecornoroffer">
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -60,7 +60,7 @@
 
 
     </LinearLayout>
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -102,19 +102,23 @@
             android:background="#70a493"/>
 
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#b7d6d9"
-        android:layout_margin="10dp"
-        android:hint="Enter item description..."
-        android:textColorHint="#716d6d"
-        android:textColor="#000"
-        android:textSize="15dp"
-        android:paddingLeft="7dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#b7d6d9"
+            android:layout_margin="10dp">
 
-        />
-    <Button
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter item description..."
+                android:textColorHint="#716d6d"
+                android:textColor="#000"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+        <Button
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="Submit"
