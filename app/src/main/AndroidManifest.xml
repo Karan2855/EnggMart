@@ -82,10 +82,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".AdminPannel"></activity>
-
+        <activity android:name=".AdminPannel" />
         <activity android:name=".CurrentAffairs" />
         <activity android:name=".Pdf1" />
+        <activity android:name=".AdminConsole"></activity>
     </application>
 
 </manifest>

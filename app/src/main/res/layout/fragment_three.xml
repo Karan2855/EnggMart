@@ -9,11 +9,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#6c1111"
+            android:background="#fff"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -22,26 +23,34 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="40dp"
                     android:layout_weight="1"
+                    android:textSize="10dp"
                     android:background="@drawable/fbcorner"
                     android:text="New Books/Tools"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="40dp"
+                    android:textSize="10dp"
                     android:background="@drawable/fbcorner"
                     android:text="Old Books/Tools"
                     />
             </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@mipmap/line"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,8 +59,8 @@
             android:orientation="vertical"
             >
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="15dp"
 
                 android:layout_gravity="center"
@@ -60,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Books"
-                android:textColor="#fff"
+                android:textColor="#d60d0d"
                 android:textAlignment="center"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -72,8 +81,8 @@
             android:orientation="vertical"
             >
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:background="@mipmap/tools"/>
@@ -81,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Tools"
-                android:textColor="#fff"
+                android:textColor="#d60d0d"
                 android:textAlignment="center"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -92,16 +101,16 @@
             android:orientation="vertical"
             >
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
-                android:background="@mipmap/one"/>
+                android:background="@mipmap/chip"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Electroics Tools"
-                android:textColor="#fff"
+                android:textColor="#d60d0d"
                 android:textAlignment="center"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -109,19 +118,18 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
-                android:background="@mipmap/one"/>
+                android:background="@mipmap/note"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Notes"
-                android:textColor="#fff"
+                android:textColor="#d60d0d"
                 android:textAlignment="center"
                 android:textSize="15dp"/>
         </LinearLayout>

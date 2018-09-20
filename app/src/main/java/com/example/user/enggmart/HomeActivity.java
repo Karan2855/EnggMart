@@ -350,6 +350,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawers();
         } else if (v == accountSetting) {
             Toast.makeText(this, "clicked On Account Setting", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(HomeActivity.this,AdminPannel.class);
+            startActivity(i);
             drawer.closeDrawers();
         } else if (v == helpCentre) {
             Toast.makeText(this, "clicked On Help Centre", Toast.LENGTH_SHORT).show();
