@@ -21,7 +21,7 @@ public class FourFragment extends Fragment {
         LinearLayout ECsem = (LinearLayout)rootView.findViewById(R.id.ecsem);
         LinearLayout EEsem = (LinearLayout)rootView.findViewById(R.id.eesem);
         LinearLayout ITsem = (LinearLayout)rootView.findViewById(R.id.itsem);
-        LinearLayout MEsem = (LinearLayout)rootView.findViewById(R.id.mesem);
+
 
         CSsem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,14 +47,7 @@ public class FourFragment extends Fragment {
         ITsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Semester.class);
-                startActivity(i);
-            }
-        });
-        MEsem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Semester.class);
+                Intent i=new Intent(getActivity(),SkillDevlopment.class);
                 startActivity(i);
             }
         });
