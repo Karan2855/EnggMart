@@ -6,11 +6,11 @@ package com.example.user.enggmart;
 
 public class PostModel {
     private String postUserdpurl = "";
-    private String postUserName = "";
-    private String postUserEmail = "";
+    private String postUserName = "hello";
+    private String postUserEmail = "hello@gmail.com";
     private String postUrl = "";
-    private String postTime = "";
-    private String postDescription="";
+    private String postTime = "11bje";
+    private String postDescription="hm hai boss";
     private String postLikesCount="0 Likes";
     private String postCommentsCount="0 Comments";
     private boolean isPostLiked=false;
