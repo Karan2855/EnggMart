@@ -1,0 +1,10 @@
+<TextView android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/ibListitem"
+    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:textSize="16dip"
+    android:textColor="#3b3b3b"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

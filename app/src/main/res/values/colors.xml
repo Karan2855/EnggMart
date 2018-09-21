@@ -8,5 +8,6 @@
     <color name="navigationBarColor">#000000</color>
     <color name="stay_color">#999999</color>
     <color name="view_color">#766b6b</color>
+    <color name="itemordercolor">#6e9974</color>
 
 </resources>
