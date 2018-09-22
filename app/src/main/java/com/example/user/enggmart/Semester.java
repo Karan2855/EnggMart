@@ -35,7 +35,7 @@ public class Semester extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Semester");
+        setTitle("Newspaper");
 
 
         LinearLayout b11=(LinearLayout)findViewById(R.id.first);

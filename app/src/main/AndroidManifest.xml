@@ -64,6 +64,7 @@
         <activity android:name=".ChatActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".Semester" />
+        <activity android:name=".Novel" />
         <activity android:name=".WritePost" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SkillDevlopment" />
@@ -88,8 +89,10 @@
         <activity android:name=".CurrentAffairs" />
         <activity android:name=".Pdf1" />
         <activity android:name=".AdminConsole" />
-        <activity android:name=".ProductDescription" />
-        <activity android:name=".PaymentPage"></activity>
+        <activity android:name=".Seveneges" />
+        <activity android:name=".Artofps" />
+        <activity android:name=".Journalism" />
+        <activity android:name=".Taleoftwocities"></activity>
     </application>
 
 </manifest>

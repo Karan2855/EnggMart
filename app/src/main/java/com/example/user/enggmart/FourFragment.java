@@ -40,7 +40,7 @@ public class FourFragment extends Fragment {
         EEsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Semester.class);
+                Intent i=new Intent(getActivity(),Novel.class);
                 startActivity(i);
             }
         });

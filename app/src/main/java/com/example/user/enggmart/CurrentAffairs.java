@@ -26,7 +26,7 @@ public class CurrentAffairs extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Semester");
+        setTitle("Current Affairs");
 
 
         LinearLayout b23=(LinearLayout)findViewById(R.id.first1);

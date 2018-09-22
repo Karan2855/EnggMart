@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
 import java.util.Vector;
 public class SkillDevlopment extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -13,6 +16,9 @@ public class SkillDevlopment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill_devlopment);
+
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView11);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
