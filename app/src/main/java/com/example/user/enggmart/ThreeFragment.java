@@ -32,7 +32,7 @@ public class ThreeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(), personNames,personImages);
+        CustomAdapter customAdapter = new CustomAdapter(getActivity(), personNames,personImages  );
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
         return rootView;
     }

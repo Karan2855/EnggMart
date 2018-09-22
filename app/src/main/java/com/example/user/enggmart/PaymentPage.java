@@ -43,8 +43,8 @@ public class PaymentPage extends AppCompatActivity {
     private void initData() {
         listDataHeader=new ArrayList<>();
         listHash = new HashMap<>();
-        listDataHeader.add("1.How will you charge if i cancel the booking?");
-        listDataHeader.add("2.Where can i pick up the camera from?");
+        listDataHeader.add("e-Wallet");
+        listDataHeader.add("Cash On Delivery");
 
         List<String> edmDev = new ArrayList<>();
         listHash.put("e-Wallet",edmDev);
