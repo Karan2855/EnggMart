@@ -22,7 +22,7 @@ public class TwoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_two, container, false);
         WebView wb = (WebView) rootView.findViewById(R.id.webview);
         wb.setWebViewClient(new Browser());
-        String url="https://www.tutorialspoint.com/computer_programming_tutorials.htm";
+        String url="https://www.indiabix.com";
         wb.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         wb.loadUrl(url);
 
