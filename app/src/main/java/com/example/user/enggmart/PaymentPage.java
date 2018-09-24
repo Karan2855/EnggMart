@@ -34,7 +34,6 @@ public class PaymentPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("FAQ");
         listView=(ExpandableListView)findViewById(R.id.ivExp);
         initData();
 
@@ -44,19 +43,11 @@ public class PaymentPage extends AppCompatActivity {
         listDataHeader=new ArrayList<>();
         listHash = new HashMap<>();
         listDataHeader.add("e-Wallet");
-        listDataHeader.add("Cash On Delivery");
 
         List<String> edmDev = new ArrayList<>();
         listHash.put("e-Wallet",edmDev);
         edmDev.add("we have to add here payment process");
-        edmDev.add("if consumer click on e-wallet it expand and show the field to enter paytm/phonepe no.");
-
-        List<String> androidStudio = new ArrayList<>();
-        listHash.put("Cash On Delivery",androidStudio);
-        androidStudio.add("after clicking on this field customer will get the additional money for cash on delivery");
-        androidStudio.add("");
-
-
+       // edmDev.add("if consumer click on e-wallet it expand and show the field to enter paytm/phonepe no.");
 
         listAdapter =new ExpandableListAdapter(this,listDataHeader,listHash);
         listView.setAdapter(listAdapter);

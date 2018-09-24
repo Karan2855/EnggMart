@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -82,8 +83,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater=(LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view =inflater.inflate(R.layout.list_item,null);
         }
-        TextView txtListchild=(TextView)view.findViewById(R.id.ibListitem);
-        txtListchild.setText(childText);
+        LinearLayout txtListchild=(LinearLayout)view.findViewById(R.id.ibListitem);
+        txtListchild.getLayoutMode();
         return view;
     }
 

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
+//import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class ThreeFragment extends Fragment {
@@ -29,10 +29,10 @@ public class ThreeFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         // set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2, LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+       // GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2, LinearLayoutManager.VERTICAL,false);
+        //recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(), personNames,personImages  );
+        CustomAdapter customAdapter = new CustomAdapter(getActivity(), personNames,personImages);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
         return rootView;
     }
