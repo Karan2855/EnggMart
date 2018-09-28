@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class SecondActivity extends AppCompatActivity {
     ImageView selectedImage;
     @Override
@@ -13,7 +15,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         selectedImage = (ImageView) findViewById(R.id.selectedImage); // init a ImageView
         Intent intent = getIntent(); // get Intent which was set from adapter of Previous Activity
-        selectedImage.setImageResource(intent.getIntExtra("image", 0)); // get image from Intent and set it in ImageView
+        Glide.with(SecondActivity.this).load(intent.getStringExtra("Image").toString()).into(selectedImage);
     }
 }
 

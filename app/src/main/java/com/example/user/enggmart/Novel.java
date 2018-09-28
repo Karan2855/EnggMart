@@ -19,53 +19,50 @@ public class Novel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novel);
 
-        ImageView imageView=(ImageView) findViewById(R.id.seveneges);
+        ImageView imageView = (ImageView) findViewById(R.id.seveneges);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Novel.this,Seveneges.class);
+                Intent i = new Intent(Novel.this, Seveneges.class);
                 startActivity(i);
             }
         });
 
-        ImageView imageView2=(ImageView) findViewById(R.id.theaops);
+        ImageView imageView2 = (ImageView) findViewById(R.id.theaops);
 
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Novel.this,Artofps.class);
+                Intent i = new Intent(Novel.this, Artofps.class);
                 startActivity(i);
             }
         });
 
-        ImageView imageView3=(ImageView) findViewById(R.id.journalism);
+        ImageView imageView3 = (ImageView) findViewById(R.id.journalism);
 
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Novel.this,Journalism.class);
+                Intent i = new Intent(Novel.this, Journalism.class);
                 startActivity(i);
             }
         });
 
-        ImageView imageView4=(ImageView) findViewById(R.id.ataleoftwo);
+        ImageView imageView4 = (ImageView) findViewById(R.id.ataleoftwo);
 
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Novel.this,Taleoftwocities.class);
+                Intent i = new Intent(Novel.this, Taleoftwocities.class);
                 startActivity(i);
             }
         });
 
 
-
-
-
     }
-       }
+}

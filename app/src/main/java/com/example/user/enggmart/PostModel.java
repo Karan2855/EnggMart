@@ -6,13 +6,13 @@ package com.example.user.enggmart;
 
 public class PostModel {
     private String postUserdpurl = "";
-    private String postUserName = "hello";
-    private String postUserEmail = "hello@gmail.com";
+    private String postUserName = "Vikas Deshpandey";
+    private String postUserEmail = "vikasdp@gmail.com";
     private String postUrl = "";
-    private String postTime = "11bje";
-    private String postDescription="hm hai boss";
-    private String postLikesCount="0 Likes";
-    private String postCommentsCount="0 Comments";
+    private String postTime = "11-september-2018||22:10";
+    private String postDescription="I am Asking to you all.";
+    private String postLikesCount="0";
+    private String postCommentsCount="0";
     private boolean isPostLiked=false;
 
     public String getPostUserdpurl() {

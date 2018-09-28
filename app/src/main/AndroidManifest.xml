@@ -40,6 +40,11 @@
         </activity>
         <activity android:name=".SplashScreen">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
@@ -64,6 +69,7 @@
         <activity android:name=".WritePost" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SkillDevlopment" />
+        <activity android:name=".SecondActivity" />
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -89,15 +95,10 @@
         <activity android:name=".Artofps" />
         <activity android:name=".PaymentPage">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".Journalism" />
-        <activity android:name=".Taleoftwocities"></activity>
+        <activity android:name=".Taleoftwocities"/>
     </application>
 
 </manifest>

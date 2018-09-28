@@ -68,8 +68,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setTitle("User Profile");
 
 
-
-
         findIds();
         context = ProfileActivity.this;
 
@@ -84,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 namepro.setText(dataSnapshot.child("name").getValue().toString());
                 emailpro.setText(dataSnapshot.child("email").getValue().toString());
                 phonepro.setText(dataSnapshot.child("phone").getValue().toString());
+                return;
             }
 
             @Override
@@ -127,7 +126,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void profileImageUploadMethod() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this,  R.style.MyAlertDialogTheme);
+            builder = new AlertDialog.Builder(this, R.style.MyAlertDialogTheme);
         } else {
             builder = new AlertDialog.Builder(this);
         }
@@ -169,7 +168,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
             imageUri = Crop.getOutput(result);
-
+            profileImage.setImageURI(imageUri);
             uploadImage();
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
@@ -189,9 +188,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                profileImage.setImageURI(imageUri);
-                                imageUri = uri;
-                                mdDatabase.child("image").setValue(imageUri.toString());
+
+                                mdDatabase.child("image").setValue(uri.toString());
                             }
                         });
                         Toast.makeText(context, "Successfully uploaded", Toast.LENGTH_SHORT).show();
