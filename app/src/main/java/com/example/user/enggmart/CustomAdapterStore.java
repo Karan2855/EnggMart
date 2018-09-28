@@ -39,7 +39,7 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
         final StoreModel storeModel = listItemsStore.get(position);
         holder.name.setText(storeModel.getItemName() + "");
         holder.price.setText(storeModel.getItemPrice() + "");
-        Glide.with(context).load(storeModel.getImage1()).into(holder.image);
+        Glide.with(context).load(storeModel.getItemImage()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +65,6 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-
             // get the reference of item view's
             name = (TextView) itemView.findViewById(R.id.name_item_list);
             price = itemView.findViewById(R.id.price_item_list);
