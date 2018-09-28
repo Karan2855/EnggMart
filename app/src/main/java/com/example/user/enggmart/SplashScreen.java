@@ -25,6 +25,8 @@ public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth userAuth;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class SplashScreen extends AppCompatActivity {
       //  gifImageView = (GifImageView) findViewById(R.id.gifImageView);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//Do what you need for this SDK
+//Do what you need for this SD
         }
     //    try {
          //   InputStream inputStream = getAssets().open("loading.gif");
@@ -57,6 +59,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (userAuth.getCurrentUser() != null) {
                     startActivity(new Intent(SplashScreen.this, HomeActivity.class));
                     overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
@@ -67,6 +70,7 @@ public class SplashScreen extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
                     finish();
                 }
+
             }
         }, SPLASH_TIME_OUT);
     }

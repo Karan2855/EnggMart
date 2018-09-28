@@ -11,6 +11,7 @@
         android:padding="7dp"
         android:layout_marginLeft="5dp">
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/write_post_cross"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/cancel"
