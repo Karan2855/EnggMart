@@ -34,6 +34,8 @@ import com.soundcloud.android.crop.Crop;
 import java.io.File;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;

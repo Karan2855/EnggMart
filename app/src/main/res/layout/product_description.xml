@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context="com.example.user.enggmart.ProductDescription">
-    <include layout="@layout/custom_app_bar"/>
+
+    <include layout="@layout/custom_app_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,17 +54,20 @@
                         android:paddingVertical="15dp">
 
                         <ImageView
+                            android:id="@+id/img_one_des"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:background="#fff" />
 
                         <ImageView
+                            android:id="@+id/img_two_des"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_marginLeft="10dp"
                             android:background="#fff" />
 
                         <ImageView
+                            android:id="@+id/img_three_des"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_marginLeft="10dp"
@@ -72,22 +75,39 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/item_name"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:fontFamily="serif"
-                        android:text="product_name"
-                        android:textColor="#000"
-                        android:textSize="20dp" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/item_name_des"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:fontFamily="serif"
+                            android:text="product_name"
+                            android:layout_weight=".7"
+                            android:textColor="#000"
+                            android:textSize="20dp" />
+                        <TextView
+                            android:id="@+id/item_price_des"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:fontFamily="serif"
+                            android:layout_weight=".3"
+                            android:text="50.00 rs"
+                            android:textColor="#00960a"
+                            android:textSize="16dp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/item_description"
+                        android:id="@+id/item_description_des"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Description"
                         android:textColor="#000"
                         android:textSize="17dp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,7 +119,7 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/Purchase"
+            android:id="@+id/purchase"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"

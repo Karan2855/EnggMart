@@ -52,6 +52,7 @@ public class ThreeFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.e("hello", dataSnapshot.toString());
+                String itemID = dataSnapshot.getKey();
                 Map map = (Map) dataSnapshot.getValue();
                 String itemName = map.get("itemName").toString();
                 String itemPrice = map.get("itemPrice").toString();
@@ -59,8 +60,8 @@ public class ThreeFragment extends Fragment {
                 String image1 = map.get("image1").toString();
                 String image2 = map.get("image2").toString();
                 String image3 = map.get("image3").toString();
-
                 StoreModel storeModel = new StoreModel();
+                storeModel.setItemID(itemID);
                 storeModel.setItemName(itemName);
                 storeModel.setItemPrice(itemPrice);
                 storeModel.setItemDescription(itemDescription);

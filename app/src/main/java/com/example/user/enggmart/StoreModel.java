@@ -7,6 +7,15 @@ public class StoreModel {
     private String image1="";
     private String image2="";
     private String image3="";
+    private String itemID="";
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
+    }
 
     public String getItemName() {
         return itemName;

@@ -36,7 +36,7 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        StoreModel storeModel = listItemsStore.get(position);
+        final StoreModel storeModel = listItemsStore.get(position);
         holder.name.setText(storeModel.getItemName() + "");
         holder.price.setText(storeModel.getItemPrice() + "");
         Glide.with(context).load(storeModel.getImage1()).into(holder.image);
@@ -44,7 +44,8 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
             @Override
             public void onClick(View view) {
                 // open another activity on item click
-                Intent intent = new Intent(holder.itemView.getContext(), SecondActivity.class);
+                Intent intent = new Intent(holder.itemView.getContext(), ProductDescription.class);
+                intent.putExtra("id",storeModel.getItemID().toString());
                 holder.itemView.getContext().startActivity(intent); // start Intent
             }
         });
