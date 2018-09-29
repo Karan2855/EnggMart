@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:background="#025b07"
+            android:background="#73b478"
             android:text="CONFIRM PAYMENT"
             android:textColor="#fff"
             android:textSize="20dp" />
