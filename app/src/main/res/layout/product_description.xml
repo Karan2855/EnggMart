@@ -143,17 +143,17 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/purchase"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="#025b07"
+            android:text="PURCHASE"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/purchase"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="#025b07"
-        android:text="PURCHASE"
-        android:textColor="#fff"
-        android:textSize="20dp" />
 
 </LinearLayout>
