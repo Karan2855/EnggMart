@@ -24,7 +24,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#1278be">
+                android:background="@color/colorPrimary">
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -47,11 +47,13 @@
 
                         android:textSize="20dp"
                         />
-                    <com.felipecsl.gifimageview.library.GifImageView
-                        android:layout_width="60dp"
-                        android:layout_height="?attr/actionBarSize"
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@mipmap/notificationicon"
                         android:id="@+id/nofication"
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
                         />
 
                 </LinearLayout>

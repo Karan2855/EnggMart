@@ -17,21 +17,15 @@
             android:background="@mipmap/cancel"
             android:layout_gravity="center_vertical"/>
         <LinearLayout
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:orientation="horizontal"
             android:background="@drawable/rectangle_sky"
             >
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/mainlogo"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:text="EnggMart"
             android:textColor="#fff"
@@ -83,7 +77,6 @@
         android:layout_height="51dp"
         android:padding="0.5dp"
         android:layout_alignParentBottom="true"
-        android:background="#1278be"
         >
         <RelativeLayout
             android:layout_width="match_parent"

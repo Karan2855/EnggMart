@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawer;
     LinearLayout semesterWiseBooks, tools, myCart, myOrder, myChat, sellOnEnggMart, accountSetting, helpCentre, share;
     CircleImageView imageProfile;
-    private GifImageView notifiacationa;
+    private ImageView notifiacationa;
     private DatabaseReference mdDatabase;
     private FirebaseAuth userAuth;
     Toolbar toolbar;
@@ -90,21 +91,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
         onClicking();
-        try {
-            InputStream inputStream = getAssets().open("bellmmf.gif");
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            notifiacationa.setBytes(bytes);
-            notifiacationa.startAnimation();
-            notifiacationa.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(HomeActivity.this, Notification.class);
-                    startActivity(i);
-                }
-            });
-        } catch (IOException e) {
+        notifiacationa=(ImageView)findViewById(R.id.nofication);
+        notifiacationa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this, Notification.class);
+                startActivity(i);
 
-        }
+            }
+        });
 
         setSupportActionBar(toolbar);
 
@@ -182,7 +177,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void findIds() {
-        notifiacationa = (GifImageView) findViewById(R.id.nofication);
+        notifiacationa = (ImageView) findViewById(R.id.nofication);
         drawer = (DrawerLayout) findViewById(R.id.dr_layout);
         semesterWiseBooks = (LinearLayout) findViewById(R.id.semesterwisebook);
         tools = (LinearLayout) findViewById(R.id.tools);
