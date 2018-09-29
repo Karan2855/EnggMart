@@ -115,7 +115,7 @@
                     android:id="@+id/rent_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="# 9eb987"
+                    android:buttonTint="#9eb987"
                     android:text="RENT"
                     android:textColor="#000" />
             </RadioGroup>
