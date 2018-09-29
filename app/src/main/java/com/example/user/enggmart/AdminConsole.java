@@ -136,7 +136,7 @@ public class AdminConsole extends AppCompatActivity implements View.OnClickListe
                             public void onSuccess(Uri uri) {
                                 Map<String, String> map = new HashMap<String, String>();
                                 map.put("itemName", iName + " ");
-                                map.put("itemPrice", iPrice + ".00");
+                                map.put("itemPrice",iPrice + ".00");
                                 map.put("itemDescription", iDescription + " ");
                                 map.put("itemImage", uri.toString());
                                 map.put("storagefolderName", timeStamp);
