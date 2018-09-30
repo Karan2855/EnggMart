@@ -68,12 +68,8 @@ public class MainActivity extends AppCompatActivity implements /*NavigationView.
         setContentView(R.layout.activity_main);
         notifiacationa=(GifImageView) findViewById(R.id.nofication);
         drawer=findViewById(R.id.drawer_layout);
-        semesterWiseBooks=findViewById(R.id.semesterwisebook);
-        tools=findViewById(R.id.tools);
-        myCart=findViewById(R.id.mycart);
         myChat=findViewById(R.id.mychat);
         myOrder=findViewById(R.id.myorder);
-        sellOnEnggMart=findViewById(R.id.sellonenggmart);
         accountSetting=findViewById(R.id.accountsetting);
         share=findViewById(R.id.share);
         helpCentre=findViewById(R.id.help);

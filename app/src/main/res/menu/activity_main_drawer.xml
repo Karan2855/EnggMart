@@ -4,18 +4,18 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
+      <!--  <item
             android:id="@+id/nav_camera"
             android:icon="@mipmap/handbook"
             android:title="Semesterwise Books" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@mipmap/tools"
-            android:title="Sports,Tools and more" />
+            android:title="Electro. equi. \u0026 Tools" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@mipmap/sella"
-            android:title="My Cart" />
+            android:title="My Cart" />-->
         <item
             android:id="@+id/nav_manage"
             android:icon="@mipmap/padnote"
@@ -24,32 +24,32 @@
             android:id="@+id/nav_manage2"
             android:icon="@mipmap/chat"
             android:title="My Chat" />
-        <item
-            android:id="@+id/nav_manage1"
-            android:icon="@mipmap/businessman"
-            android:title="Sell on EnggMart" />
-        <item
-            android:id="@+id/nav_send1"
-            android:icon="@mipmap/setting"
-            android:title="Account Setting" />
-        <item
-            android:id="@+id/nav_send"
-            android:icon="@mipmap/help"
-            android:title="Help Cenre" />
-        <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Share" />
+        <!--  <item
+              android:id="@+id/nav_manage1"
+              android:icon="@mipmap/businessman"
+              android:title="Sell on EnggMart" />-->
+          <item
+              android:id="@+id/nav_send1"
+              android:icon="@mipmap/setting"
+              android:title="Account Setting" />
+          <item
+              android:id="@+id/nav_send"
+              android:icon="@mipmap/help"
+              android:title="Help Cenre" />
+          <item
+              android:id="@+id/nav_share"
+              android:icon="@drawable/ic_menu_share"
+              android:title="Share" />
 
 
-    </group>
+      </group>
 
 
-    <item android:title="Communicate">
-        <menu>
+      <item android:title="Communicate">
+          <menu>
 
 
-        </menu>
-    </item>
+          </menu>
+      </item>
 
-</menu>
+  </menu>

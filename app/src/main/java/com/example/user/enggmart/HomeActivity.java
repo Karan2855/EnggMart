@@ -272,6 +272,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
             finish();
             return true;
+        }else if (id == R.id.guide) {
+                guideDialog();
         } else if (id == R.id.logoutmenu) {
             customDialog();
         }
@@ -322,6 +324,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
         openDialog.show();
     }
+
+    private void guideDialog() {
+        final Dialog openDialog = new Dialog(HomeActivity.this);
+        openDialog.setContentView(R.layout.guidelines);
+        openDialog.setCancelable(false);
+        openDialog.getWindow().setLayout(1000,1500);
+        TextView cancel = (TextView) openDialog.findViewById(R.id.guide_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialog.dismiss();
+
+            }
+        });
+        openDialog.show();
+    }
+
 
 
     public void onClick(View v) {
