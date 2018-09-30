@@ -371,6 +371,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
             drawer.closeDrawers();
         } else if (v == helpCentre) {
+            Intent i=new Intent(HomeActivity.this,HelpCenter.class);
+            startActivity(i);
             Toast.makeText(this, "clicked On Help Centre", Toast.LENGTH_SHORT).show();
             drawer.closeDrawers();
         } else if (v == share) {
