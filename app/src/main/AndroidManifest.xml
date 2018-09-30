@@ -45,7 +45,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,12 +98,21 @@
         <activity android:name=".AdminConsole" />
         <activity android:name=".Seveneges" />
         <activity android:name=".Artofps" />
-        <activity android:name=".PaymentPage">
-
-
-        </activity>
+        <activity android:name=".PaymentPage" />
         <activity android:name=".Journalism" />
         <activity android:name=".Taleoftwocities" />
+        <activity android:name=".January" />
+        <activity android:name=".February" />
+        <activity android:name=".March" />
+        <activity android:name=".April" />
+        <activity android:name=".May" />
+        <activity android:name=".June" />
+        <activity android:name=".July" />
+        <activity android:name=".August" />
+        <activity android:name=".Revolution" />
+        <activity android:name=".Billgates" />
+        <activity android:name=".Godan" />
+        <activity android:name=".Madhusala"></activity>
     </application>
 
 </manifest>

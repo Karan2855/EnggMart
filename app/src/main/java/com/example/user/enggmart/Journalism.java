@@ -14,7 +14,7 @@ public class Journalism extends AppCompatActivity {
         setContentView(R.layout.activity_journalism);
 
         bookje=(PDFView)findViewById(R.id.journalismpdf);
-        bookje.fromAsset("journalism and the novel.pdf").load();
+        bookje.fromAsset("heartofdarkness.pdf").load();
 
     }
 }

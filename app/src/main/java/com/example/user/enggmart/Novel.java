@@ -13,6 +13,11 @@ public class Novel extends AppCompatActivity {
     ImageView imageView;
     ImageView imageView2;
     ImageView imageView3;
+    ImageView imageView4;
+    ImageView imageView5;
+    ImageView imageView6;
+    ImageView imageView7;
+    ImageView imageView8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
