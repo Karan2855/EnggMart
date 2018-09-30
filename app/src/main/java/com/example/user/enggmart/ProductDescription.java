@@ -24,7 +24,7 @@ public class ProductDescription extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Button button;
     private String itemID;
-    private String priceitemsend;
+    private String itemType;
     private String priceitem;
     private TextView name, price, description, percentOff, pricePurchace;
     private ImageView img;
@@ -74,9 +74,11 @@ public class ProductDescription extends AppCompatActivity {
                 name.setText(dataSnapshot.child("itemName").getValue().toString());
                 priceitem = dataSnapshot.child("itemPrice").getValue().toString();
                 pricePurchace.setText("\u20B9 " + Float.parseFloat(priceitem) * 0.8 + "");
+                itemType = "NEW";
                 percentOff.setText("20% off");
                 price.setText("\u20B9 " + priceitem);
                 description.setText(dataSnapshot.child("itemDescription").getValue().toString());
+                return;
             }
 
             @Override
@@ -91,18 +93,18 @@ public class ProductDescription extends AppCompatActivity {
                     case R.id.new_book:
                         pricePurchace.setText("\u20B9 " + Float.parseFloat(priceitem) * 0.8 + "");
                         percentOff.setText("20% off");
-                        priceitemsend= Float.parseFloat(priceitem) * 0.8 + "";
+                        itemType = "NEW";
                         break;
                     case R.id.old_book:
                         pricePurchace.setText("\u20B9 " + Float.parseFloat(priceitem) * 0.6 + "");
                         percentOff.setText("40% off");
-                        priceitemsend= Float.parseFloat(priceitem) * 0.6 + "";
+                        itemType = "OLD";
                         break;
                     case R.id.rent_book:
 
                         pricePurchace.setText("\u20B9 " + Float.parseFloat(priceitem) * 0.77 + "");
                         percentOff.setText("47% ret");
-                        priceitemsend= Float.parseFloat(priceitem) * 0.77 + "";
+                        itemType = "RENT";
                         break;
                 }
             }
@@ -112,7 +114,7 @@ public class ProductDescription extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ProductDescription.this, PaymentPage.class);
                 i.putExtra("idItem", itemID);
-                i.putExtra("itemprice",priceitemsend);
+                i.putExtra("itemtype", itemType);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
             }

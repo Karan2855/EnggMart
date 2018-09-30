@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     tools:context=".SignInSignUp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,8 +16,8 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/footer"
 
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
@@ -35,19 +36,22 @@
                 android:orientation="horizontal" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:orientation="horizontal">
+
                 <LinearLayout
+                    android:id="@+id/google_sign_in"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
@@ -55,32 +59,32 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/googlecorner">
+
                     <ImageView
                         android:layout_width="17dp"
+                        android:layout_height="19dp"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="11dp"
-                        android:layout_height="19dp"
-                        android:src="@drawable/google"
-                        />
+                        android:src="@drawable/google" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="15dp"
-                        android:textColor="#ffffff"
+                        android:layout_marginTop="10dp"
                         android:text="Google+"
-                        android:textSize="15dp"
-                        />
+                        android:textColor="#ffffff"
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/fbcorner">
 
                     <ImageView
@@ -100,33 +104,34 @@
                         android:textSize="15dp" />
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:text="or using email"
-                android:textSize="10dp"
-                android:gravity="center"
                 android:background="#fff"
-                android:textColor="#b6b0b0"/>
+                android:gravity="center"
+                android:text="or using email"
+                android:textColor="#b6b0b0"
+                android:textSize="10dp" />
 
             <LinearLayout
+                android:id="@+id/fabs"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/fabs"
-                android:background="#e5e5e5"
                 android:layout_marginTop="1dp"
+                android:background="#e5e5e5"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/signin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="0.5dp"
-                    android:background="#ffffff"
                     android:layout_marginTop="0.5dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
                     android:text="SIGN IN"
                     android:textColor="#000000"
-                    android:layout_weight="1"
                     android:textSize="15dp" />
 
                 <Button
@@ -147,6 +152,12 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progress_bar_sign_in_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

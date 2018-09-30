@@ -61,8 +61,6 @@ public class ChatActivity extends AppCompatActivity {
         dp = (CircleImageView) findViewById(R.id.dp);
         userAuth = FirebaseAuth.getInstance();
         uid = userAuth.getCurrentUser().getUid().toString();
-
-
         mDatabase1 = FirebaseDatabase.getInstance().getReference().child("messages").child(uid + "_" + UserDetails.chatWith);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("messages").child(UserDetails.chatWith + "_" + uid);
 

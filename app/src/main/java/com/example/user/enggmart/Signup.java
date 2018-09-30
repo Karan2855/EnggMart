@@ -10,10 +10,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
@@ -44,206 +47,160 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Signup extends AppCompatActivity implements View.OnClickListener, ConnectivityReceiver.ConnectivityReceiverListener {
-
-    private static final int RC_SIGN_IN = 111;
     private ImageView Imv;
     private EditText email, password, uname, phone;
-    private Uri imageUri;
-    private Button btnregister, btnverify;
+    private Button btnregister;
     private TextView login;
-    private ProgressDialog progressDialog;
-    private String name = "", pass = "", emailid = "", phoneno = "", uid = "";
     private DatabaseReference mDatabase;
-    private FirebaseUser user;
-    private StorageReference mStorageRef;
-    private GoogleSignInOptions gso;
-    private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth auth;
-
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         btnregister = findViewById(R.id.buttonregister);
-        btnverify = findViewById(R.id.buttonverify);
         email = findViewById(R.id.emailsignup);
         uname = findViewById(R.id.namesignup);
         password = findViewById(R.id.passwordsignup);
         login = findViewById(R.id.logintvsignup);
         phone = findViewById(R.id.mobnosignup);
         Imv = findViewById(R.id.imv);
+        progressBar = findViewById(R.id.progress_bar_signup);
         btnregister.setOnClickListener(this);
         login.setOnClickListener(this);
-        btnverify.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
-
-        imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + getResources().getResourcePackageName(R.mipmap.usera)
-                + '/' + getResources().getResourceTypeName(R.mipmap.usera) + '/' + getResources().getResourceEntryName(R.mipmap.usera));
-        progressDialog = new ProgressDialog(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         Imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Signup.this, SignInSignUp.class);
                 startActivity(i);
-                //              overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
         });
-
-
-        //google login
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
-
     }
 
-    private void updateInformation(FirebaseUser firebaseUser) {
-        if (firebaseUser != null) {
-            uid = user.getUid().toString();
-            mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
-            mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-            progressDialog.setMessage("Updating Informations");
-            final StorageReference sRef = mStorageRef.child("profile.jpg");
-            sRef.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+    @Override
+    public void onClick(View view) {
+        if (view == btnregister) {
+            registerUser();
+        } else if (view == login) {
+            startActivity(new Intent(Signup.this, SignIn.class));
+            finish();
+        }
+    }
+
+    public void registerUser() {
+        final String name = uname.getText().toString().trim();
+        final String emailid = email.getText().toString().trim();
+        final String phoneno = phone.getText().toString().trim();
+        String pass = password.getText().toString();
+        if (userValidte(name, emailid, phoneno, pass)) {
+            progressBar.setVisibility(View.VISIBLE);
+            auth.createUserWithEmailAndPassword(emailid, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    imageUri = uri;
-                                    updateDatabase();
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                final FirebaseUser user = task.getResult().getUser();
+                                if (user != null) {
+                                    user.sendEmailVerification().addOnCompleteListener(
+                                            new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(Signup.this,
+                                                            "Verification email sent to " + user.getEmail(),
+                                                            Toast.LENGTH_SHORT).show();
+                                                    updateUI(user, name, phoneno, emailid);
+
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(Signup.this, e.getMessage(),
+                                                    Toast.LENGTH_SHORT).show();
+                                            user.delete();
+                                            Toast.makeText(Signup.this,
+                                                    "Registration is not Successful!",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            });
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException)
+                                    Toast.makeText(Signup.this, "You Are Already Registered", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(Signup.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.setMessage("Failed");
-                            progressDialog.dismiss();
+                        public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }
     }
 
-    private void updateDatabase() {
-        ModelRegister modelRegister = new ModelRegister();
-        modelRegister.setEmail("" + emailid);
-        modelRegister.setName("" + name);
-        modelRegister.setPhone("+91 " + phoneno);
-        modelRegister.setPassword("" + pass);
-        modelRegister.setImage(imageUri.toString());
-        mDatabase.setValue(modelRegister);
-        completeTask();
+    private void updateUI(@NonNull final FirebaseUser user, final String name, final String phoneno, final String emailid) {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ModelRegister modelRegister = new ModelRegister();
+                modelRegister.setPhone("" + phoneno);
+                modelRegister.setEmail("" + emailid);
+                modelRegister.setImage("not Provided");
+                modelRegister.setName("" + name);
+                mDatabase.setValue(modelRegister);
+                completeTask();
+                return;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private boolean userValidte(String name, String emailid, String phoneno, String pass) {
+        if (name.equals("")) {
+            uname.setError("Please Enter User Name");
+            uname.requestFocus();
+        } else if (name.length() < 4) {
+            uname.setError("User Name Length Should be Atleast 4");
+            uname.requestFocus();
+        } else if (emailid.equals("")) {
+            email.setError("Please Enter an Email ID");
+            email.requestFocus();
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailid).matches()) {
+            email.setError("Please Provide a Valid Email");
+            email.requestFocus();
+        } else if (!Patterns.PHONE.matcher(phoneno).matches() || phoneno.length() < 10) {
+            phone.setError("enter valid phone no.");
+            phone.requestFocus();
+        } else if (pass.length() < 6) {
+            password.setError("at least 6 characters long");
+            password.requestFocus();
+        } else
+            return true;
+        return false;
     }
 
     private void completeTask() {
-        progressDialog.dismiss();
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "Registration Successfull..!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Signup.this, SignIn.class));
         auth.signOut();
         finish();
     }
-
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d("Tag", "firebaseAuthWithGoogle:" + acct.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser fUser = task.getResult().getUser();
-                            UpdateUI(fUser);
-                        } else {
-                            Toast.makeText(Signup.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    private void UpdateUI(final FirebaseUser fUser) {
-                        progressDialog.setMessage("Updating User Informations...");
-                        String fuid = fUser.getUid().toString();
-                        mStorageRef = FirebaseStorage.getInstance().getReference()
-                                .child("profileImages").child(fuid);
-                        mDatabase = FirebaseDatabase.getInstance()
-                                .getReference().child("users").child(fuid);
-                        mDatabase.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Log.e("DATASnapshot", dataSnapshot + "");
-                                ModelRegister modelRegister = new ModelRegister();
-                                modelRegister.setEmail("" + fUser.getEmail());
-                                modelRegister.setName("" + fUser.getDisplayName());
-                                modelRegister.setPassword("");
-                                if (dataSnapshot.getValue() == null) {
-                                    modelRegister.setPhone("+91 ");
-                                    updatepic(imageUri);
-                                    modelRegister.setImage(imageUri.toString());
-                                } else {
-                                    modelRegister.setImage(dataSnapshot.child("image").getValue().toString());
-                                    modelRegister.setPhone(dataSnapshot.child("phone").getValue().toString());
-                                }
-                                mDatabase.setValue(modelRegister);
-                                startActivity(new Intent(Signup.this, HomeActivity.class));
-                                finish();
-                                progressDialog.dismiss();
-                                return;
-                            }
-
-                            private void updatepic(Uri photoUrl) {
-                                final StorageReference sRef = mStorageRef.child("profile.jpg");
-                                sRef.putFile(photoUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        imageUri = taskSnapshot.getUploadSessionUri();
-
-                                        return;
-                                    }
-                                })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(Signup.this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
-                                                return;
-                                            }
-                                        });
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Toast.makeText(Signup.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        });
-
-                    }
-                }).
-
-                addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                });
-    }
-
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
@@ -271,140 +228,11 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            progressDialog.setMessage("Registering user Using Gmail...");
-            progressDialog.show();
-            progressDialog.setCancelable(false);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         MyApplication.getInstance().setConnectivityListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view == btnregister) {
-            registerUser();
-        } else if (view == login) {
-            startActivity(new Intent(Signup.this, SignIn.class));
-            // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
-        } else if (view == btnverify) {
-
-        }
-    }
-
-    public void registerUser() {
-        if (userValidte()) {
-            progressDialog.setMessage("Registering user...");
-            progressDialog.show();
-            progressDialog.setCancelable(false);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            auth.createUserWithEmailAndPassword(emailid, pass)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if (task.isSuccessful()) {
-                                user = task.getResult().getUser();
-                                user.sendEmailVerification().addOnCompleteListener(
-                                        new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(Signup.this,
-                                                        "Verification email sent to " + user.getEmail(),
-                                                        Toast.LENGTH_SHORT).show();
-                                                updateInformation(user);
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(Signup.this, e.getMessage(),
-                                                Toast.LENGTH_SHORT).show();
-                                        user.delete();
-
-                                        Toast.makeText(Signup.this,
-                                                "Registration is not Successful!",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else
-
-                            {
-                                progressDialog.dismiss();
-                                Toast.makeText(Signup.this, "Registeration Failed...!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-        }
-    }
-
-    private boolean userValidte() {
-        name = uname.getText().toString().trim();
-        pass = password.getText().toString().trim();
-        emailid = email.getText().toString().trim();
-        phoneno = phone.getText().toString().trim();
-        if (name.equals("")) {
-            uname.setError("can't be blank");
-        } else if (!name.matches("[A-Za-z]+")) {
-            uname.setError("only alphabet allowed");
-        } else if (name.length() < 5) {
-            uname.setError("at least 5 characters long");
-        } else if (emailid.equals("")) {
-            email.setError("can't be blank");
-        } else if (!checkEmail()) {
-            email.setError("enter valid email");
-        } else if (!checkPhone()) {
-            phone.setError("enter valid phone no.");
-        } else if (pass.length() < 5) {
-            password.setError("at least 5 characters long");
-        } else
-            return true;
-        return false;
-    }
-
-    private boolean checkPhone() {
-        if (Pattern.matches("[0-9]+", phone.getText().toString().trim()) && phoneno.length() == 10)
-            return true;
-        return false;
-    }
-
-    private boolean checkEmail() {
-        Pattern pattern;
-        Matcher matcher;
-        final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(emailid);
-        if (matcher.matches())
-            return true;
-        return false;
-    }
 
     @Override
     public void onBackPressed() {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private ImageView imgback;
-
     private EditText usernamelog;
     private EditText usrpasswordlog;
     private Button btnlog;
@@ -105,7 +105,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             userLogin();
         }
         if (view == signup) {
-            //log in activty
             startActivity(new Intent(SignIn.this, Signup.class));
             overridePendingTransition(R.anim.fade_out, R.anim.slide_out_down);
             finish();

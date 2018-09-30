@@ -1,7 +1,7 @@
 package com.example.user.enggmart;
 
 public class ModelRegister {
-    public String name="",email="",password="",phone="",image="";
+    public String name = "", email = "", phone = "", image = "";
 
     public String getName() {
         return name;
@@ -17,14 +17,6 @@ public class ModelRegister {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {

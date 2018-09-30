@@ -1,40 +1,61 @@
 package com.example.user.enggmart;
 
-import android.database.DataSetObserver;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class PaymentPage extends AppCompatActivity {
 
 
     private String itemID;
-    private String itemPriceget;
+    private String itemType;
+    private String price;
     private DatabaseReference mDatabase;
-    private TextView itemName, itemPrice;
+    private TextView itemName, itemPrice, itemCondition, rentPolicy;
     private ImageView img;
+    private EditText name, address, landmark, contactno;
+    private Button placeOrder;
+    private UUID uuid;
+    private DatabaseReference mDatabaseorder;
+    private FirebaseAuth userAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment_page);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+            } else {
+                itemID = extras.getString("idItem");
+                itemType = extras.getString("itemtype").toString();
+            }
+        } else {
+            itemID = (String) savedInstanceState.getSerializable("id");
+            itemType = (String) savedInstanceState.getSerializable("itemtype");
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,28 +67,42 @@ public class PaymentPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        itemCondition = findViewById(R.id.condition);
         itemName = findViewById(R.id.item_name_pay);
+        rentPolicy = findViewById(R.id.rent_policy);
         itemPrice = findViewById(R.id.price_to_be_paid);
-
+        name = findViewById(R.id.name_order);
+        address = findViewById(R.id.address_order);
+        contactno = findViewById(R.id.contact_order);
+        landmark = findViewById(R.id.landmark_order);
+        placeOrder = findViewById(R.id.p_placeorder);
         img = findViewById(R.id.image_item_payment);
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if (extras == null) {
-            } else {
-                itemID = extras.getString("idItem");
-                itemPriceget = extras.getString("itemprice");
-            }
-        } else {
-            itemID = (String) savedInstanceState.getSerializable("id");
-            itemPriceget = (String) savedInstanceState.getSerializable("itemprice");
-        }
-        itemPrice.setText("\u20B9 " + itemPriceget);
+        mDatabaseorder = FirebaseDatabase.getInstance().getReference().child("orders");
+        userAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Glide.with(getApplicationContext()).load(dataSnapshot.child("itemImage").getValue().toString()).into(img);
                 itemName.setText(dataSnapshot.child("itemName").getValue().toString());
+                String itemPriceString = dataSnapshot.child("itemPrice").getValue().toString();
+                if (itemType.equals("NEW")) {
+                    price = "\u20B9 " + Float.parseFloat(itemPriceString) * 0.8 + "";
+                    itemPrice.setText(price);
+                    itemCondition.setText("NEW");
+                    rentPolicy.setVisibility(View.GONE);
+                } else if (itemType.equals("OLD")) {
+                    itemCondition.setText("OLD");
+                    price = "\u20B9 " + Float.parseFloat(itemPriceString) * 0.6 + "";
+                    itemPrice.setText(price);
+                    rentPolicy.setVisibility(View.GONE);
+                } else if (itemType.equals("RENT")) {
+                    itemCondition.setText("On RENT");
+                    price = "\u20B9 " + Float.parseFloat(itemPriceString) * 0.77 + "";
+                    itemPrice.setText(price);
+                    rentPolicy.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -76,8 +111,54 @@ public class PaymentPage extends AppCompatActivity {
             }
         });
 
-
+        placeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nameorder = name.getText().toString().trim();
+                String addressorder = address.getText().toString().trim();
+                String landmarkorder = landmark.getText().toString().trim();
+                String contectorder = contactno.getText().toString().trim();
+                if (validateOrderDetails(nameorder, addressorder, landmarkorder, contectorder)) {
+                    placeOrder.setEnabled(false);
+                    uuid = UUID.randomUUID();
+                    String orderid = uuid.toString();
+                    mDatabaseorder.child(orderid).child("nameUser").setValue(nameorder);
+                    mDatabaseorder.child(orderid).child("addressOfOrder").setValue(addressorder);
+                    mDatabaseorder.child(orderid).child("landmarkOfOrder").setValue(landmarkorder);
+                    mDatabaseorder.child(orderid).child("ContactNoOfOrder").setValue(contectorder);
+                    mDatabaseorder.child(orderid).child("amount").setValue(price);
+                    mDatabaseorder.child(orderid).child("userId").setValue(userAuth.getCurrentUser().getUid());
+                    mDatabaseorder.child(orderid).child("itemId").setValue(itemID);
+                    mDatabaseorder.child(orderid).child("itemCondition").setValue(itemType);
+                    mDatabaseorder.child(orderid).child("orderStatus").setValue("Confirmed");
+                    final String timeStamp = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss",
+                            Locale.getDefault()).format(new Date());
+                    mDatabaseorder.child(orderid).child("time").setValue(timeStamp);
+                    Toast.makeText(PaymentPage.this, "Your Order is Confirmed & you can see further details in My Orders", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        });
     }
 
+    private boolean validateOrderDetails(String nameorder, String addressorder, String landmarkorder, String contectorder) {
+        if (TextUtils.isEmpty(nameorder)) {
+            name.setError("Please Enter Name");
+        } else if (TextUtils.isEmpty(addressorder)) {
+            address.setError("Please Enter full Address");
+        } else if (TextUtils.isEmpty(landmarkorder)) {
+            landmark.setError("Please Enter LandMark");
+        } else if (!checkPhone(contectorder)) {
+            contactno.setError("enter valid phone no.");
+        } else
+            return true;
+        return false;
+    }
+
+    private boolean checkPhone(String contectOrder) {
+        if (Pattern.matches("[0-9]+", contectOrder) && contectOrder.length() == 10)
+            return true;
+        return false;
+    }
 
 }
