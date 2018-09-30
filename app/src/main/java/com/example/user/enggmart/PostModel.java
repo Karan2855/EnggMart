@@ -6,14 +6,15 @@ package com.example.user.enggmart;
 
 public class PostModel {
     private String postUserdpurl = "";
-    private String postUserName = "Vikas Deshpandey";
-    private String postUserEmail = "vikasdp@gmail.com";
+    private String postUserName = "";
+    private String postUserEmail = "";
     private String postUrl = "";
-    private String postTime = "11-september-2018||22:10";
-    private String postDescription="I am Asking to you all.";
-    private String postLikesCount="0";
-    private String postCommentsCount="0";
-    private boolean isPostLiked=false;
+    private String postTime = "";
+    private String postDescription = "";
+    private String postLikesCount = "0";
+    private String postCommentsCount = "0";
+    private boolean isPostLiked = false;
+    private String uid = "";
 
     public String getPostUserdpurl() {
         return postUserdpurl;
@@ -85,5 +86,13 @@ public class PostModel {
 
     public void setPostLiked(boolean postLiked) {
         isPostLiked = postLiked;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
     }
 }

@@ -2,6 +2,7 @@ package com.example.user.enggmart;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +30,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class ThreeFragment extends Fragment {
 
     private RecyclerView mAllItemsListView;
-    private List<StoreModel> listItemsStore = new ArrayList<>();
+    private List<StoreModel> listItemsStore;
     private DatabaseReference mDatabase;
 
     @Override
@@ -38,6 +39,7 @@ public class ThreeFragment extends Fragment {
         // get the reference of RecyclerView
         View rootView = inflater.inflate(R.layout.fragment_three, container, false);
         mAllItemsListView = rootView.findViewById(R.id.recycler_view_store);
+        listItemsStore = new ArrayList<>();
         // set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         mAllItemsListView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
@@ -51,7 +53,7 @@ public class ThreeFragment extends Fragment {
 
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.hasChildren()) {
                     Log.e("hello", dataSnapshot.toString());
                     String itemID = dataSnapshot.getKey();

@@ -152,6 +152,7 @@ public class PaymentPage extends AppCompatActivity {
         Toast.makeText(PaymentPage.this,
                 "Your Order is Confirmed & you can see further details in My Orders",
                 Toast.LENGTH_LONG).show();
+        finish();
     }
 
     private boolean validateOrderDetails(String nameorder, String addressorder, String landmarkorder, String contectorder) {

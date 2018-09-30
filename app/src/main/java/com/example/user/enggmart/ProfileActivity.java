@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
-    private ImageView profileImage;
+    private CircleImageView profileImage;
     private String uriupdate;
     private TextView namepro, phonepro, emailpro, detailedpro, update;
     private EditText etnamepro, etphonepro;
@@ -47,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference mdDatabase;
     private FirebaseAuth userAuth;
     private DatabaseReference mdDatabase2;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
     private ProfileActivity context;
 
 
@@ -68,9 +69,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         setTitle("User Profile");
-
-
         findIds();
+        progressBar.setVisibility(View.VISIBLE);
         context = ProfileActivity.this;
         userAuth = FirebaseAuth.getInstance();
         String uid = userAuth.getCurrentUser().getUid().toString();
@@ -80,8 +80,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mdDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.child("image").getValue().toString().equals("not Provided"))
+                if (!dataSnapshot.child("image").getValue().toString().equals("not Provided")) {
                     Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString()).into(profileImage);
+                    progressBar.setVisibility(View.GONE);
+                }
                 namepro.setText(dataSnapshot.child("name").getValue().toString());
                 emailpro.setText(dataSnapshot.child("email").getValue().toString());
                 phonepro.setText(dataSnapshot.child("phone").getValue().toString());
@@ -104,6 +106,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         etnamepro = findViewById(R.id.nameprofileet);
         etphonepro = findViewById(R.id.phoneprofileet);
         emailpro = findViewById(R.id.emailprofiletv);
+        progressBar = findViewById(R.id.progress_bar_pro_dp);
         profileImage.setOnClickListener(this);
         phonepro.setOnClickListener(this);
         namepro.setOnClickListener(this);
@@ -128,13 +131,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void profileImageUploadMethod() {
         AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, R.style.MyAlertDialogTheme);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }
+        builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         builder.setTitle("Update Display Picture")
-                .setMessage("Are you sure you want to Change Display Picture?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         openFileChooser();
@@ -145,7 +143,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         // do nothing
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.mipmap.photocamera)
                 .show();
     }
 
@@ -156,10 +154,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+
             beginCrop(result.getData());
         } else if (requestCode == Crop.REQUEST_CROP) {
             handleCrop(resultCode, result);
         }
+
     }
 
     private void beginCrop(Uri source) {
@@ -169,8 +169,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
+            progressBar.setVisibility(View.VISIBLE);
             imageUri = Crop.getOutput(result);
-            profileImage.setImageURI(imageUri);
             uploadImage();
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
@@ -178,9 +178,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void uploadImage() {
-        progressDialog = new ProgressDialog(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
-        progressDialog.setMessage("uploading...");
-        progressDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
         final StorageReference sRef = mStorageRef.child("profile.jpg");
 
         sRef.putFile(imageUri)
@@ -191,16 +189,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             @Override
                             public void onSuccess(Uri uri) {
                                 uriupdate = uri.toString();
+                                mdDatabase.child("image").setValue(uriupdate);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        Toast.makeText(context, "Successfully uploaded", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 });

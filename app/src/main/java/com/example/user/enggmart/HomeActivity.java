@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private ActionBarDrawerToggle toggle;
     private String uid;
+    private ProgressBar progressBar;
     boolean doubleBackToExitPressedOnce = false;
     private int[] tabIcons = {
             R.drawable.newspaper,
@@ -84,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         userAuth = FirebaseAuth.getInstance();
         uid = userAuth.getCurrentUser().getUid();
         UserDetails.uid = uid;
+        progressBar.setVisibility(View.VISIBLE);
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
         init();
@@ -145,8 +148,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     UserDetails.phoneno = phone;
                     UserDetails.email = email;
                     UserDetails.img = imageurl;
-                    if (!imageurl.equals("not Provided"))
+                    if (!imageurl.equals("not Provided")) {
                         Glide.with(getApplicationContext()).load(imageurl).into(imageProfile);
+                        progressBar.setVisibility(View.GONE);
+                    }
                     uname.setText(name + "");
                     uemail.setText(email + "");
                     return;
@@ -191,6 +196,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         imageProfile = (CircleImageView) findViewById(R.id.img_pdr);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        progressBar = findViewById(R.id.progress_bar_drawer);
     }
 
 

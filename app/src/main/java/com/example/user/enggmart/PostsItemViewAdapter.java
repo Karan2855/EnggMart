@@ -1,7 +1,6 @@
 package com.example.user.enggmart;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +13,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -28,6 +32,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 class PostsItemViewAdapter extends RecyclerView.Adapter<PostsItemViewAdapter.PostsItemViewHolder> {
     private Context context;
     private List<PostModel> mPosts;
+    private DatabaseReference mDatabase;
 
     public PostsItemViewAdapter(Context context, List<PostModel> posts) {
         this.context = context;
@@ -43,23 +48,38 @@ class PostsItemViewAdapter extends RecyclerView.Adapter<PostsItemViewAdapter.Pos
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostsItemViewHolder holder, int position) {
-        PostModel postModel = mPosts.get(position);
+    public void onBindViewHolder(@NonNull final PostsItemViewHolder holder, final int position) {
+        final PostModel postModel = mPosts.get(position);
+        String postUserUid = postModel.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(postUserUid);
 
-       // Uri dpuserUri = Uri.parse(postModel.getPostUserdpurl());
-       // Uri postUri = Uri.parse(postModel.getPostUrl());
-       // holder.mPostUserDp.setImageURI(dpuserUri);
-       // holder.mPostImageView.setImageURI(postUri);
-        holder.mPostUserName.setText(postModel.getPostUserName());
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                holder.mPostUserName.setText(dataSnapshot.child("name").getValue().toString());
+                holder.mPostUserEmail.setText(dataSnapshot.child("email").getValue().toString());
+                String imageurl = dataSnapshot.child("image").getValue().toString();
+                if (!imageurl.equals("not Provided"))
+                    Glide.with(getApplicationContext()).load(imageurl).into(holder.mPostUserDp);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        String imageurl = postModel.getPostUrl();
+        if (!imageurl.equals("no Image")) {
+            Glide.with(getApplicationContext()).load(imageurl).into(holder.mPostImageView);
+            holder.mPostImageView.setVisibility(View.VISIBLE);
+        }
         holder.mPostDiscription.setText(postModel.getPostDescription());
         holder.mPostTime.setText(postModel.getPostTime());
-        holder.mPostUserEmail.setText(postModel.getPostUserEmail());
+
         holder.mPostLikeCounts.setText(postModel.getPostLikesCount() + " Likes");
         holder.mPostCommentsCounts.setText(postModel.getPostCommentsCount() + " Comments");
-        if(postModel.isPostLiked()){
+        if (postModel.isPostLiked()) {
             holder.mPostLiketv.setText("Unlike");
-        }
-        else
+        } else
             holder.mPostLiketv.setText("Like");
     }
 
@@ -70,7 +90,7 @@ class PostsItemViewAdapter extends RecyclerView.Adapter<PostsItemViewAdapter.Pos
 
     public class PostsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View mView;
-        private SimpleDraweeView mPostImageView;
+        private ImageView mPostImageView;
         private CircleImageView mPostUserDp;
         private TextView mPostUserName, mPostUserEmail, mPostTime, mPostLikeCounts, mPostCommentsCounts, mPostDiscription, mPostLiketv;
         private LinearLayout mPostLike, mPostComment, mPostShare;
@@ -84,7 +104,7 @@ class PostsItemViewAdapter extends RecyclerView.Adapter<PostsItemViewAdapter.Pos
             mPostUserEmail = itemView.findViewById(R.id.posts_email);
             mPostTime = itemView.findViewById(R.id.posts_time);
             mPostDiscription = itemView.findViewById(R.id.posts_description);
-          //  mPostImageView = itemView.findViewById(R.id.posts_img_View);
+            mPostImageView = itemView.findViewById(R.id.posts_img_View);
             mPostLikeCounts = itemView.findViewById(R.id.posts_likes_count);
             mPostCommentsCounts = itemView.findViewById(R.id.posts_comments_count);
             mPostLike = itemView.findViewById(R.id.posts_like_post);
