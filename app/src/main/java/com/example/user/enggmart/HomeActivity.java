@@ -55,19 +55,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout tabLayout;
-    TextView uname, uemail;
+    private TextView uname, uemail;
     private ViewPager viewPager;
-    DrawerLayout drawer;
-    LinearLayout semesterWiseBooks, tools, myCart, myOrder, myChat, sellOnEnggMart, accountSetting, helpCentre, share;
-    CircleImageView imageProfile;
+    private DrawerLayout drawer;
+    private LinearLayout semesterWiseBooks, tools, myCart, myOrder, myChat, sellOnEnggMart, accountSetting, helpCentre, share;
+    private CircleImageView imageProfile;
     private ImageView notifiacationa;
     private DatabaseReference mdDatabase;
     private FirebaseAuth userAuth;
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private GoogleSignInClient mGoogleSignInClient;
-    FloatingActionButton fab;
-    ActionBarDrawerToggle toggle;
-    String uid;
+    private FloatingActionButton fab;
+    private ActionBarDrawerToggle toggle;
+    private String uid;
     boolean doubleBackToExitPressedOnce = false;
     private int[] tabIcons = {
             R.drawable.newspaper,
@@ -80,18 +80,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         findIds();
         userAuth = FirebaseAuth.getInstance();
-        uid = userAuth.getCurrentUser().getUid().toString();
+        uid = userAuth.getCurrentUser().getUid();
         UserDetails.uid = uid;
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
-
-
         init();
         onClicking();
-        notifiacationa=(ImageView)findViewById(R.id.nofication);
+        notifiacationa = (ImageView) findViewById(R.id.nofication);
         notifiacationa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(HomeActivity.this,WritePost.class);
+                Intent i = new Intent(HomeActivity.this, WritePost.class);
                 startActivity(i);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -117,7 +114,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         setupViewPager();
     }
 
@@ -135,7 +131,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
-
         mdDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,7 +145,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     UserDetails.phoneno = phone;
                     UserDetails.email = email;
                     UserDetails.img = imageurl;
-                    Glide.with(getApplicationContext()).load(imageurl).into(imageProfile);
+                    if (!imageurl.equals("not Provided"))
+                        Glide.with(getApplicationContext()).load(imageurl).into(imageProfile);
                     uname.setText(name + "");
                     uemail.setText(email + "");
                     return;
@@ -272,8 +268,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
             finish();
             return true;
-        }else if (id == R.id.guide) {
-                guideDialog();
+        } else if (id == R.id.guide) {
+            guideDialog();
         } else if (id == R.id.logoutmenu) {
             customDialog();
         }
@@ -300,6 +296,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 openDialog.dismiss();
 
+                userAuth.signOut();
 
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestIdToken(getString(R.string.default_web_client_id))
@@ -329,7 +326,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final Dialog openDialog = new Dialog(HomeActivity.this);
         openDialog.setContentView(R.layout.guidelines);
         openDialog.setCancelable(false);
-        openDialog.getWindow().setLayout(1000,1500);
+        openDialog.getWindow().setLayout(1000, 1500);
         TextView cancel = (TextView) openDialog.findViewById(R.id.guide_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,7 +338,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
         openDialog.show();
     }
-
 
 
     public void onClick(View v) {
@@ -367,24 +363,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawers();
         } else if (v == accountSetting) {
             Toast.makeText(this, "clicked On Account Setting", Toast.LENGTH_SHORT).show();
-            Intent i=new Intent(HomeActivity.this,AdminPannel.class);
+            Intent i = new Intent(HomeActivity.this, AdminPannel.class);
             startActivity(i);
             drawer.closeDrawers();
         } else if (v == helpCentre) {
-            Intent i=new Intent(HomeActivity.this,HelpCenter.class);
+            Intent i = new Intent(HomeActivity.this, HelpCenter.class);
             startActivity(i);
             Toast.makeText(this, "clicked On Help Centre", Toast.LENGTH_SHORT).show();
             drawer.closeDrawers();
         } else if (v == share) {
             Toast.makeText(this, "clicked On Share", Toast.LENGTH_SHORT).show();
 
-                    Intent myIntent = new Intent(Intent.ACTION_SEND);
-                    myIntent.setType("text/plain");
-                    String shareBody = "";
-                    String shareSub = "Your Subject here";
-                    myIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
-                    myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
-                    startActivity(Intent.createChooser(myIntent,"Share using"));
+            Intent myIntent = new Intent(Intent.ACTION_SEND);
+            myIntent.setType("text/plain");
+            String shareBody = "";
+            String shareSub = "Your Subject here";
+            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(myIntent, "Share using"));
 
 
             drawer.closeDrawers();

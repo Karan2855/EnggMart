@@ -212,6 +212,7 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
                     modelRegister.setName("" + fUser.getDisplayName());
                     modelRegister.setImage("not Provided");
                     modelRegister.setPhone("not Provided");
+                    modelRegister.setPass("no");
                     mDatabase.setValue(modelRegister);
                 }
                 progressBar.setVisibility(View.GONE);

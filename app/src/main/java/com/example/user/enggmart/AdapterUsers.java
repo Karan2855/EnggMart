@@ -65,7 +65,8 @@ public class AdapterUsers extends BaseAdapter {
         email.setText(list.get(position).getEmail());
         phone.setText(list.get(position).getPhone());
         String img = list.get(position).getImage();
-        Glide.with(context).load(img).into(dpuser);
+        if (!img.equals("not Provided"))
+            Glide.with(context).load(img).into(dpuser);
         return convertView;
     }
 

@@ -65,8 +65,9 @@ public class ChatActivity extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("messages").child(UserDetails.chatWith + "_" + uid);
 
         name.setText(UserDetails.chatWithname);
-       imageWith =  UserDetails.chatwithImage;
-        Glide.with(getApplicationContext()).load(imageWith).into(dp);
+        imageWith = UserDetails.chatwithImage;
+        if (!imageWith.equals("not Provided"))
+            Glide.with(getApplicationContext()).load(imageWith).into(dp);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +135,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ChatActivity.this,UsersActivity.class));
+        startActivity(new Intent(ChatActivity.this, UsersActivity.class));
         finish();
     }
 

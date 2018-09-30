@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
     private ImageView profileImage;
-    private String uri;
+    private String uriupdate;
     private TextView namepro, phonepro, emailpro, detailedpro, update;
     private EditText etnamepro, etphonepro;
     private StorageReference mStorageRef;
@@ -72,15 +72,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         findIds();
         context = ProfileActivity.this;
-
         userAuth = FirebaseAuth.getInstance();
         String uid = userAuth.getCurrentUser().getUid().toString();
         mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid + "");
+
         mdDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString()).into(profileImage);
+                if (!dataSnapshot.child("image").getValue().toString().equals("not Provided"))
+                    Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString()).into(profileImage);
                 namepro.setText(dataSnapshot.child("name").getValue().toString());
                 emailpro.setText(dataSnapshot.child("email").getValue().toString());
                 phonepro.setText(dataSnapshot.child("phone").getValue().toString());
@@ -149,7 +150,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void openFileChooser() {
-        profileImage.setImageURI(imageUri);
         Crop.pickImage(this);
     }
 
@@ -190,8 +190,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-
-                                mdDatabase.child("image").setValue(uri.toString());
+                                uriupdate = uri.toString();
                             }
                         });
                         Toast.makeText(context, "Successfully uploaded", Toast.LENGTH_SHORT).show();
@@ -203,7 +202,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     public void onFailure(@NonNull Exception exception) {
                         progressDialog.dismiss();
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-
                     }
                 });
     }

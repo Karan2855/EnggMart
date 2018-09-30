@@ -59,18 +59,20 @@
                     android:text="200"
                     android:textColor="#000" />
 
+                <TextView
+                    android:id="@+id/condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:layout_marginLeft="20dp"
+                    android:text="NEW"
+                    android:textColor="#a10909" />
             </LinearLayout>
+
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/condition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
-            android:layout_marginLeft="20dp"
-            android:text="NEW"
-            android:textColor="#a10909" />
+
     </LinearLayout>
 
     <LinearLayout

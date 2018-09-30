@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private EditText usrpasswordlog;
     private Button btnlog;
     private TextView signup;
-    private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -49,7 +49,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         signup = (TextView) findViewById(R.id.gosignup);
         btnlog.setOnClickListener(this);
         signup.setOnClickListener(this);
-        progressDialog = new ProgressDialog(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
 
     }
 
@@ -58,7 +57,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         String password = usrpasswordlog.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            //email empty
             usernamelog.setText("");
             Toast.makeText(this, "Please enter Email", Toast.LENGTH_SHORT).show();
             return;
@@ -66,7 +64,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         if (TextUtils.isEmpty(password)) {
             //password empty
             usrpasswordlog.setText("");
-            usernamelog.setError("");
             Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT).show();
             return;
 
@@ -75,7 +72,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             if (task.getResult().getUser().isEmailVerified()) {
                                 startActivity(new Intent(SignIn.this, HomeActivity.class));
@@ -90,9 +86,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 firebaseAuth.signOut();
                             }
                         } else {
-                            Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

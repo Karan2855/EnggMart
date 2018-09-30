@@ -1,5 +1,6 @@
 package com.example.user.enggmart;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -33,6 +36,7 @@ public class PaymentPage extends AppCompatActivity {
     private String itemType;
     private String price;
     private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseUser;
     private TextView itemName, itemPrice, itemCondition, rentPolicy;
     private ImageView img;
     private EditText name, address, landmark, contactno;
@@ -48,6 +52,7 @@ public class PaymentPage extends AppCompatActivity {
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
+
             } else {
                 itemID = extras.getString("idItem");
                 itemType = extras.getString("itemtype").toString();
@@ -77,10 +82,9 @@ public class PaymentPage extends AppCompatActivity {
         landmark = findViewById(R.id.landmark_order);
         placeOrder = findViewById(R.id.p_placeorder);
         img = findViewById(R.id.image_item_payment);
-        mDatabaseorder = FirebaseDatabase.getInstance().getReference().child("orders");
+        String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -114,31 +118,40 @@ public class PaymentPage extends AppCompatActivity {
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameorder = name.getText().toString().trim();
-                String addressorder = address.getText().toString().trim();
-                String landmarkorder = landmark.getText().toString().trim();
-                String contectorder = contactno.getText().toString().trim();
+                final String nameorder = name.getText().toString().trim();
+                final String addressorder = address.getText().toString().trim();
+                final String landmarkorder = landmark.getText().toString().trim();
+                final String contectorder = contactno.getText().toString().trim();
                 if (validateOrderDetails(nameorder, addressorder, landmarkorder, contectorder)) {
                     placeOrder.setEnabled(false);
                     uuid = UUID.randomUUID();
-                    String orderid = uuid.toString();
-                    mDatabaseorder.child(orderid).child("nameUser").setValue(nameorder);
-                    mDatabaseorder.child(orderid).child("addressOfOrder").setValue(addressorder);
-                    mDatabaseorder.child(orderid).child("landmarkOfOrder").setValue(landmarkorder);
-                    mDatabaseorder.child(orderid).child("ContactNoOfOrder").setValue(contectorder);
-                    mDatabaseorder.child(orderid).child("amount").setValue(price);
-                    mDatabaseorder.child(orderid).child("userId").setValue(userAuth.getCurrentUser().getUid());
-                    mDatabaseorder.child(orderid).child("itemId").setValue(itemID);
-                    mDatabaseorder.child(orderid).child("itemCondition").setValue(itemType);
-                    mDatabaseorder.child(orderid).child("orderStatus").setValue("Confirmed");
+                    mDatabaseorder = FirebaseDatabase.getInstance().getReference().child("orders").child(uuid.toString());
+                    Map<String, String> map = new HashMap<>();
+                    map.put("addressOfOrder", addressorder);
+                    map.put("nameUser", nameorder);
+                    map.put("landmarkOfOrder", landmarkorder);
+                    map.put("ContactNoOfOrder", contectorder);
+                    map.put("amount", price);
+                    map.put("userId", userAuth.getCurrentUser().getUid());
+                    map.put("itemId", itemID);
+                    map.put("itemCondition", itemType);
+                    map.put("orderStatus", "Order Confirmed");
                     final String timeStamp = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss",
                             Locale.getDefault()).format(new Date());
-                    mDatabaseorder.child(orderid).child("time").setValue(timeStamp);
-                    Toast.makeText(PaymentPage.this, "Your Order is Confirmed & you can see further details in My Orders", Toast.LENGTH_LONG).show();
-                    finish();
+                    map.put("time", timeStamp);
+                    mDatabaseorder.setValue(map);
+                    databaseUpdate(uuid.toString());
                 }
             }
         });
+    }
+
+    private void databaseUpdate(String s) {
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("users").child(userAuth.getCurrentUser().getUid()).child("orders").child(s);
+        mDatabaseUser.setValue("orderconfirmed");
+        Toast.makeText(PaymentPage.this,
+                "Your Order is Confirmed & you can see further details in My Orders",
+                Toast.LENGTH_LONG).show();
     }
 
     private boolean validateOrderDetails(String nameorder, String addressorder, String landmarkorder, String contectorder) {

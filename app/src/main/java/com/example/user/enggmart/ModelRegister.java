@@ -1,7 +1,16 @@
 package com.example.user.enggmart;
 
 public class ModelRegister {
-    public String name = "", email = "", phone = "", image = "";
+    public String name = "";
+    public String email = "";
+    public String phone = "";
+    public String image = "";
+
+    public String getPass() {
+        return pass;
+    }
+
+    public String pass = "";
 
     public String getName() {
         return name;
@@ -33,5 +42,9 @@ public class ModelRegister {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 }

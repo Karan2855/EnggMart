@@ -157,6 +157,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
                 modelRegister.setEmail("" + emailid);
                 modelRegister.setImage("not Provided");
                 modelRegister.setName("" + name);
+                modelRegister.setPass("yes");
                 mDatabase.setValue(modelRegister);
                 completeTask();
                 return;
@@ -204,9 +205,10 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
-        showSnack(isConnected);
+        //showSnack(isConnected);
     }
 
+/*
     private void showSnack(boolean isConnected) {
         String message;
         int color;
@@ -219,13 +221,14 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
         }
 
         Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.ll), message, Snackbar.LENGTH_LONG);
+                .make(findViewById(R.id.), message, Snackbar.LENGTH_LONG);
 
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(color);
         snackbar.show();
     }
+*/
 
     @Override
     protected void onResume() {
