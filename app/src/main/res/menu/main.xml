@@ -12,7 +12,7 @@
         android:title="Friend"
         app:showAsAction="never" />-->
     <item
-        android:id="@+id/privacymenu"
+        android:id="@+id/guide"
         android:orderInCategory="100"
         android:title="Guideline"
         app:showAsAction="never" />

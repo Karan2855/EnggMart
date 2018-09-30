@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-          <!--  <LinearLayout
+           <LinearLayout
                 android:id="@+id/semesterwisebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                     android:layout_marginLeft="40dp"
                     android:text="My Cart"
                     android:textColor="#000" />
-            </LinearLayout>-->
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/myorder"
@@ -163,7 +163,7 @@
                     android:textColor="#000" />
             </LinearLayout>
 
-            <!--   <LinearLayout
+             <LinearLayout
                    android:id="@+id/sellonenggmart"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                        android:layout_marginLeft="40dp"
                        android:text="Sell On EnggMart"
                        android:textColor="#000" />
-               </LinearLayout>-->
+               </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/accountsetting"
