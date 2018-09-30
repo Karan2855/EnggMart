@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:text="Useful Novels For You"
-        android:textSize="25dp"
+        android:textSize="22dp"
         android:gravity="center"
         android:textColor="#0294ff"/>
 
@@ -38,13 +38,13 @@
                     android:id="@+id/seveneges"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/seveneges" />
+                    android:src="@drawable/twost" />
 
                 <ImageView
                     android:id="@+id/theaops"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/theartofps" />
+                    android:src="@drawable/novel" />
 
             </LinearLayout>
 
@@ -58,13 +58,13 @@
                     android:id="@+id/journalism"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/journalism" />
+                    android:src="@drawable/heod" />
 
                 <ImageView
                     android:id="@+id/ataleoftwo"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/atotc" />
+                    android:src="@drawable/enggr" />
 
             </LinearLayout>
 
@@ -78,15 +78,37 @@
                     android:id="@+id/chetan"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/chetan1" />
+                    android:src="@drawable/howspt" />
 
                 <ImageView
-                    android:id="@+id/war1"
+                    android:id="@+id/billgates"
                     android:layout_width="189dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/war" />
+                    android:src="@drawable/billgates" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/godan"
+                    android:layout_width="189dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/self" />
+
+                <ImageView
+                    android:id="@+id/madhusala"
+                    android:layout_width="189dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/madhusla" />
+
+            </LinearLayout>
+
+
 
 
         </LinearLayout>

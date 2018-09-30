@@ -13,7 +13,7 @@ public class Artofps extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artofps);
         bookps=(PDFView)findViewById(R.id.artofpsbookpdf);
-        bookps.fromAsset("arofpuspeaking.pdf").load();
+        bookps.fromAsset("pdf-smith.pdf").load();
 
     }
 }

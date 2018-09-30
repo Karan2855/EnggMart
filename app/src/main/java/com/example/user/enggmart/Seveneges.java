@@ -13,7 +13,7 @@ PDFView bookse;
         setContentView(R.layout.activity_seveneges);
 
         bookse=(PDFView)findViewById(R.id.sevenegespdf);
-        bookse.fromAsset("seveneges.pdf").load();
+        bookse.fromAsset("twostates.pdf").load();
 
 
     }

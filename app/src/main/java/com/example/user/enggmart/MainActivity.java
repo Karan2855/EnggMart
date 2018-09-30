@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements /*NavigationView.
     private DrawerLayout drawer;
     private LinearLayout semesterWiseBooks,tools,myCart,myOrder,myChat,sellOnEnggMart,accountSetting,helpCentre,share;
     private CircleImageView imageProfile;
-    private GifImageView  notifiacationa;
     private DatabaseReference mdDatabase;
     private FirebaseAuth userAuth;
 
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements /*NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        notifiacationa=(GifImageView) findViewById(R.id.nofication);
         drawer=findViewById(R.id.drawer_layout);
         myChat=findViewById(R.id.mychat);
         myOrder=findViewById(R.id.myorder);
@@ -74,21 +72,7 @@ public class MainActivity extends AppCompatActivity implements /*NavigationView.
         share=findViewById(R.id.share);
         helpCentre=findViewById(R.id.help);
 
-        try {
-            InputStream inputStream=getAssets().open("bellmmf.gif");
-            byte[] bytes= IOUtils.toByteArray(inputStream);
-            notifiacationa.setBytes(bytes);
-            notifiacationa.startAnimation();
-            notifiacationa.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i=new Intent(MainActivity.this,Notification.class);
-                    startActivity(i);
-                }
-            });
-        } catch (IOException e) {
 
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

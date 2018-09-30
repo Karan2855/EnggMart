@@ -8,7 +8,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class CurrentAffairs extends AppCompatActivity {
-    LinearLayout b23;
+    LinearLayout jan;
+    LinearLayout feb;
+    LinearLayout mar;
+    LinearLayout apr;
+    LinearLayout may;
+    LinearLayout jun;
+    LinearLayout july;
+    LinearLayout aug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +36,85 @@ public class CurrentAffairs extends AppCompatActivity {
         setTitle("Current Affairs");
 
 
-        LinearLayout b23=(LinearLayout)findViewById(R.id.first1);
+        LinearLayout jan=(LinearLayout)findViewById(R.id.jan);
 
-        b23.setOnClickListener(new View.OnClickListener() {
+        jan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(CurrentAffairs.this,Pdf1.class);
+                Intent i = new Intent(CurrentAffairs.this,January.class);
+                startActivity(i);
+            }
+        });
+
+        LinearLayout feb=(LinearLayout)findViewById(R.id.feb);
+
+        feb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,February.class);
+                startActivity(i);
+            }
+        });
+
+        LinearLayout mar=(LinearLayout)findViewById(R.id.mar);
+
+        mar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,March.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout apr=(LinearLayout)findViewById(R.id.apr);
+
+        apr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,April.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout may=(LinearLayout)findViewById(R.id.may);
+
+        may.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,May.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout jun=(LinearLayout)findViewById(R.id.jun);
+
+        jun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,June.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout july=(LinearLayout)findViewById(R.id.jul);
+
+        july.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,July.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout aug=(LinearLayout)findViewById(R.id.aug);
+
+        aug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CurrentAffairs.this,August.class);
                 startActivity(i);
             }
         });

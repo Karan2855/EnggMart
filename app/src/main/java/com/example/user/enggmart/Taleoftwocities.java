@@ -14,7 +14,7 @@ public class Taleoftwocities extends AppCompatActivity {
         setContentView(R.layout.activity_taleoftwocities);
 
         bookte=(PDFView)findViewById(R.id.totcpdf);
-        bookte.fromAsset("ataleoftwocities.pdf").load();
+        bookte.fromAsset("eng.pdf").load();
 
     }
 }
