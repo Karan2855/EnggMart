@@ -29,33 +29,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:paddingTop="30dp"
+        android:orientation="vertical"
         android:paddingHorizontal="30dp"
-        android:orientation="vertical">
+        android:paddingTop="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#f5f5f5"
-            android:padding="1dp"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:background="#c4c4c4"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingLeft="1dp"
+            android:paddingBottom="1dp">
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
                 android:background="#fff"
-                android:padding="2dp"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/name" />
 
             <TextView
                 android:id="@+id/nameprofiletv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:layout_marginLeft="1dp"
-                android:padding="30dp"
                 android:background="#fff"
+                android:padding="30dp"
+
                 android:text="example"
-                android:textColor="#8e81a3"
+                android:textColor="#1d1b8e"
                 android:visibility="visible" />
 
             <EditText
@@ -64,19 +68,28 @@
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:text="example"
-                android:textColor="#fff"
+                android:textColor="#bfdcbd"
                 android:visibility="gone" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:background="#c4c4c4"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="1dp"
+            >
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
+                android:background="#fff"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/email" />
 
             <TextView
@@ -84,10 +97,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
-                android:padding="30dp"
                 android:background="#fff"
+                android:padding="30dp"
                 android:text="example@gmail.com"
-                android:textColor="#fff"
+                android:textColor="#2e2e2e"
                 android:visibility="visible" />
 
             <EditText
@@ -96,19 +109,27 @@
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:text="example@gmail.com"
-                android:textColor="#fff"
+                android:textColor="#bfdcbd"
                 android:visibility="gone" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:background="#c4c4c4"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
+                android:background="#fff"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/phone" />
 
             <TextView
@@ -116,10 +137,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
-                android:padding="30dp"
                 android:background="#fff"
+                android:padding="30dp"
                 android:text="1234567890"
-                android:textColor="#fff"
+                android:textColor="#2e2e2e"
                 android:visibility="visible" />
 
             <EditText
@@ -128,19 +149,27 @@
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:text="1234567890"
-                android:textColor="#000"
+                android:textColor="#bfdcbd"
                 android:visibility="gone" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:background="#c4c4c4"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
+                android:background="#fff"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/detail" />
 
             <TextView
@@ -148,10 +177,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
-                android:padding="30dp"
                 android:background="#fff"
+                android:padding="30dp"
                 android:text="Detailed Profile"
-                android:textColor="#fff"
+                android:textColor="#2e2e2e"
                 android:visibility="visible" />
         </LinearLayout>
 

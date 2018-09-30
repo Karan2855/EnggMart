@@ -90,7 +90,7 @@
                 android:id="@+id/radiogroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight=".6"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -98,7 +98,7 @@
                     android:id="@+id/new_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#000"
+                    android:buttonTint="#9eb987"
                     android:text="NEW"
                     android:checked="true"
                     android:textColor="#000" />
@@ -107,7 +107,7 @@
                     android:id="@+id/old_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#000"
+                    android:buttonTint="#9eb987"
                     android:text="OLD"
                     android:textColor="#000" />
 
@@ -115,7 +115,7 @@
                     android:id="@+id/rent_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#000"
+                    android:buttonTint="#9eb987"
                     android:text="RENT"
                     android:textColor="#000" />
             </RadioGroup>
@@ -148,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:background="#025b07"
+            android:background="#73b478"
             android:text="PURCHASE"
             android:textColor="#fff"
             android:textSize="20dp" />
