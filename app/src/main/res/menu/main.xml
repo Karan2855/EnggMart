@@ -10,12 +10,12 @@
         android:id="@+id/friendmenu"
         android:orderInCategory="100"
         android:title="Friend"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
     <item
         android:id="@+id/privacymenu"
         android:orderInCategory="100"
-        android:title="Privacy Shortcuts"
-        app:showAsAction="never" />-->
+        android:title="Guideline"
+        app:showAsAction="never" />
     <item
         android:id="@+id/logoutmenu"
         android:orderInCategory="100"
