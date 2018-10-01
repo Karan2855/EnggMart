@@ -82,6 +82,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
         findIds();
         userAuth = FirebaseAuth.getInstance();
         uid = userAuth.getCurrentUser().getUid();
