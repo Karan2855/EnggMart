@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
@@ -38,16 +41,13 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
     private CircleImageView profileImage;
-    private String uriupdate;
     private TextView namepro, phonepro, emailpro, detailedpro, update;
     private EditText etnamepro, etphonepro;
     private StorageReference mStorageRef;
     private DatabaseReference mdDatabase;
     private FirebaseAuth userAuth;
-    private DatabaseReference mdDatabase2;
     private ProgressBar progressBar;
     private ProfileActivity context;
 
@@ -76,8 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         String uid = userAuth.getCurrentUser().getUid().toString();
         mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid + "");
-
-        mdDatabase.addValueEventListener(new ValueEventListener() {
+        mdDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.child("image").getValue().toString().equals("not Provided")) {
@@ -188,25 +187,34 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                uriupdate = uri.toString();
-                                mdDatabase.child("image").setValue(uriupdate);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                mdDatabase.child("image").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(ProfileActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                                            profileImage.setImageURI(imageUri);
+                                            progressBar.setVisibility(View.GONE);
+                                        } else
+                                            Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         });
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                progressBar.setProgress(currentProgress);
+            }
+        });
     }
 
     @Override

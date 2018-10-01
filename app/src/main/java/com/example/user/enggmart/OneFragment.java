@@ -54,10 +54,12 @@ public class OneFragment extends Fragment {
         ((LinearLayoutManager) mLayoutManager).setStackFromEnd(true);
         mPostsListView.setLayoutManager(mLayoutManager);
 
+/*
         final ProgressDialog pd = new ProgressDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         pd.setMessage("Loading Posts...");
         pd.setCancelable(false);
         pd.show();
+*/
         posts.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
 
@@ -81,12 +83,10 @@ public class OneFragment extends Fragment {
                     //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
                     mPostsItemViewAdapter = new PostsItemViewAdapter(getActivity(), posts);
                     mPostsListView.setAdapter(mPostsItemViewAdapter);
-                    pd.dismiss();
+
                 } else {
-                    pd.dismiss();
                     Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override

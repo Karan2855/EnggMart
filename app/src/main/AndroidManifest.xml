@@ -19,13 +19,12 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"
             tools:replace="android:value" />
-        <service
-            android:name=".MyFirebaseInstanceIDService">
+
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
 
         <activity android:name=".ProductDescription" />
         <activity
@@ -47,11 +46,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,12 +76,13 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SkillDevlopment" />
         <activity android:name=".SecondActivity" />
-        <service
-            android:name=".MyFirebaseMessagingService">
+
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <receiver
             android:name=".ConnectivityReceiver"
             android:enabled="true">
@@ -102,10 +97,11 @@
         <activity android:name=".AdminConsole" />
         <activity android:name=".Seveneges" />
         <activity android:name=".Artofps" />
-        <activity android:name=".PaymentPage"></activity>
+        <activity android:name=".PaymentPage" />
         <activity android:name=".Journalism" />
         <activity android:name=".Taleoftwocities" />
-        <activity android:name=".HelpCenter"></activity>
+        <activity android:name=".HelpCenter" />
+        <activity android:name=".UploadNovelAffaires"></activity>
     </application>
 
 </manifest>

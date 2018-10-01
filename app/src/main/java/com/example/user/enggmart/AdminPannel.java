@@ -1,5 +1,6 @@
 package com.example.user.enggmart;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class AdminPannel extends AppCompatActivity {
-     Button admin_login;
+    Button admin_login;
     EditText input_email;
     EditText input_password;
 
@@ -34,11 +37,11 @@ public class AdminPannel extends AppCompatActivity {
             }
         });
         setTitle("Only for Admin");
-        admin_login=(Button)findViewById(R.id.button);
+        admin_login = (Button) findViewById(R.id.button);
         admin_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validate(input_email.getText().toString(),input_password.getText().toString());
+                validate(input_email.getText().toString(), input_password.getText().toString());
             }
         });
 
@@ -46,14 +49,51 @@ public class AdminPannel extends AppCompatActivity {
     }
 
 
-    private void validate(String userName, String userPassword){
-        if((userName.equals("Arjit")) && (userPassword.equals("1234"))){
-            Intent intent = new Intent(AdminPannel.this, AdminConsole.class);
-            startActivity(intent);
+    private void validate(String userName, String userPassword) {
+        if ((userName.equals("Arjit")) && (userPassword.equals("1234"))) {
 
-        }else{
+            customDialog();
+
+        } else {
 
             admin_login.setEnabled(false);
         }
+    }
+
+    private void customDialog() {
+        final Dialog openDialog = new Dialog(AdminPannel.this);
+        openDialog.setContentView(R.layout.layout_admin_select);
+        openDialog.show();
+
+        RelativeLayout books = openDialog.findViewById(R.id.books_admin_select);
+        RelativeLayout novels = openDialog.findViewById(R.id.novel_admin_select);
+        RelativeLayout currentAffairs = openDialog.findViewById(R.id.currentaffairs_admin_select);
+        books.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPannel.this, AdminConsole.class);
+                startActivity(intent);
+                openDialog.dismiss();
+            }
+        });
+        novels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPannel.this, UploadNovelAffaires.class);
+                intent.putExtra("upload", "novel");
+                startActivity(intent);
+                openDialog.dismiss();
+            }
+        });
+        currentAffairs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPannel.this, UploadNovelAffaires.class);
+                intent.putExtra("upload", "currentaffairs");
+                startActivity(intent);
+
+                openDialog.dismiss();
+            }
+        });
     }
 }

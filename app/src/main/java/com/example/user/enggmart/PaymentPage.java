@@ -35,6 +35,7 @@ public class PaymentPage extends AppCompatActivity {
     private String itemID;
     private String itemType;
     private String price;
+    private String itemNameString;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabaseUser;
     private TextView itemName, itemPrice, itemCondition, rentPolicy;
@@ -90,6 +91,7 @@ public class PaymentPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Glide.with(getApplicationContext()).load(dataSnapshot.child("itemImage").getValue().toString()).into(img);
                 itemName.setText(dataSnapshot.child("itemName").getValue().toString());
+                itemNameString = dataSnapshot.child("itemName").getValue().toString();
                 String itemPriceString = dataSnapshot.child("itemPrice").getValue().toString();
                 if (itemType.equals("NEW")) {
                     price = "\u20B9 " + Float.parseFloat(itemPriceString) * 0.8 + "";
@@ -134,6 +136,7 @@ public class PaymentPage extends AppCompatActivity {
                     map.put("amount", price);
                     map.put("userId", userAuth.getCurrentUser().getUid());
                     map.put("itemId", itemID);
+                    map.put("itemName", itemNameString);
                     map.put("itemCondition", itemType);
                     map.put("orderStatus", "Order Confirmed");
                     final String timeStamp = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss",
