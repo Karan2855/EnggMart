@@ -82,6 +82,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
+
         findIds();
         userAuth = FirebaseAuth.getInstance();
         uid = userAuth.getCurrentUser().getUid();
@@ -151,7 +153,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     if (!imageurl.equals("not Provided")) {
                         Glide.with(getApplicationContext()).load(imageurl).into(imageProfile);
                         progressBar.setVisibility(View.GONE);
-                    }
+                    }else
+                        progressBar.setVisibility(View.GONE);
                     uname.setText(name + "");
                     uemail.setText(email + "");
                     return;
@@ -332,7 +335,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final Dialog openDialog = new Dialog(HomeActivity.this);
         openDialog.setContentView(R.layout.guidelines);
         openDialog.setCancelable(false);
-        openDialog.getWindow().setLayout(1000, 1500);
+    //    openDialog.getWindow().setLayout(1000, 1500);
         TextView cancel = (TextView) openDialog.findViewById(R.id.guide_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
