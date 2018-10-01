@@ -29,37 +29,16 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/textview11"
+            android:id="@+id/textviewviewpager"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:paddingRight="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="serif"
-            android:text="Best Shopping Center for"
+            android:gravity="center"
+            android:paddingHorizontal="45dp"
+            android:text="@string/enggmarticon"
             android:textColor="#222"
             android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textview12"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:fontFamily="serif"
-            android:gravity="center"
-            android:paddingLeft="0dp"
-            android:text="Engineering Material"
-            android:textColor="#222"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textview13"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:text="Easy to Purchase"
-            android:textColor="#150481"
-            android:textSize="18dp" />
-
     </LinearLayout>
 
 </LinearLayout>

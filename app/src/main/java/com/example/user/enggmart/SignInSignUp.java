@@ -249,7 +249,7 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                Toast.makeText(this, ""
+                Toast.makeText(this, "google error"
                         + e.getMessage(), Toast.LENGTH_SHORT).show();
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
