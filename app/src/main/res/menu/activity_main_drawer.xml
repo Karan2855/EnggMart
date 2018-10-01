@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-      <!--  <item
+      <item
             android:id="@+id/nav_camera"
             android:icon="@mipmap/handbook"
             android:title="Semesterwise Books" />
@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@mipmap/sella"
-            android:title="My Cart" />-->
+            android:title="My Cart" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@mipmap/padnote"
@@ -24,10 +24,10 @@
             android:id="@+id/nav_manage2"
             android:icon="@mipmap/chat"
             android:title="My Chat" />
-        <!--  <item
+        <item
               android:id="@+id/nav_manage1"
               android:icon="@mipmap/businessman"
-              android:title="Sell on EnggMart" />-->
+              android:title="Sell on EnggMart" />
           <item
               android:id="@+id/nav_send1"
               android:icon="@mipmap/setting"
