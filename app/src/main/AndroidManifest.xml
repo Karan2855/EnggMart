@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".utility.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/em"
         android:label="@string/app_name"
@@ -20,13 +20,13 @@
             android:value="@string/facebook_app_id"
             tools:replace="android:value" />
 
-        <service android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ProductDescription" />
+        <activity android:name=".activities.ProductDescription" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -45,7 +45,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name=".activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,54 +54,47 @@
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".SignInSignUp" />
-        <activity android:name=".Signup" />
-        <activity android:name=".VarificationCode" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".Home_Page" />
-        <activity android:name=".Notification" />
-        <activity android:name=".UsersActivity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".Semester" />
-        <activity android:name=".Novel" />
-        <activity android:name=".WritePost" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".SkillDevlopment" />
-        <activity android:name=".SecondActivity" />
+        <activity android:name=".activities.SignInSignUp" />
+        <activity android:name=".activities.Signup" />
+        <activity android:name=".activities.VarificationCode" />
+        <activity android:name=".activities.SignIn" />
+        <activity android:name=".activities.Notification" />
+        <activity android:name=".activities.UsersActivity" />
+        <activity android:name=".activities.ChatActivity" />
+        <activity android:name=".wrost_activities.Semester" />
+        <activity android:name=".wrost_activities.Novel" />
+        <activity android:name=".activities.WritePost" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".wrost_activities.SkillDevlopment" />
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <receiver
-            android:name=".ConnectivityReceiver"
+            android:name=".utility.ConnectivityReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".AdminPannel" />
-        <activity android:name=".CurrentAffairs" />
-        <activity android:name=".Pdf1" />
-        <activity android:name=".AdminConsole" />
-        <activity android:name=".Seveneges" />
-        <activity android:name=".Artofps" />
-        <activity android:name=".PaymentPage" />
-        <activity android:name=".Journalism" />
-        <activity android:name=".Taleoftwocities" />
-        <activity android:name=".HelpCenter" />
-        <activity android:name=".UploadNovelAffaires"></activity>
+        <activity android:name=".activities.AdminPannel" />
+        <activity android:name=".wrost_activities.CurrentAffairs" />
+        <activity android:name=".wrost_activities.Pdf1" />
+        <activity android:name=".activities.AdminConsole" />
+        <activity android:name=".wrost_activities.Seveneges" />
+        <activity android:name=".wrost_activities.Artofps" />
+        <activity android:name=".activities.PaymentPage" />
+        <activity android:name=".wrost_activities.Journalism" />
+        <activity android:name=".wrost_activities.Taleoftwocities" />
+        <activity android:name=".activities.HelpCenter" />
+        <activity android:name=".activities.UploadNovelAffaires"></activity>
     </application>
 
 </manifest>

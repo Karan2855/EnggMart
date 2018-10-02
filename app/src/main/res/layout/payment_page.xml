@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.example.user.enggmart.PaymentPage">
+    tools:context="com.example.user.enggmart.activities.PaymentPage">
 
     <include layout="@layout/custom_app_bar" />
 
