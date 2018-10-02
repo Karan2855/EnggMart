@@ -1,10 +1,6 @@
 package com.example.user.enggmart;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,13 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.user.enggmart.activities.WritePost;
+import com.example.user.enggmart.models.PostModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,10 +51,12 @@ public class OneFragment extends Fragment {
         ((LinearLayoutManager) mLayoutManager).setStackFromEnd(true);
         mPostsListView.setLayoutManager(mLayoutManager);
 
+/*
         final ProgressDialog pd = new ProgressDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         pd.setMessage("Loading Posts...");
         pd.setCancelable(false);
         pd.show();
+*/
         posts.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
 
@@ -81,12 +80,10 @@ public class OneFragment extends Fragment {
                     //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
                     mPostsItemViewAdapter = new PostsItemViewAdapter(getActivity(), posts);
                     mPostsListView.setAdapter(mPostsItemViewAdapter);
-                    pd.dismiss();
+
                 } else {
-                    pd.dismiss();
                     Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
