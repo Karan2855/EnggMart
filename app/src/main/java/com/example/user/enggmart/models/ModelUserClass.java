@@ -1,8 +1,6 @@
 package com.example.user.enggmart.models;
 
-/**
- * Created by KaranVerma on 07-Mar-18.
- */
+
 
 public class ModelUserClass {
 
@@ -10,6 +8,28 @@ public class ModelUserClass {
     private String email = "";
     private String name = "";
     private String image = "";
+    private String status = "";
+    private String thumbImage = "";
+
+    public ModelUserClass() {
+    }
+
+    public String getStatus() {
+
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ModelUserClass(String phone, String email, String name, String image, String status) {
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.image = image;
+        this.status = status;
+    }
 
     public String getChatWithuser() {
         return chatWithuser;
@@ -19,7 +39,7 @@ public class ModelUserClass {
         this.chatWithuser = chatWithuser;
     }
 
-    private String chatWithuser="";
+    private String chatWithuser = "";
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -51,5 +71,13 @@ public class ModelUserClass {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getThumbImage() {
+        return thumbImage;
+    }
+
+    public void setThumbImage(String thumbImage) {
+        this.thumbImage = thumbImage;
     }
 }

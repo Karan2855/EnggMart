@@ -17,6 +17,7 @@ import com.example.user.enggmart.R;
 import com.example.user.enggmart.models.ModelRegister;
 import com.example.user.enggmart.utility.ConnectivityReceiver;
 import com.example.user.enggmart.utility.MyApplication;
+import com.example.user.enggmart.utility.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class Signup extends AppCompatActivity implements View.OnClickListener, ConnectivityReceiver.ConnectivityReceiverListener {
     private ImageView Imv;
     private EditText email, password, uname, phone;
@@ -40,9 +43,11 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
     private ProgressBar progressBar;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        Utils.darkenStatusBar(this, R.color.textColorPrimary);
         btnregister = findViewById(R.id.buttonregister);
         email = findViewById(R.id.emailsignup);
         uname = findViewById(R.id.namesignup);
@@ -133,24 +138,21 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
 
     private void updateUI(@NonNull final FirebaseUser user, final String name, final String phoneno, final String emailid) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        HashMap<String, String> userMap = new HashMap<>();
+        userMap.put("phone", phoneno+"");
+        userMap.put("email", emailid+"");
+        userMap.put("image", "not Provided");
+        userMap.put("name", name+"");
+        userMap.put("status", "Hey Thare I'm using EnggMart");
+        userMap.put("pass", "yes");
+        userMap.put("thumb_image", "not Provided");
+        mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ModelRegister modelRegister = new ModelRegister();
-                modelRegister.setPhone("" + phoneno);
-                modelRegister.setEmail("" + emailid);
-                modelRegister.setImage("not Provided");
-                modelRegister.setName("" + name);
-                modelRegister.setPass("yes");
-                mDatabase.setValue(modelRegister);
-                completeTask();
-                return;
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressBar.setVisibility(View.GONE);
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    completeTask();
+                } else
+                    Toast.makeText(Signup.this, "Registration Not Completed", Toast.LENGTH_SHORT).show();
             }
         });
     }

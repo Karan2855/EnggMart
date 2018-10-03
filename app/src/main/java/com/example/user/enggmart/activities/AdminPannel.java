@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
 
 public class AdminPannel extends AppCompatActivity {
     Button admin_login;
@@ -21,7 +22,7 @@ public class AdminPannel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_pannel);
-
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
         input_email = (EditText) findViewById(R.id.Name);
         input_password = (EditText) findViewById(R.id.Password);
 

@@ -1,6 +1,7 @@
 package com.example.user.enggmart.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +33,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        Utils.darkenStatusBar(this, R.color.textColorPrimary);
         imgback = (ImageView) findViewById(R.id.imv12);
         imgback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +76,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             if (task.getResult().getUser().isEmailVerified()) {
-                                startActivity(new Intent(SignIn.this, HomeActivity.class));
-                                //overridePendingTransition(R.anim.fade_in, R.anim.slide_out_down);
+                                Intent mIntent = new Intent(SignIn.this, HomeActivity.class);
+                                mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mIntent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 finish();
                             } else {
                                 Toast.makeText(SignIn.this,
@@ -85,7 +90,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 firebaseAuth.signOut();
                             }
                         } else {
-                           // Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }

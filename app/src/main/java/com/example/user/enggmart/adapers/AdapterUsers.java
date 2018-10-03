@@ -16,9 +16,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by KaranVerma on 07-Mar-18.
- */
+
 
 public class AdapterUsers extends BaseAdapter {
     private Context context;
@@ -52,7 +50,7 @@ public class AdapterUsers extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.usersinflate, parent, false);
         name = (TextView) convertView.findViewById(R.id.nameu);
         email = (TextView) convertView.findViewById(R.id.emailu);
-        phone = (TextView) convertView.findViewById(R.id.phoneu);
+      //  phone = (TextView) convertView.findViewById(R.id.phoneu);
         dpuser = (CircleImageView) convertView.findViewById(R.id.usersdp);
         Log.e("name", list.get(position).getName());
         Log.e("email", list.get(position).getEmail());
@@ -60,7 +58,7 @@ public class AdapterUsers extends BaseAdapter {
         Log.e("Image", list.get(position).getImage());
         name.setText(list.get(position).getName());
         email.setText(list.get(position).getEmail());
-        phone.setText(list.get(position).getPhone());
+       // phone.setText(list.get(position).getPhone());
         String img = list.get(position).getImage();
         if (!img.equals("not Provided"))
             Glide.with(context).load(img).into(dpuser);

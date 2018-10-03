@@ -12,6 +12,7 @@ buildscript {
             url "https://jitpack.io"
 
         }
+        maven
 
     }
     dependencies {

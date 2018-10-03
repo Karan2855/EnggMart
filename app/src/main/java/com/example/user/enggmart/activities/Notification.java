@@ -8,6 +8,7 @@ import android.view.View;
 
 
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -18,6 +19,7 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

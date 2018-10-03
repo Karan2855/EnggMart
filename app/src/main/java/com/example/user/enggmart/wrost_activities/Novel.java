@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
 
 
 public class Novel extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class Novel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novel);
-
+        Utils.darkenStatusBar(this, R.color.textColorPrimary);
         ImageView imageView = (ImageView) findViewById(R.id.seveneges);
 
         imageView.setOnClickListener(new View.OnClickListener() {
