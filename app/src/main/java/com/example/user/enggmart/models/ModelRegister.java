@@ -5,6 +5,7 @@ public class ModelRegister {
     public String email = "";
     public String phone = "";
     public String image = "";
+    private String status = "";
 
     public String getPass() {
         return pass;
@@ -46,5 +47,13 @@ public class ModelRegister {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

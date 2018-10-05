@@ -1,8 +1,6 @@
 package com.example.user.enggmart.models;
 
-/**
- * Created by UJJAWAL-KUMAR on 9/20/2018.
- */
+
 
 public class PostModel {
     private String postUserdpurl = "";
@@ -15,6 +13,22 @@ public class PostModel {
     private String postCommentsCount = "0";
     private boolean isPostLiked = false;
     private String uid = "";
+
+    public PostModel() {
+    }
+
+    public PostModel(String postUserdpurl, String postUserName, String postUserEmail, String postUrl, String postTime, String postDescription, String postLikesCount, String postCommentsCount, boolean isPostLiked, String uid) {
+        this.postUserdpurl = postUserdpurl;
+        this.postUserName = postUserName;
+        this.postUserEmail = postUserEmail;
+        this.postUrl = postUrl;
+        this.postTime = postTime;
+        this.postDescription = postDescription;
+        this.postLikesCount = postLikesCount;
+        this.postCommentsCount = postCommentsCount;
+        this.isPostLiked = isPostLiked;
+        this.uid = uid;
+    }
 
     public String getPostUserdpurl() {
         return postUserdpurl;

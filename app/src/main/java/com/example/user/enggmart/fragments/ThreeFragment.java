@@ -46,10 +46,6 @@ public class ThreeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         mAllItemsListView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
 
-        final ProgressDialog pd = new ProgressDialog(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
-        pd.setMessage("Loading Items...");
-        pd.setCancelable(false);
-        pd.show();
         listItemsStore.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails");
 
@@ -74,10 +70,8 @@ public class ThreeFragment extends Fragment {
                     //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
                     CustomAdapterStore customAdapter = new CustomAdapterStore(getActivity(), listItemsStore);
                     mAllItemsListView.setAdapter(customAdapter); // set the Adapter to RecyclerView
-                    pd.dismiss();
 
                 } else {
-                    pd.dismiss();
                     Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
                 }
 

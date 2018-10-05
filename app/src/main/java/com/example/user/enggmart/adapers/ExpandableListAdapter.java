@@ -15,9 +15,6 @@ import com.example.user.enggmart.R;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by UJJAWAL-KUMAR on 9/22/2018.
- */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;

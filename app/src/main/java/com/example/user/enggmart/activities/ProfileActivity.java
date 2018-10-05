@@ -1,7 +1,9 @@
 package com.example.user.enggmart.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -16,11 +18,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,28 +36,39 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int PICK_IMAGE = 1022;
     private Uri imageUri;
     private CircleImageView profileImage;
     private TextView namepro, phonepro, emailpro, detailedpro, update;
     private EditText etnamepro, etphonepro;
     private StorageReference mStorageRef;
     private DatabaseReference mdDatabase;
-    private FirebaseAuth userAuth;
+    private FirebaseUser mCurrentUser;
     private ProgressBar progressBar;
     private ProfileActivity context;
-
+    private ProgressDialog progressDialog;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,21 +84,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findIds();
         progressBar.setVisibility(View.VISIBLE);
         context = ProfileActivity.this;
-        userAuth = FirebaseAuth.getInstance();
-        String uid = userAuth.getCurrentUser().getUid().toString();
-        mStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages").child(uid);
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = mCurrentUser.getUid();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid + "");
-        mdDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mdDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.child("image").getValue().toString().equals("not Provided")) {
-                    Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString()).into(profileImage);
+                String name = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                String phone = dataSnapshot.child("phone").getValue().toString();
+                // String status = dataSnapshot.child("status").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+                namepro.setText(name);
+                emailpro.setText(email);
+                phonepro.setText(phone);
+                if (!image.equals("not Provided")) {
+                    Glide.with(getApplicationContext()).load(image).into(profileImage);
+                    //Picasso.get().load(imageUri).placeholder(R.mipmap.usera).into(profileImage);
                     progressBar.setVisibility(View.GONE);
                 }
-                namepro.setText(dataSnapshot.child("name").getValue().toString());
-                emailpro.setText(dataSnapshot.child("email").getValue().toString());
-                phonepro.setText(dataSnapshot.child("phone").getValue().toString());
-                return;
             }
 
             @Override
@@ -143,72 +164,118 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void openFileChooser() {
-        Crop.pickImage(this);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
-        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
-
-            beginCrop(result.getData());
-        } else if (requestCode == Crop.REQUEST_CROP) {
-            handleCrop(resultCode, result);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+            Uri imageUri = data.getData();
+            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
         }
-
-    }
-
-    private void beginCrop(Uri source) {
-        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
-        Crop.of(source, destination).asSquare().start(this);
-    }
-
-    private void handleCrop(int resultCode, Intent result) {
-        if (resultCode == RESULT_OK) {
-            progressBar.setVisibility(View.VISIBLE);
-            imageUri = Crop.getOutput(result);
-            uploadImage();
-        } else if (resultCode == Crop.RESULT_ERROR) {
-            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show();
+                File thumb_filePath = new File(result.getUri().getPath());
+                uploadImage(result.getUri(), thumb_filePath);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
         }
     }
 
-    private void uploadImage() {
+    private void uploadImage(Uri imageUri, final File thumb_filePath) {
+        progressDialog = new ProgressDialog(ProfileActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        progressDialog.setTitle("Uploading Image...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         progressBar.setVisibility(View.VISIBLE);
-        final StorageReference sRef = mStorageRef.child("profile.jpg");
+        String userID = mCurrentUser.getUid();
 
-        sRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                        sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                mdDatabase.child("image").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(ProfileActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
-                                            profileImage.setImageURI(imageUri);
-                                            progressBar.setVisibility(View.GONE);
-                                        } else
-                                            Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
+        Bitmap thumb_bitmap = null;
+        byte[] thumb_byte = null;
+        try {
+            thumb_bitmap = new Compressor(this)
+                    .setMaxWidth(180)
+                    .setMaxWidth(180)
+                    .setQuality(60)
+                    .compressToBitmap(thumb_filePath);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+            thumb_byte = baos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        final StorageReference filePath = mStorageRef.child("profileImages").child(userID + ".jpg");
+        final StorageReference thumb_filePathS = mStorageRef.child("profileImages").child("thumbs").child(userID + ".jpg");
+
+        final byte[] finalThumb_byte = thumb_byte;
+        filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if (task.isSuccessful()) {
+                    filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(final Uri uri) {
+
+                            UploadTask uploadTask = thumb_filePathS.putBytes(finalThumb_byte);
+                            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
                                     }
-                                });
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                                    // Continue with the task to get the download URL
+                                    return thumb_filePathS.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Uri thumb_downloadUri = task.getResult();
+                                        Map uploadUris = new HashMap<>();
+                                        uploadUris.put("image", uri.toString());
+                                        uploadUris.put("thumb_image", thumb_downloadUri.toString());
+                                        mdDatabase.updateChildren(uploadUris).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(ProfileActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                    progressBar.setVisibility(View.GONE);
+                                                } else {
+                                                    Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(ProfileActivity.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Profile Image Not Uploaded", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                 int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                progressBar.setProgress(currentProgress);
+                progressDialog.setProgress(currentProgress);
             }
         });
     }
@@ -217,6 +284,5 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
-
     }
 }

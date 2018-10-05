@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.user.enggmart.wrost_activities.Novel;
 import com.example.user.enggmart.R;
@@ -20,38 +21,37 @@ public class FourFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_four, container, false);
-        LinearLayout CSsem = (LinearLayout)rootView.findViewById(R.id.cssem);
-        LinearLayout ECsem = (LinearLayout)rootView.findViewById(R.id.ecsem);
-        LinearLayout EEsem = (LinearLayout)rootView.findViewById(R.id.eesem);
-        LinearLayout ITsem = (LinearLayout)rootView.findViewById(R.id.itsem);
+        View rootView = inflater.inflate(R.layout.fragment_four, container, false);
+        LinearLayout CSsem = (LinearLayout) rootView.findViewById(R.id.cssem);
+        LinearLayout ECsem = (LinearLayout) rootView.findViewById(R.id.ecsem);
+        LinearLayout EEsem = (LinearLayout) rootView.findViewById(R.id.eesem);
+        LinearLayout ITsem = (LinearLayout) rootView.findViewById(R.id.itsem);
 
 
         CSsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Semester.class);
+                Intent i = new Intent(getActivity(), Semester.class);
                 startActivity(i);
             }
         });
         ECsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),CurrentAffairs.class);
-                startActivity(i);
+                Toast.makeText(getActivity(), "This Feature Will Be Added Soon", Toast.LENGTH_SHORT).show();
             }
         });
         EEsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Novel.class);
+                Intent i = new Intent(getActivity(), Novel.class);
                 startActivity(i);
             }
         });
         ITsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),SkillDevlopment.class);
+                Intent i = new Intent(getActivity(), SkillDevlopment.class);
                 startActivity(i);
             }
         });

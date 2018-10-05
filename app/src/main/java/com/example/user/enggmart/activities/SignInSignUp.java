@@ -23,6 +23,7 @@ import com.example.user.enggmart.adapers.ViewPagerAdapter;
 import com.example.user.enggmart.models.ModelRegister;
 import com.example.user.enggmart.utility.ConnectivityReceiver;
 import com.example.user.enggmart.utility.MyApplication;
+import com.example.user.enggmart.utility.Utils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -68,6 +69,7 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_signup);
         checkConnection();
+        Utils.darkenStatusBar(this, R.color.textColorPrimary);
         signin = (Button) findViewById(R.id.signin);
         signup = findViewById(R.id.signup);
         googlePlus = findViewById(R.id.google_sign_in);
@@ -212,6 +214,7 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
                     modelRegister.setImage("not Provided");
                     modelRegister.setPhone("not Provided");
                     modelRegister.setPass("no");
+                    modelRegister.setStatus("Hey There I'm using EnggMart");
                     mDatabase.setValue(modelRegister);
                 }
                 progressBar.setVisibility(View.GONE);

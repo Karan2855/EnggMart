@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.user.enggmart.R;
 import com.example.user.enggmart.models.PostModel;
+import com.example.user.enggmart.utility.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,9 +39,6 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by UJJAWAL-KUMAR on 9/21/2018.
- */
 
 public class WritePost extends AppCompatActivity implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 100;
@@ -61,6 +59,7 @@ public class WritePost extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.write_post);
+        Utils.darkenStatusBar(this, R.color.textColorPrimary);
         crossImage = findViewById(R.id.write_post_cross);
         userDp = findViewById(R.id.user_dp_write);
         mwritePostEditText = findViewById(R.id.write_your_views_et);
@@ -186,7 +185,7 @@ public class WritePost extends AppCompatActivity implements View.OnClickListener
 
     private void updateDataBase(String uri) {
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
-        final String timeStamp = new SimpleDateFormat("dd/MM/yyyy||HH:mm:ss",
+        final String timeStamp = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss a",
                 Locale.getDefault()).format(new Date());
         PostModel postModel = new PostModel();
         postModel.setPostUrl(uri);

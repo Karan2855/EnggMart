@@ -25,9 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-/**
- * Created by UJJAWAL-KUMAR on 9/20/2018.
- */
+
 
 class PostsItemViewAdapter extends RecyclerView.Adapter<PostsItemViewAdapter.PostsItemViewHolder> {
     private Context context;

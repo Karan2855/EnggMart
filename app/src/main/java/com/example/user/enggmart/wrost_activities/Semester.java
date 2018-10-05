@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.user.enggmart.R;
+import com.example.user.enggmart.utility.Utils;
 
 public class Semester extends AppCompatActivity {
     LinearLayout b11;
@@ -27,7 +28,7 @@ public class Semester extends AppCompatActivity {
         setContentView(R.layout.newspaper);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Utils.darkenStatusBar(this, R.color.colorPrimary);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -40,99 +41,95 @@ public class Semester extends AppCompatActivity {
         setTitle("Newspaper");
 
 
-        LinearLayout b11=(LinearLayout)findViewById(R.id.first);
+        LinearLayout b11 = (LinearLayout) findViewById(R.id.first);
         b11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.timesofindia.indiatimes.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.timesofindia.indiatimes.com/"));
                 startActivity(i);
-
             }
         });
 
-        LinearLayout b12=(LinearLayout)findViewById(R.id.second);
+        LinearLayout b12 = (LinearLayout) findViewById(R.id.second);
         b12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hindustantimes.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hindustantimes.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b13=(LinearLayout)findViewById(R.id.third);
+        LinearLayout b13 = (LinearLayout) findViewById(R.id.third);
         b13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thehindu.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thehindu.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b14=(LinearLayout)findViewById(R.id.fourth);
+        LinearLayout b14 = (LinearLayout) findViewById(R.id.fourth);
         b14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bbc.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bbc.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b15=(LinearLayout)findViewById(R.id.fifth);
+        LinearLayout b15 = (LinearLayout) findViewById(R.id.fifth);
         b15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.livehindustan.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.livehindustan.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b16=(LinearLayout)findViewById(R.id.sixth);
+        LinearLayout b16 = (LinearLayout) findViewById(R.id.sixth);
         b16.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.jagran.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.jagran.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b17=(LinearLayout)findViewById(R.id.seventh);
+        LinearLayout b17 = (LinearLayout) findViewById(R.id.seventh);
         b17.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bhaskar.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bhaskar.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b18=(LinearLayout)findViewById(R.id.eight);
+        LinearLayout b18 = (LinearLayout) findViewById(R.id.eight);
         b18.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.patrika.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.patrika.com/"));
                 startActivity(i);
 
             }
         });
-        LinearLayout b19=(LinearLayout)findViewById(R.id.ninth);
+        LinearLayout b19 = (LinearLayout) findViewById(R.id.ninth);
         b19.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.indianexpress.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.indianexpress.com/"));
                 startActivity(i);
 
             }
         });
-
-
 
 
     }
