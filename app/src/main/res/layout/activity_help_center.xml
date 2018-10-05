@@ -5,88 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:paddingLeft="7dp"
+    android:paddingTop="7dp"
     android:orientation="vertical"
     tools:context=".activities.HelpCenter">
+
+    <ImageView
+        android:id="@+id/canclehelp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/cancel" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="25dp"
-        android:textColor="#000"
+        android:fontFamily="serif"
         android:text="Contact us:"
-        android:fontFamily="serif"/>
+        android:textColor="#000"
+        android:textSize="25dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="EnggMart Private Limited"
         android:textColor="@color/colorPrimary"
-        android:textSize="18dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:layout_marginLeft="10dp"
-    android:orientation="horizontal">
-    <ImageView
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_gravity="center"
-        android:background="@mipmap/gmaillogo"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=": enggmart2018@gmail.com"
-        android:layout_marginLeft="3dp"
-        android:textColor="#000"
-        android:layout_marginTop="6dp"
-        android:textSize="12dp"/>
+        android:textSize="18dp" />
 
-</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_gravity="center"
-            android:background="@mipmap/whatsapp"/>
+            android:background="@mipmap/gmaillogo" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="6dp"
+            android:text=": enggmart2018@gmail.com"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/whatsapp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+
+            android:layout_marginTop="6dp"
             android:text=": +91 7542986002"
-
-            android:layout_marginLeft="3dp"
             android:textColor="#000"
-            android:layout_marginTop="6dp"
-            android:textSize="12dp"/>
+            android:textSize="12dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_gravity="center"
-            android:background="@mipmap/mapsandflags"/>
+            android:background="@mipmap/mapsandflags" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text=": Location"
             android:layout_marginLeft="3dp"
-            android:textColor="#000"
             android:layout_marginTop="6dp"
-            android:textSize="12dp"/>
+            android:text=": Location"
+            android:textColor="#000"
+            android:textSize="12dp" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
