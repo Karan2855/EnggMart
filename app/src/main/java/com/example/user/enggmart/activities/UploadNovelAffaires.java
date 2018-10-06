@@ -1,7 +1,9 @@
 package com.example.user.enggmart.activities;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,9 +15,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.user.enggmart.R;
@@ -31,7 +35,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class UploadNovelAffaires extends AppCompatActivity implements View.OnClickListener {
@@ -99,7 +106,11 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v == mSelectPDF) {
+        if (v == mPdfDATE) {
+            new DatePickerDialog(UploadNovelAffaires.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        } else if (v == mSelectPDF) {
             if (checkPermission()) {
                 selectPdf();
             }
@@ -127,6 +138,27 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
 
     }
 
+
+    final Calendar myCalendar = Calendar.getInstance();
+
+    final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            String myFormat = "dd/MM/yyyy"; //set date format
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            mPdfDATE.setText(sdf.format(myCalendar.getTime()));
+        }
+
+    };
+
+
     private void uploadPDFFile(Uri pdfUrl, final String date) {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -153,6 +185,7 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
                                     Toast.makeText(UploadNovelAffaires.this, "pdf Uploaded", Toast.LENGTH_SHORT).show();
                                     fileUriImage = null;
                                     mPdfDATE.setText("");
+
                                     progressDialog.dismiss();
                                 } else {
                                     Toast.makeText(UploadNovelAffaires.this, "pdf Not Uploaded 1", Toast.LENGTH_SHORT).show();
