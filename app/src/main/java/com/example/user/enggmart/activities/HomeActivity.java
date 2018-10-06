@@ -171,7 +171,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupViewPager() {
         HomeActivity.ViewPagerAdapter adapter = new HomeActivity.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "Newfeed");
+        adapter.addFragment(new OneFragment(), "Newsfeeds");
         adapter.addFragment(new ThreeFragment(), "Store");
         adapter.addFragment(new TwoFragment(), "Work/Job");
         adapter.addFragment(new FourFragment(), "Engg Lib");

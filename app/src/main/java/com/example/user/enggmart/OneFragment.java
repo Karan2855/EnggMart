@@ -128,6 +128,7 @@ public class OneFragment extends Fragment {
                     if (!imageurl.equals("not Provided"))
                         Glide.with(getApplicationContext()).load(imageurl).into(postUserImage);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 

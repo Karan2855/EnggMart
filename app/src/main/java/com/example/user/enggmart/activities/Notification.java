@@ -34,8 +34,5 @@ public class Notification extends AppCompatActivity {
         setTitle("Notification");
 
 
-
-
-
     }
 }

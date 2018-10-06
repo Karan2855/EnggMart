@@ -7,8 +7,10 @@
     android:background="#fff"
     android:orientation="vertical"
     tools:context=".activities.Notification">
-    <include layout="@layout/custom_app_bar"/>
-    <include layout="@layout/networkerror"/>
+
+    <include layout="@layout/custom_app_bar" />
+
+    <include layout="@layout/networkerror" />
 
 
 </LinearLayout>

@@ -15,11 +15,11 @@ public class HelpCenter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_center);
-        hlpCancle=(ImageView)findViewById(R.id.canclehelp);
+        hlpCancle = (ImageView) findViewById(R.id.canclehelp);
         hlpCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(HelpCenter.this,HomeActivity.class);
+                Intent i = new Intent(HelpCenter.this, HomeActivity.class);
                 startActivity(i);
             }
         });

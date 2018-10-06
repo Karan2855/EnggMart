@@ -8,7 +8,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.example.user.enggmart.R;
-import com.example.user.enggmart.wrost_activities.YouTubeVideos;
+import com.example.user.enggmart.models.YouTubeVideos;
 
 import java.util.List;
 
@@ -19,39 +19,42 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     public VideoAdapter() {
 
     }
+
     public VideoAdapter(List<YouTubeVideos> youtubeVideosList) {
         this.youtubeVideosList = youtubeVideosList;
     }
 
-   @Override
+    @Override
 
-   public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from( parent.getContext()).inflate(R.layout.video_view, parent, false);
-       return new  VideoViewHolder(view);
-   }
+    public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_view, parent, false);
+        return new VideoViewHolder(view);
+    }
 
 
     @Override
-   public void onBindViewHolder(VideoViewHolder holder, int position) {
-       holder.videoWeb.loadData( youtubeVideosList.get(position).getVideoUrl(), "text/html" , "utf-8");
-   }
+    public void onBindViewHolder(VideoViewHolder holder, int position) {
+        holder.videoWeb.loadData(youtubeVideosList.get(position).getVideoUrl(), "text/html", "utf-8");
+    }
 
 
     @Override
-    public int getItemCount() { return youtubeVideosList.size(); }
+    public int getItemCount() {
+        return youtubeVideosList.size();
+    }
 
     public class VideoViewHolder extends RecyclerView.ViewHolder {
 
         WebView videoWeb;
 
-        public  VideoViewHolder(View itemView) {
+        public VideoViewHolder(View itemView) {
             super(itemView);
 
             videoWeb = (WebView) itemView.findViewById(R.id.videoWebiew);
-            
+
             videoWeb.getSettings().setJavaScriptEnabled(true);
             videoWeb.setWebChromeClient(new WebChromeClient() {
-                
+
             });
         }
     }

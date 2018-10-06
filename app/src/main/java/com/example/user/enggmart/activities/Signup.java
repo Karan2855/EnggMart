@@ -139,10 +139,10 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
     private void updateUI(@NonNull final FirebaseUser user, final String name, final String phoneno, final String emailid) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         HashMap<String, String> userMap = new HashMap<>();
-        userMap.put("phone", phoneno+"");
-        userMap.put("email", emailid+"");
+        userMap.put("phone", phoneno + "");
+        userMap.put("email", emailid + "");
         userMap.put("image", "not Provided");
-        userMap.put("name", name+"");
+        userMap.put("name", name + "");
         userMap.put("status", "Hey Thare I'm using EnggMart");
         userMap.put("pass", "yes");
         userMap.put("thumb_image", "not Provided");

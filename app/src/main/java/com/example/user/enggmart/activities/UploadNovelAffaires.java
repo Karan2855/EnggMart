@@ -31,6 +31,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UploadNovelAffaires extends AppCompatActivity implements View.OnClickListener {
 
     private String upload;
@@ -132,27 +135,29 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
         progressDialog.show();
 
         final String fileName = System.currentTimeMillis() + "";
-        final StorageReference storageReference = mfStorage.getReference().child(type).child(fileName);
+        final StorageReference storageReference = mfStorage.getReference().child(type).child(fileName + ".pdf");
         storageReference.putFile(pdfUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String uploadeduri = uri.toString();
-                        DatabaseReference databaseReference = mfirebaseDatabase.getReference().child(type).child(fileName);
-                        databaseReference.child("date").setValue(date);
-                        databaseReference.child("pdf").setValue(uploadeduri).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        final Map<String, String> map = new HashMap<>();
+                        map.put("pdf", uri.toString() + "");
+                        map.put("date", date + "");
+                        DatabaseReference databaseReference = mfirebaseDatabase.getReference();
+                        databaseReference.child(type).child(fileName).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(UploadNovelAffaires.this, "Pdf file Uploaded", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UploadNovelAffaires.this, "pdf Uploaded", Toast.LENGTH_SHORT).show();
+                                    fileUriImage = null;
                                     mPdfDATE.setText("");
-                                    pdfUri = null;
-                                    mpdftv.setText("");
                                     progressDialog.dismiss();
-                                } else
-                                    Toast.makeText(UploadNovelAffaires.this, "Pdf file not Uploaded", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(UploadNovelAffaires.this, "pdf Not Uploaded 1", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
                             }
                         });
                     }
@@ -174,13 +179,12 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
 
     private void uploadImageFile(Uri pdfUrl, Uri imagePdfUrl) {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMessage("Uploading Files...");
         progressDialog.setProgress(0);
         progressDialog.show();
 
         final String fileName = System.currentTimeMillis() + "";
-
+        final Map<String, String> map = new HashMap<>();
         final StorageReference storageReference = mfStorage.getReference().child(type).child(fileName + ".pdf");
         storageReference.putFile(pdfUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -188,44 +192,29 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String uploadeduri = uri.toString();
-                        DatabaseReference databaseReference = mfirebaseDatabase.getReference();
-                        databaseReference.child(type).child(fileName).child("pdf").setValue(uploadeduri).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    pdfUri = null;
-                                    mpdftv.setText("");
-                                    Toast.makeText(UploadNovelAffaires.this, "Pdf file Uploaded", Toast.LENGTH_SHORT).show();
-                                } else
-                                    Toast.makeText(UploadNovelAffaires.this, "Pdf file not Uploaded", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        map.put("pdf", uri.toString() + "");
                     }
                 });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UploadNovelAffaires.this, "Pdf file not Uploaded", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                progressDialog.setProgress(currentProgress);
+                Toast.makeText(UploadNovelAffaires.this, "Pdf file not Uploaded 2", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
+
+
         final StorageReference storageReferenceImg = mfStorage.getReference().child(type).child(fileName + ".jpg");
         storageReferenceImg.putFile(imagePdfUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                storageReferenceImg.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String uploadeduri = uri.toString();
+                        map.put("img", uri.toString() + "");
                         DatabaseReference databaseReference = mfirebaseDatabase.getReference();
-                        databaseReference.child(type).child(fileName).child("img").setValue(uploadeduri).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference.child(type).child(fileName).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -233,8 +222,10 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
                                     fileUriImage = null;
                                     mImagePDF.setImageBitmap(null);
                                     progressDialog.dismiss();
-                                } else
-                                    Toast.makeText(UploadNovelAffaires.this, "Image Not Uploaded", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(UploadNovelAffaires.this, "Image Not Uploaded 1", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
                             }
                         });
                     }
@@ -243,18 +234,13 @@ public class UploadNovelAffaires extends AppCompatActivity implements View.OnCli
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UploadNovelAffaires.this, "Image File Not Uploaded", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                progressDialog.setProgress(currentProgress);
+                Toast.makeText(UploadNovelAffaires.this, "Image File Not Uploaded 2", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
 
-
     }
+
 
     private void selectPdf() {
         Intent intent = new Intent();

@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:gravity="center"
-        >
+        android:gravity="center">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="200dp"
@@ -21,6 +21,7 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"

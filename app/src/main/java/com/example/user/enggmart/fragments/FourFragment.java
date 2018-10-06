@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.user.enggmart.wrost_activities.Novel;
+import com.example.user.enggmart.activities.CurrentAffairsActivity;
+import com.example.user.enggmart.activities.NewsPaperActivity;
+import com.example.user.enggmart.activities.NovelsActivity;
 import com.example.user.enggmart.R;
-import com.example.user.enggmart.wrost_activities.Semester;
-import com.example.user.enggmart.wrost_activities.SkillDevlopment;
-import com.example.user.enggmart.wrost_activities.CurrentAffairs;
+import com.example.user.enggmart.activities.SkillDevlopment;
 
 
 public class FourFragment extends Fragment {
@@ -31,20 +30,21 @@ public class FourFragment extends Fragment {
         CSsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Semester.class);
+                Intent i = new Intent(getActivity(), NewsPaperActivity.class);
                 startActivity(i);
             }
         });
         ECsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "This Feature Will Be Added Soon", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), CurrentAffairsActivity.class);
+                startActivity(i);
             }
         });
         EEsem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Novel.class);
+                Intent i = new Intent(getActivity(), NovelsActivity.class);
                 startActivity(i);
             }
         });

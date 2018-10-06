@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:background="#fff"
     tools:context=".activities.AdminPannel">
-    <include layout="@layout/custom_app_bar"/>
+
+    <include layout="@layout/custom_app_bar" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,6 +17,7 @@
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +59,7 @@
             android:layout_marginTop="20dp"
             android:background="#a22222"
             android:text="Login"
-            android:textColor="#fff"/>
+            android:textColor="#fff" />
 
     </LinearLayout>
 

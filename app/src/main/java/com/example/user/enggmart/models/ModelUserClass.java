@@ -1,7 +1,6 @@
 package com.example.user.enggmart.models;
 
 
-
 public class ModelUserClass {
 
     private String phone = "";

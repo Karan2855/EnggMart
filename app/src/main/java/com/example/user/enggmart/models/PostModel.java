@@ -1,7 +1,6 @@
 package com.example.user.enggmart.models;
 
 
-
 public class PostModel {
     private String postUserdpurl = "";
     private String postUserName = "";

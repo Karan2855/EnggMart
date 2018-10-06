@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- android:orientation="vertical"
-    tools:context=".wrost_activities.Semester">
+    android:orientation="vertical"
+    tools:context=".activities.Semester">
 
-    <include layout="@layout/custom_app_bar"/>
-    <LinearLayout
-        android:layout_width="match_parent"
+    <include layout="@layout/custom_app_bar" />
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#fff"
@@ -23,7 +23,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             app:cardCornerRadius="5dp">
-            <LinearLayout layout="@layout/content_main"
+
+            <LinearLayout
+                layout="@layout/content_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
@@ -38,6 +40,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:id="@+id/first"
@@ -52,9 +55,10 @@
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup1"
                             android:layout_gravity="center"
-                            android:src="@drawable/toi"/>
+                            android:src="@drawable/toi" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -71,8 +75,9 @@
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup2"
                             android:layout_gravity="center"
-                            android:src="@drawable/ht"/>
+                            android:src="@drawable/ht" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -80,8 +85,7 @@
                         android:background="#fff"
                         android:layout_marginLeft="2dp"
                         android:orientation="vertical"
-                        android:layout_weight="1"
-                        >
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -89,10 +93,11 @@
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup3"
                             android:layout_gravity="center"
-                            android:src="@drawable/th"/>
+                            android:src="@drawable/th" />
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -101,6 +106,7 @@
                     android:layout_marginRight="10dp"
 
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -116,9 +122,10 @@
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup4"
                             android:layout_gravity="center"
-                            android:src="@drawable/bbc"/>
+                            android:src="@drawable/bbc" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -127,15 +134,17 @@
                         android:layout_marginLeft="2dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup5"
                             android:layout_gravity="center"
-                            android:src="@drawable/hindustan"/>
+                            android:src="@drawable/hindustan" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -151,11 +160,12 @@
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup6"
                             android:layout_gravity="center"
-                            android:src="@drawable/dj"/>
+                            android:src="@drawable/dj" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
@@ -164,6 +174,7 @@
                     android:layout_marginRight="10dp"
 
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
@@ -171,15 +182,17 @@
                         android:background="#fff"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup7"
                             android:layout_gravity="center"
-                            android:src="@drawable/db"/>
+                            android:src="@drawable/db" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
@@ -188,16 +201,18 @@
                         android:layout_marginLeft="2dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="15dp"
                             android:id="@+id/scanpickup8"
                             android:layout_gravity="center"
-                            android:src="@drawable/patrika"/>
+                            android:src="@drawable/patrika" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
@@ -220,12 +235,12 @@
                                 android:layout_marginTop="15dp"
                                 android:id="@+id/scanpickup9"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ie"/>
+                                android:src="@drawable/ie" />
 
                         </LinearLayout>
 
                     </LinearLayout>
-                    
+
                 </LinearLayout>
 
 

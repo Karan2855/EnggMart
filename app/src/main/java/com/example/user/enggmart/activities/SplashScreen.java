@@ -45,6 +45,7 @@ public class SplashScreen extends AppCompatActivity {
         // } catch (IOException e) {
 
         //}
+
     }
 
     @Override

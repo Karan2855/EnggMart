@@ -8,5 +8,5 @@
         android:startColor="#b6731b"
         android:gradientRadius="200dp"
         android:endColor="#b6731b"
-        android:useLevel="true"/>
+        android:useLevel="true" />
 </shape>

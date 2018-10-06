@@ -9,53 +9,56 @@
     tools:context=".activities.SplashScreen">
 
 
-   <!-- <com.felipecsl.gifimageview.library.GifImageView
-        android:id="@+id/gifImageView"
-        android:background="@drawable/whitebordercircle"
-        android:layout_width="200dp"
-        android:layout_gravity="center"
+    <!-- <com.felipecsl.gifimageview.library.GifImageView
+         android:id="@+id/gifImageView"
+         android:background="@drawable/whitebordercircle"
+         android:layout_width="200dp"
+         android:layout_gravity="center"
 
-        android:layout_height="200dp"
+         android:layout_height="200dp"
 
-        android:layout_marginTop="240dp" />-->
-<LinearLayout
-    android:layout_width="180dp"
-    android:layout_height="180dp"
-
-    android:orientation="vertical">
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@mipmap/em"/>
-
+         android:layout_marginTop="240dp" />-->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="60dp"
-        android:layout_marginTop="0dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:id="@+id/anim">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Engg"
-        android:textColor="#025B07"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
 
-        android:textStyle="bold"
-        android:textSize="22dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Mart"
-        android:textStyle="bold"
-        android:textColor="#000"
+        android:orientation="vertical">
 
-        android:textSize="22dp"/>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@mipmap/em" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/anim">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Engg"
+                android:textColor="#025B07"
+
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Mart"
+                android:textStyle="bold"
+                android:textColor="#000"
+
+                android:textSize="22dp" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
 </LinearLayout>

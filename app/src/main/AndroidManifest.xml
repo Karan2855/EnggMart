@@ -27,9 +27,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
-
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".activities.ProductDescription" />
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -49,29 +49,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity
-            android:name=".activities.HomeActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".activities.SignInSignUp" />
-        <activity android:name=".activities.Signup" />
-        <activity android:name=".activities.VarificationCode" />
-        <activity android:name=".activities.SignIn" />
-        <activity android:name=".activities.Notification" />
-        <activity android:name=".activities.UsersActivity" />
-        <activity android:name=".activities.ChatActivity" />
-        <activity android:name=".wrost_activities.Semester" />
-        <activity android:name=".wrost_activities.Novel" />
-        <activity android:name=".activities.WritePost" />
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".wrost_activities.SkillDevlopment" />
 
         <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
@@ -87,19 +65,91 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.AdminPannel" />
-        <activity android:name=".wrost_activities.CurrentAffairs" />
-        <activity android:name=".wrost_activities.Pdf1" />
-        <activity android:name=".activities.AdminConsole" />
-        <activity android:name=".wrost_activities.Seveneges" />
-        <activity android:name=".wrost_activities.Artofps" />
-        <activity android:name=".activities.PaymentPage" />
-        <activity android:name=".wrost_activities.Journalism" />
-        <activity android:name=".wrost_activities.Taleoftwocities" />
-        <activity android:name=".activities.HelpCenter" />
-        <activity android:name=".activities.UploadNovelAffaires" />
-        <activity android:name=".ChatMainActivity" />
-        <activity android:name=".ChatAccountSetting"></activity>
+
+        <!--all Activities-->
+
+        <activity
+            android:name=".activities.HomeActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activities.AdminPannel"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CurrentAffairsActivity"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AdminConsole"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PaymentPage"
+            android:parentActivityName=".activities.ProductDescription"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.HelpCenter"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.UploadNovelAffaires"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SignInSignUp"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.Signup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SignIn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.Notification"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.UsersActivity"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ChatActivity"
+            android:parentActivityName=".activities.UsersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NewsPaperActivity"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NovelsActivity"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WritePost"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SkillDevlopment"
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.PDFViewActivity"
+            android:parentActivityName=".activities.CurrentAffairsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
