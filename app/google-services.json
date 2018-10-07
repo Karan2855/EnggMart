@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "70358162389-vvqrq3fbkhqnv8h57kepd3sampef5gmf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enggmartservices.enggmart",
+            "certificate_hash": "ab1e6fb42d173cda8b9c2ddf2ceb474686cda3a1"
+          }
+        },
+        {
           "client_id": "70358162389-28pe0f87990qhb1l2ebti5eb2cmqrtq5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70358162389-d1rc5v6js572ar470agclb8bicjku9g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
