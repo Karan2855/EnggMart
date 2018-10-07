@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.user.enggmart">
+    package="com.enggmartservices.enggmart">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".utility.MyApplication"
+        android:name="com.enggmartservices.enggmart.utility.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/em"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"
-            tools:replace="android:value" />
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning">
 
-        <service android:name=".services.MyFirebaseInstanceIDService">
+        <service android:name="com.enggmartservices.enggmart.services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -30,35 +28,19 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".activities.ProductDescription" />
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:theme" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
-        <service android:name=".services.MyFirebaseMessagingService">
+        <!--firebase Messages-->
+        <service android:name="com.enggmartservices.enggmart.services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
+
+        <!--connectivity checker-->
         <receiver
-            android:name=".utility.ConnectivityReceiver"
+            android:name="com.enggmartservices.enggmart.utility.ConnectivityReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -67,79 +49,82 @@
 
 
         <!--all Activities-->
-
         <activity
-            android:name=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.ProductDescription"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.enggmartservices.enggmart.activities.HomeActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".activities.AdminPannel"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.AdminPannel"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.CurrentAffairsActivity"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.CurrentAffairsActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.AdminConsole"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.AdminConsole"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.PaymentPage"
-            android:parentActivityName=".activities.ProductDescription"
+            android:name="com.enggmartservices.enggmart.activities.PaymentPage"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.ProductDescription"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.HelpCenter"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.HelpCenter"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UploadNovelAffaires"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.UploadNovelAffaires"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SignInSignUp"
+            android:name="com.enggmartservices.enggmart.activities.SignInSignUp"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.Signup"
+            android:name="com.enggmartservices.enggmart.activities.Signup"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SignIn"
+            android:name="com.enggmartservices.enggmart.activities.SignIn"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.Notification"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.Notification"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UsersActivity"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.UsersActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ChatActivity"
-            android:parentActivityName=".activities.UsersActivity"
+            android:name="com.enggmartservices.enggmart.activities.ChatActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.UsersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.NewsPaperActivity"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.NewsPaperActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.NovelsActivity"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.NovelsActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.WritePost"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.WritePost"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ProfileActivity"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.ProfileActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SkillDevlopment"
-            android:parentActivityName=".activities.HomeActivity"
+            android:name="com.enggmartservices.enggmart.activities.SkillDevlopment"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name="com.enggmartservices.enggmart.activities.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -147,8 +132,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.PDFViewActivity"
-            android:parentActivityName=".activities.CurrentAffairsActivity"
+            android:name="com.enggmartservices.enggmart.activities.PDFViewActivity"
+            android:parentActivityName="com.enggmartservices.enggmart.activities.CurrentAffairsActivity"
             android:screenOrientation="portrait" />
     </application>
 

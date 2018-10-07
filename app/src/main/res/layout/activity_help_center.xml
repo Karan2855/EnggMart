@@ -31,7 +31,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="EnggMart Private Limited"
+        android:text="EnggMart Services"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp" />
 
@@ -99,7 +99,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="6dp"
-            android:text=": Location"
+            android:text=": Jaipur"
             android:textColor="#000"
             android:textSize="12dp" />
 

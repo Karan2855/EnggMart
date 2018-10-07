@@ -1,59 +1,27 @@
 {
   "project_info": {
-    "project_number": "308628606891",
-    "firebase_url": "https://enggmart.firebaseio.com",
-    "project_id": "enggmart",
-    "storage_bucket": "enggmart.appspot.com"
+    "project_number": "70358162389",
+    "firebase_url": "https://enggmartapp.firebaseio.com",
+    "project_id": "enggmartapp",
+    "storage_bucket": "enggmartapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:308628606891:android:6ebbf000763826af",
+        "mobilesdk_app_id": "1:70358162389:android:c2c0132cf67cf857",
         "android_client_info": {
-          "package_name": "com.example.user.enggmart"
+          "package_name": "com.enggmartservices.enggmart"
         }
       },
       "oauth_client": [
         {
-          "client_id": "308628606891-v0ig3j6n82uchsig47eg42qqhcib8ne6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.user.enggmart",
-            "certificate_hash": "ab1e6fb42d173cda8b9c2ddf2ceb474686cda3a1"
-          }
-        },
-        {
-          "client_id": "308628606891-1aeavsfrpdkg4k5q20tll6hfn38i1h8p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.user.enggmart",
-            "certificate_hash": "cb8dbcaf3ab3baec5152ae1e8b8c5bb544e8149f"
-          }
-        },
-        {
-          "client_id": "308628606891-l0uhihulm0balu3lle39i4u9ocq5krhh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.user.enggmart",
-            "certificate_hash": "7dc4f983ab83a157c8b665d42d3068350cde3143"
-          }
-        },
-        {
-          "client_id": "308628606891-dek9pdnm8ll18pvn7aks1n2j7b6qdehm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.user.enggmart",
-            "certificate_hash": "4eea25d4b420680c01231c9adf109fb5c222d207"
-          }
-        },
-        {
-          "client_id": "308628606891-u8fv93fdljgdefauh1ldmgepjjg54lrc.apps.googleusercontent.com",
+          "client_id": "70358162389-28pe0f87990qhb1l2ebti5eb2cmqrtq5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD2NuVyGzpVJcP6uq_8FFdHXUSYdRPUVGg"
+          "current_key": "AIzaSyD2dvUoKlKHcVTRtD2tbL1_A1nYkr0ASmE"
         }
       ],
       "services": {
@@ -61,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "308628606891-phda7huhb4q0v1nsifugbns52p8htbbc.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

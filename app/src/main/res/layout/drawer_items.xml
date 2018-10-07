@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgrel"
             android:layout_marginLeft="20dp"
-            android:text="Karan Verma"
+            android:text="User Name"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="italic" />
@@ -53,7 +53,7 @@
             android:layout_below="@+id/namedr"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
-            android:text="karanverma2855@gmail.com"
+            android:text="username@example.xyz"
             android:textColor="#Fff" />
     </RelativeLayout>
 
@@ -227,28 +227,6 @@
                 android:background="#000" />
 
             <LinearLayout
-                android:id="@+id/about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/sharepost" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="40dp"
-                    android:text="Share"
-                    android:textColor="#000" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -270,11 +248,6 @@
                     android:textColor="#000" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000" />
-
             <LinearLayout
                 android:id="@+id/share"
                 android:layout_width="match_parent"
@@ -293,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
-                    android:text="About Us"
+                    android:text="Share"
                     android:textColor="#000" />
             </LinearLayout>
 

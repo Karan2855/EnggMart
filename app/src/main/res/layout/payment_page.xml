@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.example.user.enggmart.activities.PaymentPage">
+    tools:context="com.enggmartservices.enggmart.activities.PaymentPage">
 
     <include layout="@layout/custom_app_bar" />
 
@@ -129,7 +129,7 @@
             android:id="@+id/rent_policy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RENT POLICY:- "
+            android:text="@string/rent_policy "
             android:textColor="#3349ab"
             android:visibility="gone" />
 

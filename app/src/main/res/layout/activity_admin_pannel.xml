@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
-    tools:context=".activities.AdminPannel">
+    android:orientation="vertical"
+    tools:context="com.enggmartservices.enggmart.activities.AdminPannel">
 
     <include layout="@layout/custom_app_bar" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
+        android:paddingTop="56dp"
         android:paddingRight="24dp">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="#000">
 
             <EditText
                 android:id="@+id/Name"
@@ -38,9 +38,9 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="#000">
 
             <EditText
                 android:id="@+id/Password"
@@ -52,12 +52,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:layout_width="200dp"
             android:id="@+id/button"
+            android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"
-            android:background="#a22222"
+            android:background="@drawable/cornor_blue"
             android:text="Login"
             android:textColor="#fff" />
 

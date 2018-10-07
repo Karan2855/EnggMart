@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:background="#fff"
-    tools:context=".activities.SignInSignUp">
+    android:padding="10dp"
+    tools:context="com.enggmartservices.enggmart.activities.SignInSignUp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/guidesline"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/footer"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Hello"
-                android:textSize="15dp"
-                android:textColor="#000" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Hello"
-                android:textSize="15dp"
-                android:textColor="#000" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Hello"
-                android:textSize="15dp"
-                android:textColor="#000" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Hello"
-                android:textSize="15dp"
-                android:textColor="#000" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Hello"
-                android:textSize="15dp"
-                android:textColor="#000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/footer"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:layout_alignParentBottom="true">
 
-            <Button
-                android:id="@+id/guide_cancel"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="0.5dp"
-                android:layout_marginTop="0.5dp"
-                android:layout_weight="1"
-                android:background="#f5f5f5"
-                android:text="OK"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-        </LinearLayout>
+            android:text="EnggMart App Guidelines:-"
 
-    </RelativeLayout>
+            android:textColor="#000"
+            android:textSize="20dp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="1. Login/signup through gmail/facebook or register"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Use navigation drawer for:- chat,share, help, about us"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. To share views:- click on +(plus),write views then post it"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. To buy books/tools:- store- click on book image-> choose  book option(new, old, rent),Purchase-> fill details-> place order"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5.  For test on GK, Apptitude, Technical- go on Work/Job"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6.  Engg lib:- For Newspaper, CA, Novel, Skill development"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7.  Click on: (Right side of Apps)-> Profile, Guideline, logout  "
+            android:textColor="#000"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/guide_cancel"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guidesline"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:background="#f5f5f5"
+        android:text="OK"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+</RelativeLayout>
+

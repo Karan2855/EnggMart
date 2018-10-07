@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context=".activities.ProfileActivity">
+    tools:context="com.enggmartservices.enggmart.activities.ProfileActivity">
 
     <include layout="@layout/custom_app_bar" />
 
@@ -61,8 +61,9 @@
                 android:layout_marginLeft="1dp"
                 android:background="#fff"
                 android:gravity="center_vertical"
+                android:singleLine="true"
                 android:paddingHorizontal="10dp"
-                android:text="example"
+                android:text="User Name"
                 android:textColor="#1d1b8e"
                 android:textSize="18sp"
                 android:visibility="visible" />
@@ -103,11 +104,11 @@
                 android:layout_marginLeft="1dp"
                 android:background="#fff"
                 android:gravity="center_vertical"
-
                 android:paddingHorizontal="10dp"
-                android:text="example@gmail.com"
+                android:singleLine="true"
+                android:text="username@example.xyz"
                 android:textColor="#2e2e2e"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible" />
 
             <EditText
