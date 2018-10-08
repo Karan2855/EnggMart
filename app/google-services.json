@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "70358162389-1qrfeqdu4q83o4rnj3kuk9g39r9qb3nj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enggmartservices.enggmart",
+            "certificate_hash": "276bbc4cf3ba114163a72312da87d335d6c699cc"
+          }
+        },
+        {
+          "client_id": "70358162389-c32v8vhkm06fm3brf3nk0oq50p1vd1rr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enggmartservices.enggmart",
+            "certificate_hash": "f21b28b765166c3fa5318a7c9bde259f5d20b0c8"
+          }
+        },
+        {
           "client_id": "70358162389-28pe0f87990qhb1l2ebti5eb2cmqrtq5.apps.googleusercontent.com",
           "client_type": 3
         }

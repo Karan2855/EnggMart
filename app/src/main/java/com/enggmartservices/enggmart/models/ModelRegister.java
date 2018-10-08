@@ -1,6 +1,8 @@
 package com.enggmartservices.enggmart.models;
 
-public class ModelRegister {
+import java.io.Serializable;
+
+public class ModelRegister implements Serializable {
     public String name = "";
     public String email = "";
     public String phone = "";

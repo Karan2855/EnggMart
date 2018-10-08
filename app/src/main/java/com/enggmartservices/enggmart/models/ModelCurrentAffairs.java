@@ -1,6 +1,8 @@
 package com.enggmartservices.enggmart.models;
 
-public class ModelCurrentAffairs {
+import java.io.Serializable;
+
+public class ModelCurrentAffairs implements Serializable{
     private String itemDate = "";
     private String pdfFile = "";
 

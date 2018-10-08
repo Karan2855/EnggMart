@@ -45,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SignInSignUp extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
+public class SignInSignUp extends AppCompatActivity {
     private static final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     private static final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
     private static final int RC_SIGN_IN = 111;
@@ -68,7 +68,6 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_signup);
-        checkConnection();
         Utils.darkenStatusBar(this, R.color.textColorPrimary);
         signin = (Button) findViewById(R.id.signin);
         signup = findViewById(R.id.signup);
@@ -178,13 +177,6 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MyApplication.getInstance().setConnectivityListener(this);
-    }
-
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d("happy", "firebaseAuthWithGoogle:" + acct.getId());
         progressBar.setVisibility(View.VISIBLE);
@@ -267,36 +259,5 @@ public class SignInSignUp extends AppCompatActivity implements ConnectivityRecei
                 // ...
             }
         }
-    }
-
-
-    private void checkConnection() {
-        boolean isConnected = ConnectivityReceiver.isConnected();
-        showSnack(isConnected);
-    }
-
-    private void showSnack(boolean isConnected) {
-        String message;
-        int color;
-        if (isConnected) {
-            message = "Good! Connected to Internet";
-            color = Color.WHITE;
-        } else {
-            message = "Sorry! Not connected to internet";
-            color = Color.RED;
-        }
-
-        Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.fabs), message, Snackbar.LENGTH_LONG);
-
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(color);
-        snackbar.show();
-    }
-
-    @Override
-    public void onNetworkConnectionChanged(boolean isConnected) {
-        showSnack(isConnected);
     }
 }

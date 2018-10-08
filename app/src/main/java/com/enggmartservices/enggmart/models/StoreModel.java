@@ -1,6 +1,8 @@
 package com.enggmartservices.enggmart.models;
 
-public class StoreModel {
+import java.io.Serializable;
+
+public class StoreModel implements Serializable {
     private String itemName = "";
     private String itemPrice = "";
     private String itemDescription = "";

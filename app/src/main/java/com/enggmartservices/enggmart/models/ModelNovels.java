@@ -1,6 +1,8 @@
 package com.enggmartservices.enggmart.models;
 
-public class ModelNovels {
+import java.io.Serializable;
+
+public class ModelNovels implements Serializable {
     private String itemImage = "";
     private String pdfFile = "";
 

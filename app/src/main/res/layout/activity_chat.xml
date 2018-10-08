@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#e7e5e5"
     android:orientation="vertical"
-    android:id="@+id/chatactivity"
     tools:context="com.enggmartservices.enggmart.activities.ChatActivity">
 
     <LinearLayout

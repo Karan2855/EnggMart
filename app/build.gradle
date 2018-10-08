@@ -7,29 +7,17 @@ android {
         applicationId "com.enggmartservices.enggmart"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
-    signingConfigs {
-        release {
-            storeFile file("enggmart.jks")
-            storePassword "jkllkj123"
-            keyAlias "enggmart"
-            keyPassword "jkllkj123"
-        }
-    }
-
 }
 
 dependencies {
@@ -46,13 +34,13 @@ dependencies {
 
     // ## Firebase Libraries##
     //noinspection GradleCompatible
-    implementation 'com.google.firebase:firebase-storage:16.0.2'
-    implementation 'com.google.firebase:firebase-messaging:17.3.2'
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.firebase:firebase-auth:16.0.3'
-    implementation 'com.google.firebase:firebase-database:16.0.2'
+    implementation 'com.google.firebase:firebase-storage:16.0.3'
+    implementation 'com.google.firebase:firebase-messaging:17.3.3'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-auth:16.0.4'
+    implementation 'com.google.firebase:firebase-database:16.0.3'
     implementation 'com.firebaseui:firebase-ui-database:4.2.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
 
     testImplementation 'junit:junit:4.12'

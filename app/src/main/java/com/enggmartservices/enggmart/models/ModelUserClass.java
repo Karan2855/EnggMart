@@ -1,7 +1,9 @@
 package com.enggmartservices.enggmart.models;
 
 
-public class ModelUserClass {
+import java.io.Serializable;
+
+public class ModelUserClass implements Serializable {
 
     private String phone = "";
     private String email = "";

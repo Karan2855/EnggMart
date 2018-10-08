@@ -3,18 +3,23 @@ package com.enggmartservices.enggmart.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Process;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enggmartservices.enggmart.R;
+import com.enggmartservices.enggmart.utility.ConnectivityReceiver;
 import com.enggmartservices.enggmart.utility.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
     private static int SPLASH_TIME_OUT = 2500;
     private LinearLayout animat;
     private FirebaseAuth userAuth;
@@ -42,6 +47,7 @@ public class SplashScreen extends AppCompatActivity {
         animat = (LinearLayout) findViewById(R.id.anim);
         animat.clearAnimation();
         animat.startAnimation(a);
+        checkConnection();
         userAuth = FirebaseAuth.getInstance();
         version = FirebaseDatabase.getInstance().getReference().child("version").child("number");
 
@@ -123,5 +129,33 @@ public class SplashScreen extends AppCompatActivity {
                 .show();
 
 
+    }
+
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        if (!isConnected) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(R.id.layout_splash), "Sorry! Not connected to internet", Snackbar.LENGTH_LONG);
+
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.RED);
+            snackbar.show();
+        }
+    }
+
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (!isConnected) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(R.id.layout_splash), "Sorry! Not connected to internet", Snackbar.LENGTH_LONG);
+
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.RED);
+            snackbar.show();
+        }
     }
 }

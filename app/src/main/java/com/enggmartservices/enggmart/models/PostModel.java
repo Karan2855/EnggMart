@@ -1,7 +1,9 @@
 package com.enggmartservices.enggmart.models;
 
 
-public class PostModel {
+import java.io.Serializable;
+
+public class PostModel implements Serializable {
     private String postUserdpurl = "";
     private String postUserName = "";
     private String postUserEmail = "";
