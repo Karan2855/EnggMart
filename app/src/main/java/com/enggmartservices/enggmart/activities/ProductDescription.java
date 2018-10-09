@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProductDescription extends AppCompatActivity {
-    private DatabaseReference mDatabase;
     private Button button;
     private String itemID;
     private String itemType;
@@ -56,7 +56,7 @@ public class ProductDescription extends AppCompatActivity {
         } else {
             itemID = (String) savedInstanceState.getSerializable("id");
         }
-
+        Log.e("itemsss", itemID);
         name = findViewById(R.id.item_name_des);
         price = findViewById(R.id.item_price_des);
         description = findViewById(R.id.item_description_des);
@@ -67,7 +67,7 @@ public class ProductDescription extends AppCompatActivity {
         strikeText(price);
         // This will get the radiogroup
         rGroup = (RadioGroup) findViewById(R.id.radiogroup);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

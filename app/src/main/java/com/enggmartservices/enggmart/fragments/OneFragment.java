@@ -143,19 +143,4 @@ public class OneFragment extends Fragment {
         }
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        firebaseRecyclerAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.stopListening();
-        }
-    }
-
 }

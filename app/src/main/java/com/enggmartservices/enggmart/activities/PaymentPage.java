@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.enggmartservices.enggmart.R;
 import com.enggmartservices.enggmart.utility.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,16 +38,17 @@ public class PaymentPage extends AppCompatActivity {
     private String itemID;
     private String itemType;
     private String price;
-    private String itemNameString;
+    private String itemNameString, itemImageString;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabaseUser;
     private TextView itemName, itemPrice, itemCondition, rentPolicy;
     private ImageView img;
     private EditText name, address, landmark, contactno;
     private Button placeOrder;
-    private UUID uuid;
     private DatabaseReference mDatabaseorder;
+    private DatabaseReference mDatabaseorderAdmin;
     private FirebaseAuth userAuth;
+    private String itemDescriptionString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class PaymentPage extends AppCompatActivity {
                 itemType = extras.getString("itemtype").toString();
             }
         } else {
-            itemID = (String) savedInstanceState.getSerializable("id");
+            itemID = (String) savedInstanceState.getSerializable("idItem");
             itemType = (String) savedInstanceState.getSerializable("itemtype");
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,15 +88,18 @@ public class PaymentPage extends AppCompatActivity {
         landmark = findViewById(R.id.landmark_order);
         placeOrder = findViewById(R.id.p_placeorder);
         img = findViewById(R.id.image_item_payment);
-        String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userAuth = FirebaseAuth.getInstance();
+        mDatabaseorderAdmin = FirebaseDatabase.getInstance().getReference().child("ordersAdmin");
+        mDatabaseorder = FirebaseDatabase.getInstance().getReference().child("orders").child(userAuth.getUid());
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Glide.with(getApplicationContext()).load(dataSnapshot.child("itemImage").getValue().toString()).into(img);
+                itemImageString = dataSnapshot.child("itemImage").getValue().toString();
+                Glide.with(getApplicationContext()).load(itemImageString).into(img);
                 itemName.setText(dataSnapshot.child("itemName").getValue().toString());
                 itemNameString = dataSnapshot.child("itemName").getValue().toString();
+                itemDescriptionString = dataSnapshot.child("itemDescription").getValue().toString();
                 String itemPriceString = dataSnapshot.child("itemPrice").getValue().toString();
                 if (itemType.equals("NEW")) {
                     price = "\u20B9 " + Math.round(Float.parseFloat(itemPriceString) * 0.8) + "";
@@ -122,42 +128,44 @@ public class PaymentPage extends AppCompatActivity {
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String nameorder = name.getText().toString().trim();
+                final String nameUserorder = name.getText().toString().trim();
                 final String addressorder = address.getText().toString().trim();
                 final String landmarkorder = landmark.getText().toString().trim();
                 final String contectorder = contactno.getText().toString().trim();
-                if (validateOrderDetails(nameorder, addressorder, landmarkorder, contectorder)) {
+                if (validateOrderDetails(nameUserorder, addressorder, landmarkorder, contectorder)) {
                     placeOrder.setEnabled(false);
-                    uuid = UUID.randomUUID();
-                    mDatabaseorder = FirebaseDatabase.getInstance().getReference().child("orders").child(uuid.toString());
-                    Map<String, String> map = new HashMap<>();
-                    map.put("addressOfOrder", addressorder);
-                    map.put("nameUser", nameorder);
-                    map.put("landmarkOfOrder", landmarkorder);
-                    map.put("ContactNoOfOrder", contectorder);
-                    map.put("amount", price);
-                    map.put("userId", userAuth.getCurrentUser().getUid());
-                    map.put("itemId", itemID);
-                    map.put("itemName", itemNameString);
-                    map.put("itemCondition", itemType);
-                    map.put("orderStatus", "Order Confirmed");
-                    final String timeStamp = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss",
+                    final String orderId = "EM" + new SimpleDateFormat("ddMMyyyyHHmmss",
                             Locale.getDefault()).format(new Date());
-                    map.put("time", timeStamp);
-                    mDatabaseorder.setValue(map);
-                    databaseUpdate(uuid.toString());
+                    DatabaseReference orderReference = mDatabaseorder.child(orderId);
+                    DatabaseReference orderReferenceAdmin = mDatabaseorderAdmin.child(orderId);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("orderAddress", addressorder);
+                    map.put("orderUserName", nameUserorder);
+                    map.put("orderLandmark", landmarkorder);
+                    map.put("orderContactNumber", contectorder);
+                    map.put("orderAmount", price);
+                    map.put("orderItemId", itemID);
+                    map.put("orderName", itemNameString + " ( " + itemType + " ) ");
+                    map.put("orderStatus", "Order Confirmed");
+                    map.put("orderImage", itemImageString);
+                    final String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",
+                            Locale.getDefault()).format(new Date());
+                    map.put("orderTime", timeStamp);
+                    map.put("orderDescription", itemDescriptionString);
+                    orderReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(PaymentPage.this,
+                                    "Your Order is Confirmed & you can see further details in My Orders",
+                                    Toast.LENGTH_LONG).show();
+                            placeOrder.setVisibility(View.GONE);
+
+                        }
+                    });
+                    orderReferenceAdmin.setValue(map);
                 }
             }
         });
-    }
-
-    private void databaseUpdate(String s) {
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("users").child(userAuth.getCurrentUser().getUid()).child("orders").child(s);
-        mDatabaseUser.setValue("orderconfirmed");
-        Toast.makeText(PaymentPage.this,
-                "Your Order is Confirmed & you can see further details in My Orders",
-                Toast.LENGTH_LONG).show();
-        finish();
     }
 
     private boolean validateOrderDetails(String nameorder, String addressorder, String landmarkorder, String contectorder) {

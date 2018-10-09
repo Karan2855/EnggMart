@@ -158,4 +158,10 @@ public class SplashScreen extends AppCompatActivity implements ConnectivityRecei
             snackbar.show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Process.killProcess(Process.myPid());
+    }
 }

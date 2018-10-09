@@ -1,11 +1,17 @@
 package com.enggmartservices.enggmart.fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +37,8 @@ public class ThreeFragment extends Fragment {
     private RecyclerView mAllItemsListView;
     private List<StoreModel> listItemsStore;
     private DatabaseReference mDatabase;
+    private SearchView searchView;
+    private CustomAdapterStore customAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +46,7 @@ public class ThreeFragment extends Fragment {
         // get the reference of RecyclerView
         View rootView = inflater.inflate(R.layout.fragment_three, container, false);
         mAllItemsListView = rootView.findViewById(R.id.recycler_view_store);
+
         listItemsStore = new ArrayList<>();
         // set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
@@ -65,7 +74,8 @@ public class ThreeFragment extends Fragment {
                     storeModel.setItemImage(itemImage);
                     listItemsStore.add(storeModel);
                     //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
-                    CustomAdapterStore customAdapter = new CustomAdapterStore(getActivity(), listItemsStore);
+                    customAdapter = new CustomAdapterStore(getActivity(), listItemsStore);
+                    mAllItemsListView.setHasFixedSize(true);
                     mAllItemsListView.setAdapter(customAdapter); // set the Adapter to RecyclerView
 
                 } else {
@@ -97,8 +107,32 @@ public class ThreeFragment extends Fragment {
 
         });
 
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView = rootView.findViewById(R.id.action_search);
+
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getActivity().getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                customAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                customAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
+
         return rootView;
     }
+
 
 }
 

@@ -11,6 +11,15 @@ public class ModelUserClass implements Serializable {
     private String image = "";
     private String status = "";
     private String thumbImage = "";
+    private String uid = "";
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public ModelUserClass() {
     }
@@ -24,13 +33,22 @@ public class ModelUserClass implements Serializable {
         this.status = status;
     }
 
-    public ModelUserClass(String phone, String email, String name, String image, String status) {
+    public ModelUserClass(String phone, String uid, String name, String email, String image, String status) {
+        this.uid = uid;
+        this.email = email;
+        this.name = name;
+        this.image = image;
+        this.status = status;
+        this.phone = phone;
+    }
+
+   /* public ModelUserClass(String phone, String email, String name, String image, String status) {
         this.phone = phone;
         this.email = email;
         this.name = name;
         this.image = image;
         this.status = status;
-    }
+    }*/
 
     public String getChatWithuser() {
         return chatWithuser;

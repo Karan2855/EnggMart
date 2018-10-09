@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -29,8 +30,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.enggmartservices.enggmart.fragments.OneFragment;
 import com.enggmartservices.enggmart.R;
+import com.enggmartservices.enggmart.fragments.StoreFragment;
 import com.enggmartservices.enggmart.fragments.ThreeFragment;
 import com.enggmartservices.enggmart.fragments.TwoFragment;
+import com.enggmartservices.enggmart.utility.SharedPrefManager;
 import com.enggmartservices.enggmart.utility.UserDetails;
 import com.enggmartservices.enggmart.utility.Utils;
 import com.enggmartservices.enggmart.fragments.FourFragment;
@@ -71,6 +74,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     boolean doubleBackToExitPressedOnce = false;
 
+    private DatabaseReference tokenRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         UserDetails.uid = uid;
         progressBar.setVisibility(View.VISIBLE);
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        tokenRef = FirebaseDatabase.getInstance().getReference().child("users").child("token");
         init();
         onClicking();
         notifiacationa = (ImageView) findViewById(R.id.nofication);
@@ -151,7 +157,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void setupViewPager() {
         HomeActivity.ViewPagerAdapter adapter = new HomeActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "Newsfeed");
-        adapter.addFragment(new ThreeFragment(), "Store");
+        adapter.addFragment(new StoreFragment(), "Store");
         adapter.addFragment(new TwoFragment(), "Work/Job");
         adapter.addFragment(new FourFragment(), "Engg Lib");
         viewPager.setAdapter(adapter);
@@ -300,8 +306,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 finish();
                             }
                         });
-
-
             }
         });
         openDialog.show();
@@ -333,14 +337,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "clicked On My Cart", Toast.LENGTH_SHORT).show();
             drawer.closeDrawers();
         } else if (v == myOrder) {
-            Toast.makeText(this, "clicked On My Order", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(HomeActivity.this, MyOrdersActivity.class);
+            startActivity(i);
             drawer.closeDrawers();
         } else if (v == myChat) {
             Intent i = new Intent(HomeActivity.this, UsersActivity.class);
             startActivity(i);
             drawer.closeDrawers();
         } else if (v == sellOnEnggMart) {
-            Toast.makeText(this, "clicked On Sell On Enggmart", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This feature will be added soon", Toast.LENGTH_SHORT).show();
             drawer.closeDrawers();
         } else if (v == accountSetting) {
             Intent i = new Intent(HomeActivity.this, AdminPannel.class);
@@ -364,5 +369,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tokenRef.setValue(new SharedPrefManager(HomeActivity.this).getToken());
+    }
 }

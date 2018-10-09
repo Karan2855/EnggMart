@@ -72,7 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -90,6 +91,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,6 +114,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/mycart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
-                    android:text="My Order"
+                    android:text="My Orders"
                     android:textColor="#000" />
             </LinearLayout>
 

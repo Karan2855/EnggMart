@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,16 +18,18 @@ import com.enggmartservices.enggmart.activities.ProductDescription;
 import com.enggmartservices.enggmart.R;
 import com.enggmartservices.enggmart.models.StoreModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.MyViewHolder> {
+public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.MyViewHolder> implements Filterable {
     private List<StoreModel> listItemsStore;
     private Context context;
-
+    private List<StoreModel> listItemsStoreFiltered;
 
     public CustomAdapterStore(Context context, List<StoreModel> listItemsStore) {
         this.context = context;
         this.listItemsStore = listItemsStore;
+        this.listItemsStoreFiltered = listItemsStore;
     }
 
     @Override
@@ -36,7 +40,7 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final StoreModel storeModel = listItemsStore.get(position);
+        final StoreModel storeModel = listItemsStoreFiltered.get(position);
         holder.name.setText(storeModel.getItemName() + "");
         holder.price.setText("\u20B9 " + storeModel.getItemPrice() + "");
         Glide.with(context).load(storeModel.getItemImage()).into(holder.image);
@@ -53,8 +57,44 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
 
     @Override
     public int getItemCount() {
-        return listItemsStore.size();
+        return listItemsStoreFiltered.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    listItemsStoreFiltered = listItemsStore;
+                } else {
+                    List<StoreModel> filteredList = new ArrayList<>();
+                    for (StoreModel row : listItemsStore) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getItemName().toLowerCase().contains(charString.toLowerCase()) || row.getItemDescription().contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    listItemsStoreFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listItemsStoreFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listItemsStoreFiltered = (ArrayList<StoreModel>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // init the item view's
@@ -79,4 +119,5 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
             }
         }
     }
+
 }

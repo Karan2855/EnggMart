@@ -8,6 +8,7 @@
     tools:context=".activities.PDFViewActivity">
 
     <ProgressBar
+        android:id="@+id/progressbar_pdfviewer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
@@ -15,7 +16,6 @@
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdf_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

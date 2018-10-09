@@ -73,6 +73,7 @@ public class NovelsActivity extends AppCompatActivity {
                     listItemsNovels.add(modelNovels);
                     //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
                     NovelsAdapter novelsAdapter = new NovelsAdapter(NovelsActivity.this, listItemsNovels);
+                    simpleList.setHasFixedSize(true);
                     simpleList.setAdapter(novelsAdapter); // set the Adapter to RecyclerView
                 } else {
                     Toast.makeText(NovelsActivity.this, "no Items", Toast.LENGTH_SHORT).show();
