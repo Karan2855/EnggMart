@@ -42,7 +42,7 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final StoreModel storeModel = listItemsStoreFiltered.get(position);
         holder.name.setText(storeModel.getItemName() + "");
-        holder.price.setText("\u20B9 " + storeModel.getItemPrice() + "");
+        holder.price.setText("\u20B9 " + Math.round(Float.parseFloat(storeModel.getItemPrice()) * 0.8) + "");
         Glide.with(context).load(storeModel.getItemImage()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

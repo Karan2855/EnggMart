@@ -8,18 +8,137 @@
     android:orientation="vertical"
     tools:context=".fragments.ThreeFragment">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/action_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#000"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_store"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:reverseLayout="true"
-        app:stackFromEnd="true" />
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/books_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Semesterwise Books"
+                        android:textColor="#3056a1"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SearchView
+                        android:id="@+id/action_search_books"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:background="#000"
+                        app:queryHint="Search Books" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_books"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/action_search"
+                        android:layout_marginLeft="10dp"
+                        app:reverseLayout="true"
+                        app:stackFromEnd="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/handbooks_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Handbooks"
+                        android:textColor="#3056a1"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SearchView
+                        android:id="@+id/action_search_hb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:background="#000"
+                        app:queryHint="Search Books" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_hb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/action_search_hb"
+                        android:layout_marginLeft="10dp"
+                        app:reverseLayout="true"
+                        app:stackFromEnd="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/tools_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Tools &amp; More"
+                        android:textColor="#3056a1"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SearchView
+                        android:id="@+id/action_search_tools"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:background="#000"
+                        app:queryHint="Search Books" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tools"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/action_search_tools"
+                        android:layout_marginLeft="10dp"
+                        app:reverseLayout="true"
+                        app:stackFromEnd="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 
 

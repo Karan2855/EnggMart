@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -30,7 +29,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.enggmartservices.enggmart.fragments.OneFragment;
 import com.enggmartservices.enggmart.R;
-import com.enggmartservices.enggmart.fragments.StoreFragment;
 import com.enggmartservices.enggmart.fragments.ThreeFragment;
 import com.enggmartservices.enggmart.fragments.TwoFragment;
 import com.enggmartservices.enggmart.utility.SharedPrefManager;
@@ -157,7 +155,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void setupViewPager() {
         HomeActivity.ViewPagerAdapter adapter = new HomeActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "Newsfeed");
-        adapter.addFragment(new StoreFragment(), "Store");
+        adapter.addFragment(new ThreeFragment(), "Store");
         adapter.addFragment(new TwoFragment(), "Work/Job");
         adapter.addFragment(new FourFragment(), "Engg Lib");
         viewPager.setAdapter(adapter);

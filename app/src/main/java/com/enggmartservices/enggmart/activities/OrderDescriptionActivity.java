@@ -72,7 +72,7 @@ public class OrderDescriptionActivity extends AppCompatActivity {
                 orderUserName.setText(dataSnapshot.child("orderUserName").getValue().toString());
                 orderDes.setText(dataSnapshot.child("orderDescription").getValue().toString());
                 orderStatus.setText(dataSnapshot.child("orderStatus").getValue().toString());
-                if (dataSnapshot.child("orderStatus").getValue().toString().equals("Order Canceled")) {
+                if (dataSnapshot.child("orderStatus").getValue().toString().equals("Order Cancled")) {
                     orderStatus.setTextColor(Color.RED);
                 }
             }

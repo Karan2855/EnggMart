@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,28 +35,57 @@ import java.util.Map;
 
 public class ThreeFragment extends Fragment {
 
-    private RecyclerView mAllItemsListView;
-    private List<StoreModel> listItemsStore;
+    private CardView cardBooks, cardHandBooks, cardTools;
+    private RecyclerView mAllItemsListView, mListViewBooks, mListViewHandbooks, mListViewTools;
+    private RecyclerView mAllItemListView;
+    private List<StoreModel> listItemsStore, listItemBooks, listItemHandbooks, listItemTools;
     private DatabaseReference mDatabase;
-    private SearchView searchView;
-    private CustomAdapterStore customAdapter;
+    private SearchView searchView, searchViewBooks, searchViewHandBooks, searchViewTools;
+    private CustomAdapterStore customAdapterBooks, customAdapterHandbooks, customAdapterTools;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // get the reference of RecyclerView
         View rootView = inflater.inflate(R.layout.fragment_three, container, false);
-        mAllItemsListView = rootView.findViewById(R.id.recycler_view_store);
+        cardBooks = rootView.findViewById(R.id.books_card);
+        cardHandBooks = rootView.findViewById(R.id.handbooks_card);
+        cardTools = rootView.findViewById(R.id.tools_card);
 
-        listItemsStore = new ArrayList<>();
-        // set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        mAllItemsListView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+        mListViewBooks = rootView.findViewById(R.id.recycler_view_books);
+        mListViewHandbooks = rootView.findViewById(R.id.recycler_view_hb);
+        mListViewTools = rootView.findViewById(R.id.recycler_view_tools);
 
-        listItemsStore.clear();
+        searchViewBooks = rootView.findViewById(R.id.action_search_books);
+        searchViewHandBooks = rootView.findViewById(R.id.action_search_hb);
+        searchViewTools = rootView.findViewById(R.id.action_search_tools);
+
+        listItemBooks = new ArrayList<>();
+        listItemHandbooks = new ArrayList<>();
+        listItemTools = new ArrayList<>();
+        listItemBooks.clear();
+        listItemHandbooks.clear();
+        listItemTools.clear();
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false);
+
+        mListViewBooks.setLayoutManager(gridLayoutManager);
+        mListViewHandbooks.setLayoutManager(gridLayoutManager);
+        mListViewTools.setLayoutManager(gridLayoutManager);
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails");
 
-        mDatabase.addChildEventListener(new ChildEventListener() {
+        updateBooks();
+        updateHandBooks();
+        updateTools();
+
+        return rootView;
+    }
+
+    private void updateTools() {
+        DatabaseReference databaseReference = mDatabase.child("tools");
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.hasChildren()) {
@@ -72,12 +102,85 @@ public class ThreeFragment extends Fragment {
                     storeModel.setItemPrice(itemPrice);
                     storeModel.setItemDescription(itemDescription);
                     storeModel.setItemImage(itemImage);
-                    listItemsStore.add(storeModel);
-                    //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
-                    customAdapter = new CustomAdapterStore(getActivity(), listItemsStore);
-                    mAllItemsListView.setHasFixedSize(true);
-                    mAllItemsListView.setAdapter(customAdapter); // set the Adapter to RecyclerView
+                    listItemTools.add(storeModel);
+                    customAdapterTools = new CustomAdapterStore(getActivity(), listItemTools);
+                    mListViewTools.setHasFixedSize(true);
+                    mListViewTools.setAdapter(customAdapterTools);
+                } else {
+                    Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        searchViewTools.setSearchableInfo(searchManager
+                .getSearchableInfo(getActivity().getComponentName()));
+        searchViewTools.setMaxWidth(Integer.MAX_VALUE);
+        searchViewTools.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                customAdapterTools.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                customAdapterTools.getFilter().filter(query);
+                return false;
+            }
+        });
+
+    }
+
+    private void updateHandBooks() {
+        DatabaseReference databaseReference = mDatabase.child("handbooks");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                if (dataSnapshot.hasChildren()) {
+                    Log.e("hello", dataSnapshot.toString());
+                    String itemID = dataSnapshot.getKey();
+                    Map map = (Map) dataSnapshot.getValue();
+                    String itemName = map.get("itemName").toString();
+                    String itemPrice = map.get("itemPrice").toString();
+                    String itemDescription = map.get("itemDescription").toString();
+                    String itemImage = map.get("itemImage").toString();
+                    StoreModel storeModel = new StoreModel();
+                    storeModel.setItemID(itemID);
+                    storeModel.setItemName(itemName);
+                    storeModel.setItemPrice(itemPrice);
+                    storeModel.setItemDescription(itemDescription);
+                    storeModel.setItemImage(itemImage);
+                    listItemHandbooks.add(storeModel);
+                    //  call the constructor of CustomAdapterStore to send the reference and data to Adapter
+                    customAdapterHandbooks = new CustomAdapterStore(getActivity(), listItemHandbooks);
+                    mListViewHandbooks.setHasFixedSize(true);
+                    mListViewHandbooks.setAdapter(customAdapterHandbooks);
                 } else {
                     Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
                 }
@@ -108,29 +211,101 @@ public class ThreeFragment extends Fragment {
         });
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView = rootView.findViewById(R.id.action_search);
 
-        searchView.setSearchableInfo(searchManager
+
+        searchViewHandBooks.setSearchableInfo(searchManager
                 .getSearchableInfo(getActivity().getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchViewHandBooks.setMaxWidth(Integer.MAX_VALUE);
+        searchViewHandBooks.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filter recycler view when query submitted
-                customAdapter.getFilter().filter(query);
+                customAdapterHandbooks.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-                customAdapter.getFilter().filter(query);
+                customAdapterHandbooks.getFilter().filter(query);
                 return false;
             }
         });
 
 
-        return rootView;
+    }
+
+    private void updateBooks() {
+        DatabaseReference databaseReference = mDatabase.child("books");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                if (dataSnapshot.hasChildren()) {
+                    Log.e("hello", dataSnapshot.toString());
+                    String itemID = dataSnapshot.getKey();
+                    Map map = (Map) dataSnapshot.getValue();
+                    String itemName = map.get("itemName").toString();
+                    String itemPrice = map.get("itemPrice").toString();
+                    String itemDescription = map.get("itemDescription").toString();
+                    String itemImage = map.get("itemImage").toString();
+                    StoreModel storeModel = new StoreModel();
+                    storeModel.setItemID(itemID);
+                    storeModel.setItemName(itemName);
+                    storeModel.setItemPrice(itemPrice);
+                    storeModel.setItemDescription(itemDescription);
+                    storeModel.setItemImage(itemImage);
+                    listItemBooks.add(storeModel);
+                    customAdapterBooks = new CustomAdapterStore(getActivity(), listItemBooks);
+                    mListViewBooks.setHasFixedSize(true);
+                    mListViewBooks.setAdapter(customAdapterBooks);
+                } else {
+                    Toast.makeText(getActivity(), "no Items", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchViewBooks.setSearchableInfo(searchManager
+                .getSearchableInfo(getActivity().getComponentName()));
+        searchViewBooks.setMaxWidth(Integer.MAX_VALUE);
+        searchViewBooks.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                customAdapterBooks.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                customAdapterBooks.getFilter().filter(query);
+                return false;
+            }
+        });
+
+
     }
 
 

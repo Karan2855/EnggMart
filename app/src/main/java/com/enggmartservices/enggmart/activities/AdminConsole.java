@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.enggmartservices.enggmart.R;
@@ -43,8 +44,10 @@ public class AdminConsole extends AppCompatActivity implements View.OnClickListe
     private Uri fileUriImage;
     private StorageReference mStorageRef;
     private DatabaseReference mdDatabase;
+    private DatabaseReference mDatabaseRefforUpload;
     private ProgressDialog progressDialog;
     private Context context;
+    private RadioGroup rGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +69,34 @@ public class AdminConsole extends AppCompatActivity implements View.OnClickListe
         context = AdminConsole.this;
         mStorageRef = FirebaseStorage.getInstance().getReference().child("storeImages");
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails");
+        mDatabaseRefforUpload = mdDatabase.child("books");
         mItemImage = findViewById(R.id.image_item_to_server);
+        rGroup = (RadioGroup) findViewById(R.id.radiogroup_admin);
         mItemName = findViewById(R.id.name_item_to_server);
         mItemPrice = findViewById(R.id.price_item_to_server);
         mItemDescription = findViewById(R.id.description_item_to_server);
         submitItem = findViewById(R.id.submit_item_to_server);
         mItemImage.setOnClickListener(this);
         submitItem.setOnClickListener(this);
+
+
+        rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.book_radio_admin:
+                        mDatabaseRefforUpload = mdDatabase.child("books");
+                        break;
+                    case R.id.handbook_radio_admin:
+                        mDatabaseRefforUpload = mdDatabase.child("handbooks");
+                        break;
+                    case R.id.tools_radio_admin:
+                        mDatabaseRefforUpload = mdDatabase.child("tools");
+                        break;
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -135,7 +159,7 @@ public class AdminConsole extends AppCompatActivity implements View.OnClickListe
                                 map.put("itemDescription", iDescription + " ");
                                 map.put("itemImage", uri.toString());
                                 map.put("storagefolderName", timeStamp);
-                                mdDatabase.push().setValue(map);
+                                mDatabaseRefforUpload.push().setValue(map);
 
                             }
                         });
@@ -143,6 +167,7 @@ public class AdminConsole extends AppCompatActivity implements View.OnClickListe
                         progressDialog.dismiss();
                         mItemName.setText("");
                         mItemPrice.setText("");
+                        fileUriImage = null;
                         mItemDescription.setText("");
                         mItemImage.setImageResource(R.mipmap.photocamera);
                     }

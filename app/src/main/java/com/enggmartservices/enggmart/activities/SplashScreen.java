@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Process;
 import android.support.annotation.NonNull;
@@ -30,13 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class SplashScreen extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
-    private static int SPLASH_TIME_OUT = 2500;
+    private static int SPLASH_TIME_OUT = 2000;
     private LinearLayout animat;
     private FirebaseAuth userAuth;
     private DatabaseReference version;
-    private DatabaseReference versionLink;
-    //final String appPackageName = PackageManager.g;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,6 @@ public class SplashScreen extends AppCompatActivity implements ConnectivityRecei
     @Override
     protected void onStart() {
         super.onStart();
-
         version.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,29 +91,13 @@ public class SplashScreen extends AppCompatActivity implements ConnectivityRecei
     }
 
     private void updateApp() {
-        versionLink = FirebaseDatabase.getInstance().getReference().child("version").child("link");
-
-
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         builder.setTitle("New Version of EnggMart is Available")
                 .setPositiveButton("update Application", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        versionLink.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.getValue() != null) {
-                                    // String link = dataSnapshot.getValue().toString();
-                                    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                        Toast.makeText(SplashScreen.this, "updating", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getApplication().getPackageName()));
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
