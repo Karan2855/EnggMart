@@ -72,8 +72,20 @@ public class OrderDescriptionActivity extends AppCompatActivity {
                 orderUserName.setText(dataSnapshot.child("orderUserName").getValue().toString());
                 orderDes.setText(dataSnapshot.child("orderDescription").getValue().toString());
                 orderStatus.setText(dataSnapshot.child("orderStatus").getValue().toString());
-                if (dataSnapshot.child("orderStatus").getValue().toString().equals("Order Cancled")) {
+                String status = dataSnapshot.child("orderStatus").getValue().toString();
+                if (status.equals("c"))
+                    orderStatus.setText("Order Confirmed");
+                else if (status.equals("d")) {
+                    orderStatus.setText("Order Delivered");
+                    orderStatus.setTextColor(Color.BLUE);
+                } else if (status.equals("w"))
+                    orderStatus.setText("Order will Delivered to you Soon");
+                else if (status.equals("can")) {
+                    orderStatus.setText("Order Cancled");
                     orderStatus.setTextColor(Color.RED);
+                } else {
+                    orderStatus.setText(status);
+                    orderStatus.setTextColor(Color.BLACK);
                 }
             }
 

@@ -2,6 +2,7 @@ package com.enggmartservices.enggmart.adapers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,7 +48,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.orderIDView.setText(modelOrders.getOrderID() + "");
         holder.orderNameView.setText(modelOrders.getOrderName() + "");
         Glide.with(context).load(modelOrders.getOrderImage() + "").into(holder.orderImageView);
-        holder.orderStatusView.setText(modelOrders.getOrderStatus());
+        if (modelOrders.getOrderStatus().equals("c"))
+            holder.orderStatusView.setText("Order Confirmed");
+        else if (modelOrders.getOrderStatus().equals("d")){
+            holder.orderStatusView.setText("Order Delivered");
+            holder.orderStatusView.setTextColor(Color.BLUE);
+        }
+        else if (modelOrders.getOrderStatus().equals("w"))
+            holder.orderStatusView.setText("Order will Delivered Soon");
+        else if (modelOrders.getOrderStatus().equals("can")) {
+            holder.orderStatusView.setText("Order Cancled");
+            holder.orderStatusView.setTextColor(Color.RED);
+        } else {
+            holder.orderStatusView.setText(modelOrders.getOrderStatus() + "");
+            holder.orderStatusView.setTextColor(Color.BLACK);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

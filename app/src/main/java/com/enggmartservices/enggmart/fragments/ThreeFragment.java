@@ -67,11 +67,10 @@ public class ThreeFragment extends Fragment {
         listItemHandbooks.clear();
         listItemTools.clear();
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false);
 
-        mListViewBooks.setLayoutManager(gridLayoutManager);
-        mListViewHandbooks.setLayoutManager(gridLayoutManager);
-        mListViewTools.setLayoutManager(gridLayoutManager);
+        mListViewBooks.setLayoutManager(new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false));
+        mListViewHandbooks.setLayoutManager(new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false));
+        mListViewTools.setLayoutManager(new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false));
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails");
 
@@ -98,6 +97,7 @@ public class ThreeFragment extends Fragment {
                     String itemImage = map.get("itemImage").toString();
                     StoreModel storeModel = new StoreModel();
                     storeModel.setItemID(itemID);
+                    storeModel.setItemType("tools");
                     storeModel.setItemName(itemName);
                     storeModel.setItemPrice(itemPrice);
                     storeModel.setItemDescription(itemDescription);
@@ -168,11 +168,13 @@ public class ThreeFragment extends Fragment {
                     Map map = (Map) dataSnapshot.getValue();
                     String itemName = map.get("itemName").toString();
                     String itemPrice = map.get("itemPrice").toString();
+
                     String itemDescription = map.get("itemDescription").toString();
                     String itemImage = map.get("itemImage").toString();
                     StoreModel storeModel = new StoreModel();
                     storeModel.setItemID(itemID);
                     storeModel.setItemName(itemName);
+                    storeModel.setItemType("handbooks");
                     storeModel.setItemPrice(itemPrice);
                     storeModel.setItemDescription(itemDescription);
                     storeModel.setItemImage(itemImage);
@@ -250,6 +252,7 @@ public class ThreeFragment extends Fragment {
                     String itemImage = map.get("itemImage").toString();
                     StoreModel storeModel = new StoreModel();
                     storeModel.setItemID(itemID);
+                    storeModel.setItemType("books");
                     storeModel.setItemName(itemName);
                     storeModel.setItemPrice(itemPrice);
                     storeModel.setItemDescription(itemDescription);

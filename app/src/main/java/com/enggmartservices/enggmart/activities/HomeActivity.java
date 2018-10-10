@@ -72,7 +72,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     boolean doubleBackToExitPressedOnce = false;
 
-    private DatabaseReference tokenRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +84,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         UserDetails.uid = uid;
         progressBar.setVisibility(View.VISIBLE);
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-        tokenRef = FirebaseDatabase.getInstance().getReference().child("users").child("token");
         init();
         onClicking();
         notifiacationa = (ImageView) findViewById(R.id.nofication);
@@ -367,9 +365,4 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        tokenRef.setValue(new SharedPrefManager(HomeActivity.this).getToken());
-    }
 }

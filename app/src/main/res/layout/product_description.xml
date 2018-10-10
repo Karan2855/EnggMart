@@ -28,9 +28,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight=".45"
-                    android:gravity="center">
+                    android:layout_height="200dp">
 
                     <ProgressBar
                         android:layout_width="wrap_content"
@@ -41,9 +39,16 @@
                         android:id="@+id/img_item_des"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
                         android:background="#00ffffff"
                         android:src="@drawable/bookb" />
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,6 +80,12 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000" />
+
                 <TextView
                     android:id="@+id/item_description_des"
                     android:layout_width="wrap_content"
@@ -84,7 +95,20 @@
                     android:textColor="#000"
                     android:textSize="15dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="For any Query go to Help Centre"
+                    android:textColor="#000" />
             </LinearLayout>
+
         </ScrollView>
 
         <LinearLayout

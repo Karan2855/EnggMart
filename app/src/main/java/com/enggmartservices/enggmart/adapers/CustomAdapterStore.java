@@ -42,14 +42,18 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final StoreModel storeModel = listItemsStoreFiltered.get(position);
         holder.name.setText(storeModel.getItemName() + "");
-        holder.price.setText("\u20B9 " + Math.round(Float.parseFloat(storeModel.getItemPrice()) * 0.8) + "");
+        if (storeModel.getItemType().equals("books"))
+            holder.price.setText("\u20B9 " + Math.round(Float.parseFloat(storeModel.getItemPrice()) * 0.8) + "");
+        else
+            holder.price.setText("\u20B9 " + Math.round(Float.parseFloat(storeModel.getItemPrice())) + "");
         Glide.with(context).load(storeModel.getItemImage()).into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // open another activity on item click
                 Intent intent = new Intent(holder.itemView.getContext(), ProductDescription.class);
-                intent.putExtra("id", storeModel.getItemID().toString());
+                intent.putExtra("id", storeModel.getItemID());
+                intent.putExtra("itemtypeis",storeModel.getItemType());
                 holder.itemView.getContext().startActivity(intent); // start Intent
             }
         });

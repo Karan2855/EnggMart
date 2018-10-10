@@ -6,6 +6,7 @@ public class StoreModel implements Serializable {
     private String itemName = "";
     private String itemPrice = "";
     private String itemDescription = "";
+    private String itemType = "";
 
     public String getItemImage() {
         return itemImage;
@@ -50,4 +51,11 @@ public class StoreModel implements Serializable {
         this.itemDescription = itemDescription;
     }
 
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
 }

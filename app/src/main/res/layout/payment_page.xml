@@ -68,11 +68,7 @@
                     android:text="NEW"
                     android:textColor="#a10909" />
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -128,9 +124,18 @@
             android:id="@+id/rent_policy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rent_policy "
+            android:layout_margin="10dp"
+            android:text="@string/rent_policy"
             android:textColor="#3349ab"
             android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rent_policy"
+            android:layout_margin="10dp"
+            android:text="NOTE :- After Order Confirmation You Will not be Able to Cancle the order"
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/p_placeorder"
@@ -141,6 +146,5 @@
             android:text="Place Order"
             android:textColor="#fff"
             android:textSize="20dp" />
-
     </RelativeLayout>
 </LinearLayout>

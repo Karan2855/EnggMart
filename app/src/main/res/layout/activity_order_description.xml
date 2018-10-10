@@ -278,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:gravity="center"
-                android:text="for any query go to help center"
+                android:text="for any query go to help centre"
                 android:textColor="#3a1a46" />
         </LinearLayout>
     </ScrollView>

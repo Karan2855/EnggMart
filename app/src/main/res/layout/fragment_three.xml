@@ -33,7 +33,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="20dp"
                         android:text="Semesterwise Books"
                         android:textColor="#3056a1"
                         android:textStyle="bold" />
@@ -42,7 +44,9 @@
                         android:id="@+id/action_search_books"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
+                        android:layout_below="@+id/recycler_view_books"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:background="#000"
                         app:queryHint="Search Books" />
 
@@ -51,8 +55,8 @@
                         android:id="@+id/recycler_view_books"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/action_search"
                         android:layout_marginLeft="10dp"
+                        android:minHeight="180dp"
                         app:reverseLayout="true"
                         app:stackFromEnd="true" />
                 </RelativeLayout>
@@ -73,6 +77,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="20dp"
                         android:text="Handbooks"
                         android:textColor="#3056a1"
@@ -82,17 +87,19 @@
                         android:id="@+id/action_search_hb"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
+                        android:layout_below="@id/recycler_view_hb"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:background="#000"
-                        app:queryHint="Search Books" />
+                        app:queryHint="Search Handbooks" />
 
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view_hb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/action_search_hb"
                         android:layout_marginLeft="10dp"
+                        android:minHeight="180dp"
                         app:reverseLayout="true"
                         app:stackFromEnd="true" />
                 </RelativeLayout>
@@ -113,6 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="20dp"
                         android:text="Tools &amp; More"
                         android:textColor="#3056a1"
@@ -122,17 +130,19 @@
                         android:id="@+id/action_search_tools"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
+                        android:layout_below="@+id/recycler_view_tools"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:background="#000"
-                        app:queryHint="Search Books" />
+                        app:queryHint="Search Tools" />
 
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view_tools"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/action_search_tools"
                         android:layout_marginLeft="10dp"
+                        android:minHeight="180dp"
                         app:reverseLayout="true"
                         app:stackFromEnd="true" />
                 </RelativeLayout>

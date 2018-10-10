@@ -1,6 +1,7 @@
 package com.enggmartservices.enggmart.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -24,12 +26,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProductDescription extends AppCompatActivity {
     private Button button;
-    private String itemID;
+    private String itemID, itemTypeis;
     private String itemType;
     private String priceitem;
     private TextView name, price, description, percentOff, pricePurchace;
     private ImageView img;
     private RadioGroup rGroup;
+    private LinearLayout radioLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,11 @@ public class ProductDescription extends AppCompatActivity {
             if (extras == null) {
             } else {
                 itemID = extras.getString("id");
+                itemTypeis = extras.getString("itemtypeis");
             }
         } else {
             itemID = (String) savedInstanceState.getSerializable("id");
+            itemTypeis = (String) savedInstanceState.getSerializable("itemtypeis");
         }
         Log.e("itemsss", itemID);
         name = findViewById(R.id.item_name_des);
@@ -64,10 +69,18 @@ public class ProductDescription extends AppCompatActivity {
         pricePurchace = findViewById(R.id.des_price_purchace);
         button = (Button) findViewById(R.id.purchase);
         img = findViewById(R.id.img_item_des);
-        strikeText(price);
+        radioLayout = findViewById(R.id.radiolayout);
+
+        if (itemTypeis.equals("books")) {
+            strikeText(price);
+            radioLayout.setVisibility(View.VISIBLE);
+        } else {
+            price.setTextColor(getResources().getColor(R.color.pricecolor));
+            radioLayout.setVisibility(View.GONE);
+        }
         // This will get the radiogroup
         rGroup = (RadioGroup) findViewById(R.id.radiogroup);
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemID);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("storeDetails").child(itemTypeis).child(itemID);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -115,7 +128,11 @@ public class ProductDescription extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ProductDescription.this, PaymentPage.class);
                 i.putExtra("idItem", itemID);
-                i.putExtra("itemtype", itemType);
+                if (itemTypeis.equals("books"))
+                    i.putExtra("itemtype", itemType);
+                else
+                    i.putExtra("itemtype", "none");
+                i.putExtra("itemisa",itemTypeis);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
             }
