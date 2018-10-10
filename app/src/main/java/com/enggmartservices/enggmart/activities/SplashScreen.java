@@ -57,8 +57,7 @@ public class SplashScreen extends AppCompatActivity implements ConnectivityRecei
         version.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue().toString().equals("1.0.0")) {
-
+                if (dataSnapshot.getValue().toString().equals("1.0.1")) {
                     final FirebaseUser currentUser = userAuth.getCurrentUser();
                     new Handler().postDelayed(new Runnable() {
                         @Override

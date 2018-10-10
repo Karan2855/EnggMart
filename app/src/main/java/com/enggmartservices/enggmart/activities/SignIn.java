@@ -1,14 +1,18 @@
 package com.enggmartservices.enggmart.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +29,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private EditText usernamelog;
     private EditText usrpasswordlog;
     private Button btnlog;
-    private TextView signup;
+    private TextView signup, forgotPassword;
     private FirebaseAuth firebaseAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +47,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         });
         firebaseAuth = FirebaseAuth.getInstance();
         btnlog = (Button) findViewById(R.id.buttonlogin);
+        progressBar = findViewById(R.id.progress_bar_signin);
         usernamelog = (EditText) findViewById(R.id.editusernamelg);
         usrpasswordlog = (EditText) findViewById(R.id.editpasswordlg);
         signup = (TextView) findViewById(R.id.gosignup);
+        forgotPassword = findViewById(R.id.forgot_password);
         btnlog.setOnClickListener(this);
         signup.setOnClickListener(this);
-
+        forgotPassword.setOnClickListener(this);
     }
 
     public void userLogin() {
@@ -97,19 +104,54 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(SignIn.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
 
     @Override
     public void onClick(View view) {
         if (view == btnlog) {
             userLogin();
-        }
-        if (view == signup) {
+        } else if (view == signup) {
             startActivity(new Intent(SignIn.this, Signup.class));
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish();
+        } else if (view == forgotPassword) {
+            AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+            builder.setTitle("Are You Sure To Change Password ?")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            String email = usernamelog.getText().toString().trim();
+                            usrpasswordlog.setText("");
+                            if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                                Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                                usernamelog.setError("Enter your registered email id");
+                                usernamelog.requestFocus();
+                                return;
+                            }
+                            progressBar.setVisibility(View.VISIBLE);
+                            firebaseAuth.sendPasswordResetEmail(email)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                usernamelog.setText("");
+                                                usrpasswordlog.setText("");
+                                                Toast.makeText(SignIn.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(SignIn.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            progressBar.setVisibility(View.GONE);
+                                        }
+                                    });
+                        }
+                    })
+                    .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .show();
         }
     }
 
