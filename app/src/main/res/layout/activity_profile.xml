@@ -43,8 +43,8 @@
             android:background="#c4c4c4"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="1dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
@@ -61,8 +61,8 @@
                 android:layout_marginLeft="1dp"
                 android:background="#fff"
                 android:gravity="center_vertical"
-                android:singleLine="true"
                 android:paddingHorizontal="10dp"
+                android:singleLine="true"
                 android:text="User Name"
                 android:textColor="#1d1b8e"
                 android:textSize="18sp"
@@ -86,8 +86,8 @@
             android:background="#c4c4c4"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="1dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
@@ -128,8 +128,8 @@
             android:background="#c4c4c4"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="1dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
@@ -150,16 +150,18 @@
                 android:text="1234567890"
                 android:textColor="#2e2e2e"
                 android:textSize="18sp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/phoneprofileet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:text="1234567890"
-                android:textColor="#bfdcbd"
-                android:visibility="gone" />
+                android:hint="please Enter mobile no."
+                android:inputType="phone"
+                android:maxLength="10"
+                android:text=""
+                android:textColor="#000000"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -170,8 +172,8 @@
             android:background="#c4c4c4"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="1dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp">
 
             <ImageView
                 android:layout_width="40dp"
@@ -187,9 +189,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:background="#fff"
-
                 android:gravity="center_vertical"
                 android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:text="Detailed Profile"
                 android:textColor="#2e2e2e"
                 android:textSize="18sp"

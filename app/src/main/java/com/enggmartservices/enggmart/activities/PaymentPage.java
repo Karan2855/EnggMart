@@ -112,7 +112,7 @@ public class PaymentPage extends AppCompatActivity {
                     rentPolicy.setVisibility(View.GONE);
                 } else if (itemType.equals("OLD")) {
                     itemCondition.setText("OLD");
-                    price = "\u20B9 " + Math.round(Float.parseFloat(itemPriceString) * 0.7) + "";
+                    price = "\u20B9 " + Math.round(Float.parseFloat(itemPriceString) * 0.6) + "";
                     itemPrice.setText(price);
                     rentPolicy.setVisibility(View.GONE);
                 } else if (itemType.equals("RENT")) {
@@ -185,17 +185,16 @@ public class PaymentPage extends AppCompatActivity {
                                     placeOrder.setVisibility(View.GONE);
                                     orderReferenceAdmin.setValue(map);
                                 }
-                            })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(PaymentPage.this,
-                                                    "There are Some error while placing your order",
-                                                    Toast.LENGTH_LONG).show();
-                                            placeOrder.setEnabled(true);
-                                            placeOrder.setVisibility(View.VISIBLE);
-                                        }
-                                    });
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(PaymentPage.this,
+                                            "There are Some error while placing your order",
+                                            Toast.LENGTH_LONG).show();
+                                    placeOrder.setEnabled(true);
+                                    placeOrder.setVisibility(View.VISIBLE);
+                                }
+                            });
                         }
                     })
                     .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {

@@ -1,3 +1,4 @@
+
 package com.enggmartservices.enggmart.activities;
 
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Signup extends AppCompatActivity implements View.OnClickListener, ConnectivityReceiver.ConnectivityReceiverListener {
     private ImageView Imv;
@@ -137,7 +139,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
         userMap.put("email", emailid + "");
         userMap.put("image", "not Provided");
         userMap.put("name", name + "");
-        userMap.put("status", "Hey Thare I'm using EnggMart");
+        userMap.put("status", "Hey There I'm using EnggMart");
         userMap.put("pass", "yes");
         userMap.put("thumb_image", "not Provided");
         mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -164,7 +166,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailid).matches()) {
             email.setError("Please Provide a Valid Email");
             email.requestFocus();
-        } else if (!Patterns.PHONE.matcher(phoneno).matches() || phoneno.length() < 10) {
+        } else if (checkPhone(phoneno)) {
             phone.setError("enter valid phone no.");
             phone.requestFocus();
         } else if (pass.length() < 6) {
@@ -215,7 +217,11 @@ public class Signup extends AppCompatActivity implements View.OnClickListener, C
         super.onResume();
         MyApplication.getInstance().setConnectivityListener(this);
     }
-
+    private boolean checkPhone(String phone) {
+        if (Pattern.matches("[0-9]+", phone) && phone.length() == 10)
+            return false;
+        return true;
+    }
 
     @Override
     public void onBackPressed() {

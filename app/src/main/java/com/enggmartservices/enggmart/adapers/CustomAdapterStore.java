@@ -78,7 +78,7 @@ public class CustomAdapterStore extends RecyclerView.Adapter<CustomAdapterStore.
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getItemName().toLowerCase().contains(charString.toLowerCase()) || row.getItemDescription().contains(charSequence)) {
+                        if (row.getItemName().toLowerCase().contains(charString.toLowerCase()) || row.getItemDescription().toLowerCase().contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }

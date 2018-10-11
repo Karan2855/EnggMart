@@ -66,6 +66,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         list = new ArrayList<>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
         mOrdersListView.setLayoutManager(linearLayoutManager);
         list.clear();
         mUser = FirebaseAuth.getInstance().getCurrentUser();

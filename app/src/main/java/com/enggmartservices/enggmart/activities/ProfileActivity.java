@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -41,6 +43,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
@@ -56,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private ProgressBar progressBar;
     private ProfileActivity context;
     private ProgressDialog progressDialog;
+    private DatabaseReference databaseReferencephone;
 
     @Override
 
@@ -82,17 +86,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         String uid = mCurrentUser.getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid + "");
+
         mdDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
                 String phone = dataSnapshot.child("phone").getValue().toString();
-                // String status = dataSnapshot.child("status").getValue().toString();
+                String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
                 namepro.setText(name);
                 emailpro.setText(email);
-                phonepro.setText(phone);
+                detailedpro.setText(status);
+                if (!phone.equals("not Provided")) {
+                    phonepro.setText(phone);
+                    phonepro.setVisibility(View.VISIBLE);
+                    etphonepro.setVisibility(View.GONE);
+                    update.setEnabled(false);
+                    update.setText("Updated");
+                } else {
+                    phonepro.setVisibility(View.GONE);
+                    etphonepro.setVisibility(View.VISIBLE);
+                    update.setEnabled(true);
+                }
                 if (!image.equals("not Provided")) {
                     Glide.with(getApplicationContext()).load(image).into(profileImage);
                     //Picasso.get().load(imageUri).placeholder(R.mipmap.usera).into(profileImage);
@@ -136,7 +152,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (view == etphonepro) {
         } else if (view == detailedpro) {
         } else if (view == update) {
+            databaseReferencephone = mdDatabase.child("phone");
+            String phone = etphonepro.getText().toString().trim();
+            if (checkPhone(phone)) {
+                etphonepro.setError("Please Provide Valid No.");
+                etphonepro.requestFocus();
+            } else {
+                databaseReferencephone.setValue(phone).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Phone No. is Updated", Toast.LENGTH_SHORT).show();
+                            phonepro.setVisibility(View.VISIBLE);
+                            etphonepro.setVisibility(View.GONE);
+                            update.setEnabled(false);
+                            update.setText("Updated");
+                        } else {
+                            Toast.makeText(context, "Phone No. Can't Updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
         }
+    }
+
+    private boolean checkPhone(String phone) {
+        if (Pattern.matches("[0-9]+", phone) && phone.length() == 10)
+            return false;
+        return true;
     }
 
     private void profileImageUploadMethod() {

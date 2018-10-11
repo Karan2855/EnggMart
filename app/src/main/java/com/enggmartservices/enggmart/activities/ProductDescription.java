@@ -110,8 +110,8 @@ public class ProductDescription extends AppCompatActivity {
                         itemType = "NEW";
                         break;
                     case R.id.old_book:
-                        pricePurchace.setText("\u20B9 " + Math.round(Float.parseFloat(priceitem) * 0.7) + "");
-                        percentOff.setText("30% off");
+                        pricePurchace.setText("\u20B9 " + Math.round(Float.parseFloat(priceitem) * 0.6) + "");
+                        percentOff.setText("40% off");
                         itemType = "OLD";
                         break;
                     case R.id.rent_book:

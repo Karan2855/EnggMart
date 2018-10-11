@@ -53,7 +53,7 @@ public class HelpCenter extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "7734031944", null)));
+                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "7542986002", null)));
             }
         });
     }
